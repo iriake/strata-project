@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dfssymksab1fw"]
+
+[ext_resource type="PackedScene" uid="uid://be46isol6hfk7" path="res://assets/player_assets/Universal Animation Library[Standard]/Unreal-Godot/UAL1_Standard.glb" id="1_4flbx"]
+
+[node name="Player" type="Node3D" unique_id=806152090]
+
+[node name="UAL1_Standard" parent="." unique_id=599106669 instance=ExtResource("1_4flbx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00033673272, 0.042599916, 0.029787779)
