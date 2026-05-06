@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://bb17db381bnli"]
+
+[ext_resource type="Script" uid="uid://c0at20tnnxv71" path="res://ui/pause_menu.gd" id="1_50142"]
+
+[node name="PauseMenu" type="Control" unique_id=1750061234]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_50142")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=196775941]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -81.5
+offset_right = 35.0
+offset_bottom = 81.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1599459707]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1257402367]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=27748663]
+layout_mode = 2
+theme_type_variation = &"Title"
+text = "Pause"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=417316676]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Resume"
+
+[node name="SaveGame" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=282549867]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save Game
+"
+
+[node name="LoadGame" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1323481633]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load Game"
+
+[node name="Retry" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1348532524]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Retry
+"
+
+[node name="Settings" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1051979863]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Settings"
+
+[node name="MainMenu" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=266580520]
+unique_name_in_owner = true
+layout_mode = 2
+text = "MainMenu
+"

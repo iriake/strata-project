@@ -17,8 +17,12 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-EventBus="*uid://cncjwq03v4vng"
+AudioManager="*uid://dw5kfcwfdxjpj"
+Debug="*uid://2opxevdd6keu"
+EventBus="*uid://dbt8u2xniwcic"
+Game="*uid://dowi37fdqaq8h"
 GameManager="*uid://chukh6e6loin5"
+LevelManager="*uid://bp3luwqyl8b4h"
 
 [physics]
 

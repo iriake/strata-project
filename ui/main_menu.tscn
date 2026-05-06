@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://byk7mffodrktd"]
+
+[ext_resource type="Script" uid="uid://cp27jtqcg8aov" path="res://ui/main_menu.gd" id="1_t7e0r"]
+
+[node name="MainMenu" type="Control" unique_id=406316603]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t7e0r")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1311120978]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -81.5
+offset_right = 35.0
+offset_bottom = 81.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1815427697]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=2087105921]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1579247744]
+layout_mode = 2
+theme_type_variation = &"Title"
+text = "Strata"
+horizontal_alignment = 1
+
+[node name="Start" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=516099098]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start"
+
+[node name="Settings" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1918208766]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Settings"
+
+[node name="Credits" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=300963168]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Credits"
+
+[node name="Quit" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=262957973]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit"

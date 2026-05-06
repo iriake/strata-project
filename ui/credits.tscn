@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://crfin475mvk1e"]
+
+[ext_resource type="Script" uid="uid://dvrvrwc3iu3lo" path="res://ui/credits.gd" id="1_ed0b0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ed0b0"]
+font_size = 160
+
+[node name="Credits" type="Control" unique_id=378386958]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ed0b0")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=221850981]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -618.0
+offset_top = -276.0
+offset_right = 618.0
+offset_bottom = 276.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center][rainbow][wave][font_size=50]asdfadsf[/font_size][/wave][/rainbow][/center]
+
+[center]fonts[/center]
+
+[url = https://antidote-studios.itch.io/bold-pixel-sprite-font]Bold Pixel Font[/url]
+by Antidote Studios
+
+asassdf
+
+
+
+adsfa
+dsf
+
+
+
+
+
+a
+sdf
+a
+dfd
+a
+fd
+
+
+a
+f
+d
+saf"
+scroll_active = false
+
+[node name="Label" type="Label" parent="." unique_id=1357079934]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -51.0
+offset_top = 94.0
+offset_right = 51.0
+offset_bottom = 122.0
+grow_horizontal = 2
+text = "Credits"
+label_settings = SubResource("LabelSettings_ed0b0")

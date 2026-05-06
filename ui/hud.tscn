@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cvbonoynghc8s"]
+
+[sub_resource type="GDScript" id="GDScript_pv4sj"]
+script/source = "extends CanvasLayer
+
+@onready var coins_label: Label = %CoinsLabel
+
+func _ready() -> void:
+	_on_coins_changed(Game.coins)
+	Game.coins_changed.connect(_on_coins_changed)
+
+func _on_coins_changed(value: int) -> void:
+	coins_label.text = str(value)
+"
+
+[node name="HUD" type="CanvasLayer" unique_id=1648690276]
+script = SubResource("GDScript_pv4sj")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=857726266]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -532.0
+offset_bottom = 176.0
+grow_horizontal = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1252614270]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer" unique_id=812317301]
+layout_mode = 2
+theme_type_variation = &"HUDLabel"
+text = "Coins:"
+
+[node name="CoinsLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1057495110]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_type_variation = &"HUDLabel"
+text = "XX"
+horizontal_alignment = 2

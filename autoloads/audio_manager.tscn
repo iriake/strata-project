@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c8snhsxra7ss6"]
+
+[sub_resource type="GDScript" id="GDScript_y37e5"]
+script/source = "extends Node
+
+@onready var music_player: AudioStreamPlayer = $MusicPlayer
+
+
+func _ready() -> void:
+	play_music()
+
+func play_music() -> void:
+	music_player.play()
+
+func play_sfx(sfx: AudioStream) -> void:
+	var player = AudioStreamPlayer.new()
+	player.stream = sfx
+	player.bus = \"SFX\"
+	add_child(player)
+	player.play()
+	await player.finished
+	player.queue_free()
+"
+
+[node name="AudioManager" type="Node" unique_id=380180270]
+script = SubResource("GDScript_y37e5")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=619054592]
