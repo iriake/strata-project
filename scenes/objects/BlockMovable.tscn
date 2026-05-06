@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cs5ryrtx0g511"]
+
+[ext_resource type="Script" uid="uid://ctm1eub3b3c1j" path="res://scripts/objects/block_movable.gd" id="1_ow8ba"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_723wm"]
+
+[node name="Node3D" type="RigidBody3D" unique_id=707668681]
+script = ExtResource("1_ow8ba")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=313613553]
+shape = SubResource("BoxShape3D_723wm")

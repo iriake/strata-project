@@ -1,24 +1,17 @@
 [gd_scene format=3 uid="uid://bfop5tbjv152r"]
 
-[ext_resource type="PackedScene" uid="uid://dfssymksab1fw" path="res://scenes/player/player.tscn" id="1_a202f"]
+[ext_resource type="PackedScene" uid="uid://dfssymksab1fw" path="res://scenes/player/Player.tscn" id="1_jsqs4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_noarx"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_a0tk4"]
-size = Vector3(2.9238281, 1, 2.901245)
+[node name="Node3D" type="CharacterBody3D" unique_id=1998789407]
 
-[node name="Node3D" type="Node3D" unique_id=2096319134]
-
-[node name="Player" parent="." unique_id=806152090 instance=ExtResource("1_a202f")]
+[node name="Player" parent="." unique_id=806152090 instance=ExtResource("1_jsqs4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17772797, 0.5970473, 0.65566355)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=677985095]
 physics_material_override = SubResource("PhysicsMaterial_noarx")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1434845291]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.96191406, 0, 0.9247446)
-shape = SubResource("BoxShape3D_a0tk4")
-debug_color = Color(0.025514591, 0.60081005, 0.69330573, 0.41960785)
-
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1430078853]
 transform = Transform3D(1, 0, 0, 0, 0.92670584, 0.3757876, 0, -0.3757876, 0.92670584, -0.2608801, 3.397015, 4.1556096)
+current = true

@@ -15,6 +15,11 @@ run/main_scene="res://scenes/player/node_3d.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+EventBus="*uid://cncjwq03v4vng"
+GameManager="*uid://chukh6e6loin5"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
