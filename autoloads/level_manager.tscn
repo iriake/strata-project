@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://btrgwi4h8pfnt"]
 
 [ext_resource type="Script" uid="uid://bp3luwqyl8b4h" path="res://autoloads/level_manager.gd" id="1_swoet"]
-[ext_resource type="PackedScene" uid="uid://ysxmx7ksrswb" path="res://levels/level_1.tscn" id="2_jmqug"]
-[ext_resource type="PackedScene" uid="uid://byk7mffodrktd" path="res://ui/main_menu.tscn" id="2_stu7j"]
-[ext_resource type="PackedScene" uid="uid://crfin475mvk1e" path="res://ui/credits.tscn" id="3_gn3j0"]
-[ext_resource type="PackedScene" uid="uid://dow0bv7ac0spj" path="res://levels/level_2.tscn" id="3_stu7j"]
+[ext_resource type="PackedScene" uid="uid://c4qc1r0xgkxha" path="res://levels/level_1.tscn" id="2_jmqug"]
+[ext_resource type="PackedScene" uid="uid://byk7mffodrktd" path="res://ui/MainMenu.tscn" id="2_stu7j"]
+[ext_resource type="PackedScene" uid="uid://crfin475mvk1e" path="res://ui/Credits.tscn" id="3_gn3j0"]
+[ext_resource type="PackedScene" uid="uid://cre8ectqc8laj" path="res://levels/level_2.tscn" id="3_stu7j"]
 
 [node name="LevelManager" type="Node" unique_id=929241974]
 script = ExtResource("1_swoet")
