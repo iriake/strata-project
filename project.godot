@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="strata-proyect"
+config/name="strata"
 run/main_scene="uid://dfssymksab1fw"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"

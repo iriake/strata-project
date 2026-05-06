@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chasswuwi6k5i"
-path="res://.godot/imported/Godot_Setup.png-33bf6727762f750041fd243aae640c2d.ctex"
+uid="uid://ddv0a5o8g8wqv"
+path="res://.godot/imported/Unreal_Setup.png-a6586e0fe43c12128616192e117f475e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player_assets/Universal Animation Library[Standard]/Godot_Setup.png"
-dest_files=["res://.godot/imported/Godot_Setup.png-33bf6727762f750041fd243aae640c2d.ctex"]
+source_file="res://assets/sprites/Universal Animation Library[Standard]/Unreal_Setup.png"
+dest_files=["res://.godot/imported/Unreal_Setup.png-a6586e0fe43c12128616192e117f475e.ctex"]
 
 [params]
 

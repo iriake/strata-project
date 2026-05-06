@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://dfssymksab1fw"]
 
-[ext_resource type="PackedScene" uid="uid://be46isol6hfk7" path="res://assets/player_assets/Universal Animation Library[Standard]/Unreal-Godot/UAL1_Standard.glb" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://be46isol6hfk7" path="res://assets/sprites/Universal Animation Library[Standard]/Unreal-Godot/UAL1_Standard.glb" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://b7lnraob4lau8" path="res://scenes/player/player.gd" id="1_gfjak"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wr5hl"]
 
 [node name="Player" type="CharacterBody3D" unique_id=344500412]
+script = ExtResource("1_gfjak")
 
-[node name="UAL1_Standard" parent="." unique_id=599106669 instance=ExtResource("1_4flbx")]
+[node name="UAL1_Standard" parent="." unique_id=843398248 instance=ExtResource("1_4flbx")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1238858582]
 shape = SubResource("CapsuleShape3D_wr5hl")

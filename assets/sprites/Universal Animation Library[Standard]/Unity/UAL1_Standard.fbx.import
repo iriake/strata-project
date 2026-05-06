@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bxmafs17mjxj5"
-path="res://.godot/imported/UAL1_Standard.fbx-651bedcef59680c95481e0b6fefefa63.scn"
+path="res://.godot/imported/UAL1_Standard.fbx-d0ec381182bea0a4dcf67b5b587947a0.scn"
 
 [deps]
 
-source_file="res://assets/player_assets/Universal Animation Library[Standard]/Unity/UAL1_Standard.fbx"
-dest_files=["res://.godot/imported/UAL1_Standard.fbx-651bedcef59680c95481e0b6fefefa63.scn"]
+source_file="res://assets/sprites/Universal Animation Library[Standard]/Unity/UAL1_Standard.fbx"
+dest_files=["res://.godot/imported/UAL1_Standard.fbx-d0ec381182bea0a4dcf67b5b587947a0.scn"]
 
 [params]
 

@@ -1,11 +1,13 @@
 extends Node
 
+# --- Dimension ---
+signal dimension_changed(new_dimension: String)  # "2D" | "3D"
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+# --- Player ---
+signal player_died()
 
+# --- Level ---
+signal level_completed()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+# --- Objects ---
+signal object_interacted(object_id: String)

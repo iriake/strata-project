@@ -47,7 +47,6 @@ func _on_save_game_pressed() -> void:
 	var dict: Dictionary = {
 		"name": "Pepito",
 		"attack": 10.2,
-		"coins": Game.coins
 	}
 	var dict_string = JSON.stringify(dict)
 	
@@ -70,7 +69,6 @@ func _on_load_game_pressed() -> void:
 	var dict: Dictionary = JSON.parse_string(file.get_as_text())
 	Debug.log(dict.name)
 	Debug.log(dict.attack)
-	Game.coins = dict.coins
 	
 	var config = ConfigFile.new()
 	
