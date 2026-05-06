@@ -205,6 +205,6 @@ Registrar en `Project → Project Settings → Autoload`:
 - [ ] Al menos un objeto reacciona al cambio de dimensión
 - [ ] Existe una condición de victoria (`Goal.tscn`)
 - [x] Hay un menú principal y un menú de pausa
--
+- [x] Hola
 -
 -
