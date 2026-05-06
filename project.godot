@@ -21,6 +21,7 @@ Debug="*uid://2opxevdd6keu"
 EventBus="*uid://dbt8u2xniwcic"
 GameManager="*uid://chukh6e6loin5"
 LevelManager="*uid://bp3luwqyl8b4h"
+AudioManager="*uid://dw5kfcwfdxjpj"
 
 [input]
 

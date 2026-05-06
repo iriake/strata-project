@@ -15,47 +15,61 @@ La narrativa y el lore están pendientes de definición.
 ```
 strata-project/
 ├── assets/
+│   ├── sprites/
+│   ├── animations/
+│   ├── audio/
+│   └── fonts/
+│
 ├── autoloads/
-│   ├── EventBus.gd
-│   ├── GameManager.gd
-│   └── LevelManager.gd
+│   ├── audio_manager.gd
+│   ├── audio_manager.tscn
+│   ├── debug.gd
+│   ├── event_bus.gd
+│   ├── game_manager.gd
+│   ├── level_manager.gd
+│   └── level_manager.tscn
+│
 ├── components/
-│   ├── health_component.gd
-│   ├── hitbox_component.gd
-│   └── hurtbox_component.gd
+│   └── hitbox_component.gd
+│
 ├── gameplay/
-├── player/
-│   ├── Player.tscn
-│   ├── Player.gd
-│   └── player_movement.gd
+│   ├── collectible.gd
+│   └── collectible.tscn
+│
+├── levels/
+│   ├── level_1.tscn
+│   └── level_2.tscn
+│
 ├── scenes/
 │   ├── dimension/
 │   │   ├── DimensionManager.tscn
-│   │   ├── DimensionManager.gd
+│   │   ├── dimension_system.gd
 │   │   └── dimension_transition.gd
 │   ├── objects/
 │   │   ├── BlockMovable.tscn
-│   │   ├── BlockMovable.gd
-│   │   ├── LevelButton.tscn
-│   │   └── LevelButton.gd
+│   │   ├── block_movable.gd
+│   │   ├── Button.tscn
+│   │   └── button.gd
+│   ├── player/
+│   │   ├── Player.tscn
+│   │   ├── player.gd
+│   │   └── player_movement.gd
 │   └── world/
 │       └── World.tscn
-├── levels/
-│   ├── Level_01.tscn
-│   └── Level_02.tscn
+│
 ├── ui/
-│   ├── main_menu.tscn
+│   ├── Credits.tscn
+│   ├── credits.gd
+│   ├── MainMenu.tscn
 │   ├── main_menu.gd
-│   ├── pause_menu.tscn
+│   ├── PauseMenu.tscn
 │   ├── pause_menu.gd
-│   ├── hud.tscn
-│   ├── hud.gd
-│   ├── credits.tscn
-│   └── credits.gd
+│   └── theme.tres
+│
 ├── default_bus_layout.tres
+├── icon.svg
 ├── project.godot
-├── main.tscn
-└── main.gd
+└── README.md
 ```
 
 ---
