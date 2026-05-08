@@ -7,7 +7,8 @@ func _ready() -> void:
 	play_music()
 
 func play_music() -> void:
-	music_player.play()
+	pass
+	#music_player.play()
 
 func play_sfx(sfx: AudioStream) -> void:
 	var player = AudioStreamPlayer.new()
