@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://be46isol6hfk7" path="res://assets/sprites/Universal Animation Library[Standard]/Unreal-Godot/UAL1_Standard.glb" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://b7lnraob4lau8" path="res://scenes/player/player.gd" id="1_gfjak"]
-[ext_resource type="Script" uid="uid://1hkmippek26d" path="res://assets/sprites/Universal Animation Library[Standard]/Unreal-Godot/ual_1_standard.gd" id="3_gmlin"]
+[ext_resource type="Script" path="res://assets/sprites/Universal Animation Library[Standard]/Unreal-Godot/ual_1_standard.gd" id="3_gmlin"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gmlin"]
 animation = &"Crouch_Fwd"
@@ -82,7 +82,6 @@ transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_
 graph_offset = Vector2(68, -215)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p47bc"]
-graph_offset = Vector2(-288.28653, 87.27871)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_lvxji")
 nodes/StateMachine/position = Vector2(80, 144)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -99,6 +98,65 @@ script = ExtResource("1_gfjak")
 [node name="UAL1_Standard" parent="." unique_id=843398248 instance=ExtResource("1_4flbx")]
 unique_name_in_owner = true
 script = ExtResource("3_gmlin")
+
+[node name="GeneralSkeleton" parent="UAL1_Standard/Armature" parent_id_path=PackedInt32Array(843398248, 1736459383) index="0" unique_id=873065357]
+bones/1/position = Vector3(0.03820483, 0.7429137, -0.10944297)
+bones/1/rotation = Quaternion(-0.14672613, -0.20858695, -0.024817795, 0.9666163)
+bones/3/rotation = Quaternion(0.32319352, -0.040950846, 0.007903535, 0.9454134)
+bones/4/rotation = Quaternion(0.13425444, -0.11792129, -0.008720214, 0.98386705)
+bones/5/rotation = Quaternion(-0.1762919, 0.077677816, 0.01807037, 0.9811018)
+bones/6/rotation = Quaternion(0.086395994, 0.1749046, -0.012155041, 0.98071223)
+bones/7/rotation = Quaternion(0.4874811, 0.5266153, 0.52638143, -0.4560275)
+bones/8/rotation = Quaternion(0.045921143, 0.93672156, -0.34699956, 0.0059434767)
+bones/9/rotation = Quaternion(0.20116684, -0.77504325, 0.33706263, 0.49520582)
+bones/10/rotation = Quaternion(0.05471463, 0.647796, 0.06952803, 0.7566589)
+bones/11/rotation = Quaternion(-2.0861629e-07, 0, 2.6822093e-07, 1)
+bones/12/rotation = Quaternion(0.090540856, -1.3411045e-07, -9.834766e-07, 0.99589276)
+bones/13/rotation = Quaternion(0.09054046, -4.470349e-08, -5.960465e-07, 0.9958929)
+bones/15/rotation = Quaternion(0.096712396, -0.004572615, -4.7683716e-07, 0.9953019)
+bones/16/rotation = Quaternion(0.096725926, -0.0042802845, -4.768372e-07, 0.99530196)
+bones/17/rotation = Quaternion(0.096715994, -0.004498408, -9.536745e-07, 0.99530196)
+bones/19/rotation = Quaternion(0.26203516, -0.017599376, -1.5199187e-06, 0.9648979)
+bones/20/rotation = Quaternion(0.26200566, -0.01803683, -1.8477442e-06, 0.9648979)
+bones/21/rotation = Quaternion(0.26202765, -0.017717259, -1.9073489e-06, 0.96489775)
+bones/23/rotation = Quaternion(0.19912371, -0.0070934305, -1.6093256e-06, 0.97994876)
+bones/24/rotation = Quaternion(0.19912437, -0.0070886025, -1.0132791e-06, 0.97994864)
+bones/25/rotation = Quaternion(0.19910859, -0.007513522, -1.6689298e-06, 0.97994864)
+bones/27/rotation = Quaternion(-0.21418679, 0.67388725, 0.21418664, 0.67388725)
+bones/28/rotation = Quaternion(2.980232e-08, 4.4703484e-08, 8.940697e-08, 1)
+bones/29/rotation = Quaternion(-2.682209e-07, -1.1920929e-07, -2.3841858e-07, 1)
+bones/30/scale = Vector3(1.0001454, 1.0004874, 1.0005833)
+bones/31/rotation = Quaternion(0.539721, -0.47448945, -0.47470164, -0.50815296)
+bones/32/rotation = Quaternion(-0.013180584, 0.8551991, -0.51805615, -0.008873299)
+bones/33/rotation = Quaternion(0.21139333, 0.7499197, -0.2896857, 0.5558917)
+bones/34/rotation = Quaternion(0.00076982763, -0.613947, -0.029615806, 0.7887912)
+bones/35/rotation = Quaternion(0.629597, -1.7136337e-07, 4.2617326e-06, 0.776922)
+bones/36/rotation = Quaternion(0.6233415, 2.682209e-07, 4.261732e-06, 0.78194976)
+bones/37/rotation = Quaternion(0.62334144, 1.3783574e-07, 4.5597553e-06, 0.78194976)
+bones/38/rotation = Quaternion(3.445893e-08, 1, 7.275517e-08, -4.2753296e-08)
+bones/39/rotation = Quaternion(0.62889457, 0.02973481, 4.440546e-06, 0.7769218)
+bones/40/rotation = Quaternion(0.6227323, 0.027554452, 4.4703484e-06, 0.78194964)
+bones/41/rotation = Quaternion(0.6226688, 0.02896149, 4.4703493e-06, 0.7819494)
+bones/43/rotation = Quaternion(0.6630008, 0.04452982, -0.07369411, 0.7436507)
+bones/44/rotation = Quaternion(0.6203658, 0.06229388, -0.015572963, 0.7816797)
+bones/45/rotation = Quaternion(0.6219222, 0.04205122, 4.61936e-06, 0.78194916)
+bones/46/rotation = Quaternion(-0.033750094, 0.99943036, -2.3211172e-08, -1.1838556e-07)
+bones/47/rotation = Quaternion(0.62919796, 0.022413807, 4.023313e-06, 0.7769218)
+bones/48/rotation = Quaternion(0.6229467, 0.02217656, 4.23193e-06, 0.78194994)
+bones/49/rotation = Quaternion(0.6228984, 0.023505598, 4.3809414e-06, 0.7819496)
+bones/50/rotation = Quaternion(-0.018857837, 0.9998222, 4.3253113e-08, -1.7619723e-07)
+bones/51/rotation = Quaternion(-0.1238193, -0.7195232, -0.20183575, 0.65285337)
+bones/52/rotation = Quaternion(0.18180719, -0.110124364, -0.060063086, 0.97530055)
+bones/53/rotation = Quaternion(0.59943014, -0.27396542, -0.19463232, 0.7264604)
+bones/54/scale = Vector3(1.0001453, 1.0004876, 1.0005833)
+bones/55/rotation = Quaternion(-0.0011291038, 0.22695868, 0.9604321, -0.16142698)
+bones/56/rotation = Quaternion(0.04378293, 0.8546714, -0.51199394, 0.07404204)
+bones/57/rotation = Quaternion(-0.05702138, 0.60723984, -0.78983575, 0.06456009)
+bones/58/rotation = Quaternion(4.8480192e-08, 1, 5.9604645e-08, 1.5686734e-08)
+bones/60/rotation = Quaternion(0.0022016056, 0.02401466, 0.94886595, 0.31475696)
+bones/61/rotation = Quaternion(-0.15261002, 0.8170367, -0.49295145, -0.25721633)
+bones/62/rotation = Quaternion(0.23418832, 0.49884212, -0.8260171, 0.118355826)
+bones/63/rotation = Quaternion(-7.388046e-09, 1, 2.9802322e-08, 1.9838653e-08)
 
 [node name="AnimationTree" type="AnimationTree" parent="UAL1_Standard" unique_id=1832677600]
 tree_root = SubResource("AnimationNodeBlendTree_p47bc")
