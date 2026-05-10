@@ -14,11 +14,30 @@ var _camera_original_position: Vector3
 var _camera_original_rotation: Vector3
 
 func _ready() -> void:
-	if player:
-		camera_3d = player._camera
-		_camera_original_position = camera_3d.position
-		_camera_original_rotation = camera_3d.rotation_degrees
+	if not player:
+		push_error("¡No se ha asignado el Player al DimensionManager!")
+		return
+	camera_3d = player._camera
+	_camera_original_position = camera_3d.position
+	_camera_original_rotation = camera_3d.rotation_degrees
 
+	if GameManager.is_in_2d_mode:
+		# Entrando a una escena 2D
+		current_mode = DimensionMode.MODE_2D
+		current_perspective = GameManager.active_perspective as Perspective
+		if GameManager.player_position_3d != Vector3.ZERO:
+			player.global_position = GameManager.player_position_3d
+		player.set_dimension_mode(DimensionMode.MODE_2D, current_perspective, GameManager.saved_depth)
+		await get_tree().process_frame
+		_setup_2d_camera()
+	elif GameManager.came_from_2d:
+		# Volviendo al 3D
+		player.global_position = GameManager.player_position_3d
+		GameManager.came_from_2d = false
+		camera_3d.projection = Camera3D.PROJECTION_PERSPECTIVE
+		camera_3d.position = _camera_original_position
+		camera_3d.rotation_degrees = _camera_original_rotation
+		
 # ejes aplastados por perspectiva
 const PERSPECTIVE_DATA = {
 	Perspective.FRONT:  { "axis": "z", "dir": Vector3(0, 0,  1) },
@@ -42,52 +61,31 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("change_dimension"):
 		toggle_dimension()
 
-
 func _enter_2d() -> void:
 	var data = PERSPECTIVE_DATA[current_perspective]
-	
-	# obtenemos la posición del bloque bajo los pies
-	var entry_pos = _find_entry_plane(data)
-	player.global_position = entry_pos
-	
-	# guardamos la profundidad del bloque, no la original
-	_saved_depth = entry_pos[data["axis"]]
-	
-	current_mode = DimensionMode.MODE_2D
-	
-	# configuración de cámara para las distintas perspectivas
-	var player_pos := player.global_position
-	match current_perspective:
-		Perspective.FRONT:
-			camera_3d.global_position = player_pos + Vector3(0, 2, 15)
-			camera_3d.look_at(player_pos + Vector3(0, 1, 0), Vector3.UP)
-		Perspective.BACK:
-			camera_3d.global_position = player_pos + Vector3(0, 2, -15)
-			camera_3d.look_at(player_pos + Vector3(0, 1, 0), Vector3.UP)
-		Perspective.LEFT:
-			camera_3d.global_position = player_pos + Vector3(-15, 2, 0)
-			camera_3d.look_at(player_pos + Vector3(0, 1, 0), Vector3.UP)
-		Perspective.RIGHT:
-			camera_3d.global_position = player_pos + Vector3(15, 2, 0)
-			camera_3d.look_at(player_pos + Vector3(0, 1, 0), Vector3.UP)
-		Perspective.TOP:
-			camera_3d.global_position = player_pos + Vector3(0, 20, 0)
-			camera_3d.look_at(player_pos, Vector3.BACK)
-	
-	camera_3d.projection = Camera3D.PROJECTION_ORTHOGONAL
-	camera_3d.size = 12.0 # esto para alejarla más
-	player.set_dimension_mode(DimensionMode.MODE_2D, current_perspective, _saved_depth)
+	GameManager.player_position_3d = player.global_position
+	GameManager.active_perspective = current_perspective
+	GameManager.is_in_2d_mode = true     
+	GameManager.came_from_2d = false
+	match data["axis"]:
+		"x": GameManager.saved_depth = player.global_position.x
+		"y": GameManager.saved_depth = player.global_position.y
+		"z": GameManager.saved_depth = player.global_position.z
+	get_tree().change_scene_to_file(_get_2d_scene_path())
 
 # salir del modo 2D
 func _exit_2d() -> void:
-	var data = PERSPECTIVE_DATA[current_perspective] 
-	var new_pos = _try_raycast_depth(data)      
-	player.global_position = new_pos 
-	camera_3d.position = _camera_original_position
-	camera_3d.rotation_degrees = _camera_original_rotation
-	camera_3d.projection = Camera3D.PROJECTION_PERSPECTIVE      
-	current_mode = DimensionMode.MODE_3D
-	player.set_dimension_mode(DimensionMode.MODE_3D, current_perspective)
+	var pos_2d = player.global_position
+	var data = PERSPECTIVE_DATA[current_perspective]
+	var restored = pos_2d
+	match data["axis"]:
+		"x": restored.x = GameManager.saved_depth
+		"y": restored.y = GameManager.saved_depth
+		"z": restored.z = GameManager.saved_depth
+	GameManager.player_position_3d = restored
+	GameManager.came_from_2d = true
+	GameManager.is_in_2d_mode = false      
+	get_tree().change_scene_to_file("res://scenes/levels/level_1.tscn")
 
 # intento de hacer "crush"
 func _try_raycast_depth(data: Dictionary) -> Vector3:
@@ -184,3 +182,39 @@ func _choose_smart_perspective() -> void:
 			current_perspective = Perspective.BACK
 			
 	print("[DimensionSystem] Perspectiva inteligente (corregida): ", current_perspective)
+
+func _get_2d_scene_path() -> String:
+	match current_perspective:
+		Perspective.FRONT: return "res://scenes/levels/level_1_Front.tscn"
+		Perspective.BACK:  return "res://scenes/levels/level_1_Back.tscn"
+		Perspective.LEFT:  return "res://scenes/levels/level_1_Left.tscn"
+		Perspective.RIGHT: return "res://scenes/levels/level_1_Right.tscn"
+		Perspective.TOP:   return "res://scenes/levels/level_1_Top.tscn"
+	return "res://scenes/levels/level_1.tscn"
+	
+func _is_2d_scene() -> bool:
+	var scene_name = get_tree().current_scene.name
+	return scene_name.ends_with("_Front") or scene_name.ends_with("_Back") or \
+		   scene_name.ends_with("_Left") or scene_name.ends_with("_Right") or \
+		   scene_name.ends_with("_Top")
+
+func _setup_2d_camera() -> void:
+	var player_pos := player.global_position
+	match current_perspective:
+		Perspective.FRONT:
+			camera_3d.global_position = player_pos + Vector3(0, 2, 15)
+			camera_3d.look_at(player_pos + Vector3(0, 1, 0), Vector3.UP)
+		Perspective.BACK:
+			camera_3d.global_position = player_pos + Vector3(0, 2, -15)
+			camera_3d.look_at(player_pos + Vector3(0, 1, 0), Vector3.UP)
+		Perspective.LEFT:
+			camera_3d.global_position = player_pos + Vector3(-15, 2, 0)
+			camera_3d.look_at(player_pos + Vector3(0, 1, 0), Vector3.UP)
+		Perspective.RIGHT:
+			camera_3d.global_position = player_pos + Vector3(15, 2, 0)
+			camera_3d.look_at(player_pos + Vector3(0, 1, 0), Vector3.UP)
+		Perspective.TOP:
+			camera_3d.global_position = player_pos + Vector3(0, 20, 0)
+			camera_3d.look_at(player_pos, Vector3.BACK)
+	camera_3d.projection = Camera3D.PROJECTION_ORTHOGONAL
+	camera_3d.size = 12.0

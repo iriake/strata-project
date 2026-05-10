@@ -38,16 +38,16 @@ albedo_texture = ExtResource("3_h5tjt")
 [sub_resource type="BoxMesh" id="BoxMesh_4ate5"]
 material = SubResource("StandardMaterial3D_iav0o")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6iamk"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_ushro"]
-material = SubResource("ShaderMaterial_6iamk")
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x42e6"]
 albedo_texture = ExtResource("2_bbkvs")
 
 [sub_resource type="BoxMesh" id="BoxMesh_71xa3"]
 material = SubResource("StandardMaterial3D_x42e6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6iamk"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ushro"]
+material = SubResource("ShaderMaterial_6iamk")
 
 [node name="Level1Front" type="Node3D" unique_id=1268781108]
 
@@ -87,24 +87,6 @@ shape = SubResource("BoxShape3D_13s3p")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D4" unique_id=1415889956]
 mesh = SubResource("BoxMesh_4ate5")
 
-[node name="StaticBody3D5" type="StaticBody3D" parent="." unique_id=1096865042]
-transform = Transform3D(15, 0, 0, 0, 4, 0, 0, 0, 4, 12, -3, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D5" unique_id=752415592]
-shape = SubResource("BoxShape3D_13s3p")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D5" unique_id=588490874]
-mesh = SubResource("BoxMesh_ushro")
-
-[node name="StaticBody3D6" type="StaticBody3D" parent="." unique_id=874494691]
-transform = Transform3D(10, 0, 0, 0, 4, 0, 0, 0, 4, 9, -3, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D6" unique_id=2044304900]
-shape = SubResource("BoxShape3D_13s3p")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D6" unique_id=964966573]
-mesh = SubResource("BoxMesh_ushro")
-
 [node name="StaticBody3D7" type="StaticBody3D" parent="." unique_id=432271159]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 4, 10.482, 1, 0)
 
@@ -132,4 +114,4 @@ light_energy = 1.5
 sky_mode = 1
 
 [node name="DimensionManager" parent="." unique_id=1500566256 node_paths=PackedStringArray("player") instance=ExtResource("5_2uxwf")]
-player = NodePath("")
+player = NodePath("../Player")
