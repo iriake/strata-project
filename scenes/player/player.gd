@@ -2,10 +2,6 @@
 class_name Player
 extends CharacterBody3D
 
-@export_group("Camera")
-## Sensibilidad del ratón para el movimiento de la cámara.
-@export_range(0.0, 1.0) var mouse_sensitivility := 0.25
-
 @export_group("Movement")
 ## Velocidad máxima al caminar.
 @export var move_speed := 8.0
@@ -26,32 +22,17 @@ var _gravity := -30.0
 @onready var _camera: Camera3D = %Camera3D
 @onready var _skin: Node3D = %UAL1_Standard
 
-func _input(event: InputEvent) -> void:
-	# Captura el cursor al hacer click para poder mover la cámara
-	if event.is_action_pressed("left_click"):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	# Libera el cursor si se presiona la tecla de cancelar (Ctrl)
-	if event.is_action_pressed("iu_cancel"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
 func _unhandled_input(event: InputEvent) -> void:
-	# Detecta el movimiento del ratón solo si está capturado por el juego
-	var is_camera_motion := (
-		event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
-	)
-	if is_camera_motion:
-		_camera_input_direction = event.screen_relative * mouse_sensitivility
-		
+	if event.is_action_pressed("move_camera_right"):
+		_camera_pivot.side_rotation(-1.0) # Gira 90° derecha
+	elif event.is_action_pressed("move_camera_left"):
+		_camera_pivot.side_rotation(1.0)  # Gira 90° izquierda
+	elif event.is_action_pressed("move_camera_up"):
+		_camera_pivot.set_fixed_view("top")
+	elif event.is_action_pressed("move_camera_down"):
+		_camera_pivot.set_fixed_view("reset")
+	
 func _physics_process(delta: float) -> void:
-	# --- Rotación de Cámara ---
-	_camera_pivot.rotation.x += _camera_input_direction.y * delta
-	# Limita la rotación vertical para evitar que la cámara de la vuelta completa
-	_camera_pivot.rotation.x = clamp(_camera_pivot.rotation.x, -PI / 6.0, PI / 3.0)		
-	_camera_pivot.rotation.y -= _camera_input_direction.x * delta
-	
-	# Limpia el input del ratón para que no se siga moviendo solo
-	_camera_input_direction = Vector2.ZERO
-	
 	# --- Cálculo de Dirección de Movimiento ---
 	var raw_input := Input.get_vector("move_left", "move_right", "move_front", "move_back")
 	var foward := _camera.global_basis.z

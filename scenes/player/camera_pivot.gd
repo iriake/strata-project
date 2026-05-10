@@ -23,8 +23,8 @@ func set_fixed_view(view: String):
 		_current_tween.kill()
 	
 	match view:
-		"top": _target_rotation_x = PI
-		"reset": _target_rotation_x = 28.3
+		"top": _target_rotation_x = (PI / 2.0) - 0.1
+		"reset": _target_rotation_x = PI / 8.0
 	
 	_start_transition()
 	

@@ -109,7 +109,7 @@ shape = SubResource("CapsuleShape3D_wr5hl")
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=2141107738]
 unique_name_in_owner = true
-transform = Transform3D(0.9963453, 0.040495154, 0.075207666, 0, 0.88047737, -0.4740882, -0.08541692, 0.47235554, 0.8772595, 0, 1.619, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9238795, -0.38268346, 0, 0.38268346, 0.9238795, 0, 1.619, 0)
 script = ExtResource("4_lvxji")
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=1261885817]
