@@ -20,11 +20,15 @@ extends CharacterBody3D
 var _camera_input_direction := Vector2.ZERO
 var _last_movement_direction := Vector3.BACK
 var _gravity := -30.0
+var _is_2d_mode := false
+var _active_perspective = null
+var _locked_depth: float = 0.0
 
 # Referencias a nodos mediante nombres únicos de escena (%)
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera: Camera3D = %Camera3D
 @onready var _skin: Node3D = %UAL1_Standard
+@export var depth_snap_radius: float = 5.0
 
 func _input(event: InputEvent) -> void:
 	# Captura el cursor al hacer click para poder mover la cámara
@@ -39,7 +43,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	var is_camera_motion := (
 		event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
 	)
-	if is_camera_motion:
+	if is_camera_motion and not _is_2d_mode:
 		_camera_input_direction = event.screen_relative * mouse_sensitivility
 		
 func _physics_process(delta: float) -> void:
@@ -60,6 +64,15 @@ func _physics_process(delta: float) -> void:
 	# Calcula la dirección relativa a la cámara pero ignorando el eje Y
 	var move_direction := foward * raw_input.y + right * raw_input.x
 	move_direction.y = 0.0
+
+	if _is_2d_mode:
+		move_direction = _get_2d_move_direction(raw_input)
+	else:
+		var forward := _camera.global_basis.z
+		move_direction = forward * raw_input.y + right * raw_input.x
+		move_direction.y = 0.0
+		move_direction = move_direction.normalized()
+
 	move_direction = move_direction.normalized()
 	
 	# --- Gestión de Velocidad y Gravedad ---
@@ -76,12 +89,16 @@ func _physics_process(delta: float) -> void:
 	# Ejecuta el movimiento y gestiona colisiones
 	move_and_slide()
 	
+	if _is_2d_mode:
+		_lock_depth_axis()
+	
 	# --- Rotación del Modelo Visual ---
 	# Gira el modelo hacia la dirección de movimiento si esta es significativa
 	if move_direction.length() > 0.2:
 		_last_movement_direction = move_direction
 		var target_angle := Vector3.BACK.signed_angle_to(_last_movement_direction, Vector3.UP)
 		_skin.global_rotation.y = lerp_angle(_skin.rotation.y, target_angle, rotation_speed * delta)
+		
 	
 	# --- Lógica de Animaciones (Skin) ---
 	if is_starting_jump:
@@ -101,3 +118,98 @@ func _physics_process(delta: float) -> void:
 				_skin.move()
 			else:
 				_skin.idle()
+
+func set_dimension_mode(mode, perspective, locked_depth: float = 0.0) -> void:
+	if mode == DimensionSystem.DimensionMode.MODE_2D:
+		_is_2d_mode = true
+		_active_perspective = perspective
+		_locked_depth = locked_depth
+	else:
+		_is_2d_mode = false
+
+func _get_2d_move_direction(raw_input: Vector2) -> Vector3:
+	# En 2D, el input.x siempre es izquierda/derecha en pantalla
+	# El input.y es arriba/abajo (no se usa, el salto lo maneja jump)
+	match _active_perspective:
+		DimensionSystem.Perspective.FRONT:
+			# Cámara mira desde +Z hacia -Z: moverse en X
+			return Vector3(raw_input.x, 0, 0).normalized()
+		DimensionSystem.Perspective.BACK:
+			# Cámara mira desde -Z: X invertido
+			return Vector3(-raw_input.x, 0, 0).normalized()
+		DimensionSystem.Perspective.LEFT:
+			# Cámara mira desde -X: moverse en Z
+			return Vector3(0, 0, raw_input.x).normalized()
+		DimensionSystem.Perspective.RIGHT:
+			# Cámara mira desde +X: Z invertido
+			return Vector3(0, 0, -raw_input.x).normalized()
+		DimensionSystem.Perspective.TOP:
+			# Si W te mandaba hacia abajo, invertimos raw_input.y
+			# Si D te mandaba hacia la izquierda, invertimos raw_input.x
+			return Vector3(-raw_input.x, 0, -raw_input.y).normalized()
+	return Vector3.ZERO
+
+func _lock_depth_axis() -> void:
+	var space = get_world_3d().direct_space_state
+	
+	match _active_perspective:
+		DimensionSystem.Perspective.FRONT, DimensionSystem.Perspective.BACK:
+			# Busca bloques en ambas direcciones Z desde la posición del jugador
+			# pero solo los que tengan suelo a menos de 3 unidades bajo el jugador
+			var best_z = _locked_depth
+			var best_score = INF
+			
+			for z_offset in [-8.0, -6.0, -4.0, -2.0, 0.0, 2.0, 4.0, 6.0, 8.0]:
+				var probe = global_position
+				probe.z = _locked_depth + z_offset
+				# Desde ese Z, mira si hay suelo cerca
+				var q = PhysicsRayQueryParameters3D.create(
+					probe + Vector3(0, 0.5, 0),
+					probe + Vector3(0, -3.0, 0)
+				)
+				q.exclude = [get_rid()]
+				var r = space.intersect_ray(q)
+				if r:
+					# Hay suelo en este Z — ¿cuánto cae el jugador para llegar?
+					var height_diff = global_position.y - r["position"].y
+					if height_diff >= 0.0 and height_diff < best_score:
+						best_score = height_diff
+						best_z = r["position"].z
+			
+			_locked_depth = best_z
+			
+			if is_on_floor():
+				velocity.z = 0.0
+				global_position.z = _locked_depth
+			else:
+				global_position.z = lerp(global_position.z, _locked_depth, 0.15)
+
+		DimensionSystem.Perspective.LEFT, DimensionSystem.Perspective.RIGHT:
+			var best_x = _locked_depth
+			var best_score = INF
+			
+			for x_offset in [-8.0, -6.0, -4.0, -2.0, 0.0, 2.0, 4.0, 6.0, 8.0]:
+				var probe = global_position
+				probe.x = _locked_depth + x_offset
+				var q = PhysicsRayQueryParameters3D.create(
+					probe + Vector3(0, 0.5, 0),
+					probe + Vector3(0, -3.0, 0)
+				)
+				q.exclude = [get_rid()]
+				var r = space.intersect_ray(q)
+				if r:
+					var height_diff = global_position.y - r["position"].y
+					if height_diff >= 0.0 and height_diff < best_score:
+						best_score = height_diff
+						best_x = r["position"].x
+			
+			_locked_depth = best_x
+			
+			if is_on_floor():
+				velocity.x = 0.0
+				global_position.x = _locked_depth
+			else:
+				global_position.x = lerp(global_position.x, _locked_depth, 0.15)
+
+		DimensionSystem.Perspective.TOP:
+			velocity.y = 0.0
