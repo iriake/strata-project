@@ -2,10 +2,6 @@
 class_name Player
 extends CharacterBody3D
 
-@export_group("Camera")
-## Sensibilidad del ratón para el movimiento de la cámara.
-@export_range(0.0, 1.0) var mouse_sensitivility := 0.25
-
 @export_group("Movement")
 ## Velocidad máxima al caminar.
 @export var move_speed := 8.0
@@ -30,14 +26,6 @@ var _locked_depth: float = 0.0
 @onready var _skin: Node3D = %UAL1_Standard
 @export var depth_snap_radius: float = 5.0
 
-func _input(event: InputEvent) -> void:
-	# Captura el cursor al hacer click para poder mover la cámara
-	if event.is_action_pressed("left_click"):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	# Libera el cursor si se presiona la tecla de cancelar (Ctrl)
-	if event.is_action_pressed("iu_cancel"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
 func _unhandled_input(event: InputEvent) -> void:
 	# Detecta el movimiento del ratón solo si está capturado por el juego
 	var is_camera_motion := (
@@ -56,6 +44,7 @@ func _physics_process(delta: float) -> void:
 	# Limpia el input del ratón para que no se siga moviendo solo
 	_camera_input_direction = Vector2.ZERO
 	
+func _physics_process(delta: float) -> void:
 	# --- Cálculo de Dirección de Movimiento ---
 	var raw_input := Input.get_vector("move_left", "move_right", "move_front", "move_back")
 	var foward := _camera.global_basis.z
