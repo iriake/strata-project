@@ -7,6 +7,7 @@ var saved_depth: float = 0.0
 var active_perspective: int = 0  
 var came_from_2d: bool = false
 var is_in_2d_mode: bool = false
+var current_platform_name: String = ""
 
 func collect() -> void:
 	collectibles_collected += 1

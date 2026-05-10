@@ -22,7 +22,6 @@ func _ready() -> void:
 	_camera_original_rotation = camera_3d.rotation_degrees
 
 	if GameManager.is_in_2d_mode:
-		# Entrando a una escena 2D
 		current_mode = DimensionMode.MODE_2D
 		current_perspective = GameManager.active_perspective as Perspective
 		if GameManager.player_position_3d != Vector3.ZERO:
@@ -30,9 +29,26 @@ func _ready() -> void:
 		player.set_dimension_mode(DimensionMode.MODE_2D, current_perspective, GameManager.saved_depth)
 		await get_tree().process_frame
 		_setup_2d_camera()
+
 	elif GameManager.came_from_2d:
-		# Volviendo al 3D
-		player.global_position = GameManager.player_position_3d
+		print("[3D] platform_name=", GameManager.current_platform_name)
+		var pos = GameManager.player_position_3d
+		var platform = get_tree().current_scene.find_child(
+			GameManager.current_platform_name, true, false
+		)
+		print("[3D] platform encontrada=", platform)
+		if platform:
+			print("[3D] platform.global_position=", platform.global_position)
+			match GameManager.active_perspective:
+				Perspective.FRONT, Perspective.BACK:
+					pos.z = platform.global_position.z
+				Perspective.LEFT, Perspective.RIGHT:
+					pos.x = platform.global_position.x
+				Perspective.TOP:
+					pos.y = platform.global_position.y + 5
+		else:
+			print("[3D] Plataforma no encontrada: ", GameManager.current_platform_name)
+		player.global_position = pos
 		GameManager.came_from_2d = false
 		camera_3d.projection = Camera3D.PROJECTION_PERSPECTIVE
 		camera_3d.position = _camera_original_position
@@ -84,7 +100,20 @@ func _exit_2d() -> void:
 		"z": restored.z = GameManager.saved_depth
 	GameManager.player_position_3d = restored
 	GameManager.came_from_2d = true
-	GameManager.is_in_2d_mode = false      
+	GameManager.is_in_2d_mode = false
+	var space = get_world_3d().direct_space_state
+
+	var query = PhysicsRayQueryParameters3D.create(
+		player.global_position + Vector3(0, 1, 0),
+		player.global_position + Vector3(0, -3, 0)
+	)
+
+	query.exclude = [player.get_rid()]
+
+	var result = space.intersect_ray(query)
+
+	if result:
+		GameManager.current_platform_name = result["collider"].name      
 	get_tree().change_scene_to_file("res://scenes/levels/level_1.tscn")
 
 # intento de hacer "crush"
