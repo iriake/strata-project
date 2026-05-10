@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://w2081lyncs7a"]
+
+[ext_resource type="Texture2D" uid="uid://dj3h8v3w4wmd2" path="res://assets/textures/circuit_albedo.png" id="1_vsa4a"]
+[ext_resource type="Texture2D" uid="uid://bi8p0ht4owspk" path="res://assets/textures/GreyboxTextures/greybox_green_grid.png" id="2_bbkvs"]
+[ext_resource type="Texture2D" uid="uid://b6ujpjixvoful" path="res://assets/textures/GreyboxTextures/greybox_blue_grid.png" id="3_h5tjt"]
+[ext_resource type="PackedScene" uid="uid://dfssymksab1fw" path="res://scenes/player/player.tscn" id="4_lquxr"]
+[ext_resource type="PackedScene" uid="uid://foug5c67jr3j" path="res://scenes/dimension/DimensionManager.tscn" id="5_2uxwf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_13s3p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oc4kc"]
+albedo_texture = ExtResource("1_vsa4a")
+metallic = 1.0
+proximity_fade_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_ygp0l"]
+material = SubResource("StandardMaterial3D_oc4kc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dga24"]
+albedo_texture = ExtResource("2_bbkvs")
+metallic = 1.0
+proximity_fade_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_mjd88"]
+material = SubResource("StandardMaterial3D_dga24")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_excbq"]
+albedo_texture = ExtResource("1_vsa4a")
+metallic = 1.0
+proximity_fade_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_lx2f2"]
+material = SubResource("StandardMaterial3D_excbq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iav0o"]
+albedo_texture = ExtResource("3_h5tjt")
+
+[sub_resource type="BoxMesh" id="BoxMesh_4ate5"]
+material = SubResource("StandardMaterial3D_iav0o")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6iamk"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ushro"]
+material = SubResource("ShaderMaterial_6iamk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x42e6"]
+albedo_texture = ExtResource("2_bbkvs")
+
+[sub_resource type="BoxMesh" id="BoxMesh_71xa3"]
+material = SubResource("StandardMaterial3D_x42e6")
+
+[node name="Level1Front" type="Node3D" unique_id=1268781108]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=294786668]
+transform = Transform3D(6, 0, 0, 0, 3, 0, 0, 0, 12, 0, -2, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=868232856]
+shape = SubResource("BoxShape3D_13s3p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=526362859]
+mesh = SubResource("BoxMesh_ygp0l")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=308435773]
+transform = Transform3D(5, 0, 0, 0, 3, 0, 0, 0, 12, 18, -2, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=2099239596]
+shape = SubResource("BoxShape3D_13s3p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2" unique_id=424506012]
+mesh = SubResource("BoxMesh_mjd88")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=1416645783]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 12, 18, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3" unique_id=1864813115]
+shape = SubResource("BoxShape3D_13s3p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3" unique_id=806150731]
+mesh = SubResource("BoxMesh_lx2f2")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="." unique_id=1310619254]
+transform = Transform3D(5, 0, 0, 0, 2, 0, 0, 0, 2, 18, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D4" unique_id=1019801259]
+shape = SubResource("BoxShape3D_13s3p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D4" unique_id=1415889956]
+mesh = SubResource("BoxMesh_4ate5")
+
+[node name="StaticBody3D5" type="StaticBody3D" parent="." unique_id=1096865042]
+transform = Transform3D(15, 0, 0, 0, 4, 0, 0, 0, 4, 12, -3, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D5" unique_id=752415592]
+shape = SubResource("BoxShape3D_13s3p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D5" unique_id=588490874]
+mesh = SubResource("BoxMesh_ushro")
+
+[node name="StaticBody3D6" type="StaticBody3D" parent="." unique_id=874494691]
+transform = Transform3D(10, 0, 0, 0, 4, 0, 0, 0, 4, 9, -3, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D6" unique_id=2044304900]
+shape = SubResource("BoxShape3D_13s3p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D6" unique_id=964966573]
+mesh = SubResource("BoxMesh_ushro")
+
+[node name="StaticBody3D7" type="StaticBody3D" parent="." unique_id=432271159]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 4, 10.482, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D7" unique_id=1623349123]
+shape = SubResource("BoxShape3D_13s3p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D7" unique_id=412887092]
+mesh = SubResource("BoxMesh_71xa3")
+
+[node name="StaticBody3D8" type="StaticBody3D" parent="." unique_id=94104187]
+transform = Transform3D(10, 0, 0, 0, 4, 0, 0, 0, 4, 14.744, 2.006, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D8" unique_id=464824092]
+shape = SubResource("BoxShape3D_13s3p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D8" unique_id=2009578282]
+mesh = SubResource("BoxMesh_ushro")
+
+[node name="Player" parent="." unique_id=344500412 instance=ExtResource("4_lquxr")]
+transform = Transform3D(1, 0, 0, 0, 0.9914107, -0.13078575, 0, 0.13078575, 0.9914107, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=949606149]
+transform = Transform3D(0.7071068, 0.5, -0.5, 0, 0.7071068, 0.70710677, 0.7071068, -0.5, 0.5, -10, 10, 10)
+light_energy = 1.5
+sky_mode = 1
+
+[node name="DimensionManager" parent="." unique_id=1500566256 node_paths=PackedStringArray("player") instance=ExtResource("5_2uxwf")]
+player = NodePath("")

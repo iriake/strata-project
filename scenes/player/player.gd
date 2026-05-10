@@ -127,6 +127,7 @@ func set_dimension_mode(mode, perspective, locked_depth: float = 0.0) -> void:
 	else:
 		_is_2d_mode = false
 
+# movimiento permitido al cambiar en 2D
 func _get_2d_move_direction(raw_input: Vector2) -> Vector3:
 	# En 2D, el input.x siempre es izquierda/derecha en pantalla
 	# El input.y es arriba/abajo (no se usa, el salto lo maneja jump)
@@ -149,20 +150,18 @@ func _get_2d_move_direction(raw_input: Vector2) -> Vector3:
 			return Vector3(-raw_input.x, 0, -raw_input.y).normalized()
 	return Vector3.ZERO
 
+
 func _lock_depth_axis() -> void:
 	var space = get_world_3d().direct_space_state
 	
 	match _active_perspective:
 		DimensionSystem.Perspective.FRONT, DimensionSystem.Perspective.BACK:
-			# Busca bloques en ambas direcciones Z desde la posición del jugador
-			# pero solo los que tengan suelo a menos de 3 unidades bajo el jugador
 			var best_z = _locked_depth
 			var best_score = INF
 			
 			for z_offset in [-8.0, -6.0, -4.0, -2.0, 0.0, 2.0, 4.0, 6.0, 8.0]:
 				var probe = global_position
 				probe.z = _locked_depth + z_offset
-				# Desde ese Z, mira si hay suelo cerca
 				var q = PhysicsRayQueryParameters3D.create(
 					probe + Vector3(0, 0.5, 0),
 					probe + Vector3(0, -3.0, 0)
@@ -170,7 +169,6 @@ func _lock_depth_axis() -> void:
 				q.exclude = [get_rid()]
 				var r = space.intersect_ray(q)
 				if r:
-					# Hay suelo en este Z — ¿cuánto cae el jugador para llegar?
 					var height_diff = global_position.y - r["position"].y
 					if height_diff >= 0.0 and height_diff < best_score:
 						best_score = height_diff
