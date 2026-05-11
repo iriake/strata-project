@@ -109,27 +109,28 @@ func toggle_change() -> void:
 func _enter_change_mode() -> void:
 	var basis_z = _camera_pivot.global_basis.z
 
-	# Detectar eje aplastado
 	if abs(basis_z.y) > 0.9:
 		_lock_axis = Vector3(0, 1, 0)
-		_locked_position_value = global_position.y
-
 	elif abs(basis_z.z) > abs(basis_z.x):
 		_lock_axis = Vector3(0, 0, 1)
-		_locked_position_value = global_position.z
-
 	else:
 		_lock_axis = Vector3(1, 0, 0)
-		_locked_position_value = global_position.x
 
+	_locked_position_value = 0.0 
+	
 	_move_mask = Vector3.ONE - _lock_axis
 
-	# APLASTAR GEOMETRÍA
+	#Teletransportar al jugador al plano 0 del eje bloqueado antes de aplastar
+	if _lock_axis.x > 0: global_position.x = 0
+	elif _lock_axis.y > 0: global_position.y = 0
+	elif _lock_axis.z > 0: global_position.z = 0
+
+	# Aplastar geometría
 	_project_world()
 
 	_camera_pivot.force_2d_angle(true)
 	_set_camera_projection(true)
-	
+
 func _project_world() -> void:
 	var objects = get_tree().get_nodes_in_group("change_geometry")
 
