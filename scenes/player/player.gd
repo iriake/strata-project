@@ -24,6 +24,8 @@ var _lock_axis := Vector3.ZERO
 var _locked_position_value := 0.0
 ## Multiplicador que anula la velocidad en el eje bloqueado (ej: Vector3(1,1,0) permite mover en X e Y pero no en Z).
 var _move_mask := Vector3.ONE
+# Posiciones originales de los objetos
+var _original_positions := {}
 
 # --- VARIABLES INTERNAS Y FÍSICA ---
 ## Dirección del último movimiento realizado, usada para mantener la orientación del modelo en reposo.
@@ -100,29 +102,99 @@ func toggle_change() -> void:
 	is_2d_mode = !is_2d_mode
 
 	if is_2d_mode:
-		var basis_z = _camera_pivot.global_basis.z
-
-		if abs(basis_z.y) > 0.9:
-			_lock_axis = Vector3(0, 1, 0)
-			_locked_position_value = global_position.y
-		elif abs(basis_z.z) > abs(basis_z.x):
-			_lock_axis = Vector3(0, 0, 1)
-			_locked_position_value = global_position.z
-		else:
-			_lock_axis = Vector3(1, 0, 0)
-			_locked_position_value = global_position.x
-
-		_move_mask = Vector3.ONE - _lock_axis
-		_camera_pivot.force_2d_angle(true)
-		_set_camera_projection(true)
+		_enter_change_mode()
 	else:
-		# Al salir del modo 2D, detectamos sobre qué plataforma estamos
-		# para restaurar la posición correcta en el eje que estaba bloqueado
-		_restore_3d_position()
-		_move_mask = Vector3.ONE
-		_camera_pivot.force_2d_angle(false)
-		_set_camera_projection(false)
+		_exit_change_mode()
 
+func _enter_change_mode() -> void:
+	var basis_z = _camera_pivot.global_basis.z
+
+	# Detectar eje aplastado
+	if abs(basis_z.y) > 0.9:
+		_lock_axis = Vector3(0, 1, 0)
+		_locked_position_value = global_position.y
+
+	elif abs(basis_z.z) > abs(basis_z.x):
+		_lock_axis = Vector3(0, 0, 1)
+		_locked_position_value = global_position.z
+
+	else:
+		_lock_axis = Vector3(1, 0, 0)
+		_locked_position_value = global_position.x
+
+	_move_mask = Vector3.ONE - _lock_axis
+
+	# APLASTAR GEOMETRÍA
+	_project_world()
+
+	_camera_pivot.force_2d_angle(true)
+	_set_camera_projection(true)
+	
+func _project_world() -> void:
+	var objects = get_tree().get_nodes_in_group("change_geometry")
+
+	for obj in objects:
+		_original_positions[obj] = obj.global_position
+
+		var pos = obj.global_position
+
+		if _lock_axis.x > 0:
+			pos.x = 0
+
+		elif _lock_axis.y > 0:
+			pos.y = 0
+
+		elif _lock_axis.z > 0:
+			pos.z = 0
+
+		obj.global_position = pos
+
+func _restore_world() -> void:
+	for obj in _original_positions:
+		if is_instance_valid(obj):
+			obj.global_position = _original_positions[obj]
+
+	_original_positions.clear()
+
+func _exit_change_mode() -> void:
+	_restore_player_depth()
+
+	_restore_world()
+
+	_move_mask = Vector3.ONE
+
+	_camera_pivot.force_2d_angle(false)
+	_set_camera_projection(false)
+
+func _restore_player_depth() -> void:
+	var space = get_world_3d().direct_space_state
+
+	var query = PhysicsRayQueryParameters3D.create(
+		global_position + Vector3(0, 1, 0),
+		global_position + Vector3(0, -3, 0)
+	)
+
+	query.exclude = [get_rid()]
+
+	var result = space.intersect_ray(query)
+
+	if result:
+		var collider = result["collider"]
+
+		# ¿Tenemos guardada su posición original?
+		if _original_positions.has(collider):
+
+			var original_pos = _original_positions[collider]
+
+			# Restauramos SOLO el eje aplastado
+			if _lock_axis.x > 0:
+				global_position.x = original_pos.x
+
+			elif _lock_axis.y > 0:
+				global_position.y = original_pos.y + 1.0
+
+			elif _lock_axis.z > 0:
+				global_position.z = original_pos.z
 
 ## Al volver al modo 3D, hace un raycast hacia abajo para encontrar la plataforma
 ## y corrige la posición en el eje bloqueado usando la posición real de esa plataforma.
