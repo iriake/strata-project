@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://be46isol6hfk7" path="res://assets/sprites/Universal Animation Library[Standard]/Unreal-Godot/UAL1_Standard.glb" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://b7lnraob4lau8" path="res://scenes/player/player.gd" id="1_gfjak"]
 [ext_resource type="Script" uid="uid://1hkmippek26d" path="res://assets/sprites/Universal Animation Library[Standard]/Unreal-Godot/ual_1_standard.gd" id="3_gmlin"]
+[ext_resource type="Script" uid="uid://cw4je6ns7d7m5" path="res://scenes/player/camera_pivot.gd" id="4_lvxji"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gmlin"]
 animation = &"Crouch_Fwd"
@@ -110,6 +111,7 @@ shape = SubResource("CapsuleShape3D_wr5hl")
 [node name="CameraPivot" type="Node3D" parent="." unique_id=2141107738]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.91874987, -0.39484006, 0, 0.39484006, 0.91874987, 0, 1.619272, 0)
+script = ExtResource("4_lvxji")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot" unique_id=2083594566]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
