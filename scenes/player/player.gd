@@ -57,12 +57,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	# 1. CAPTURA DE INPUT Y ORIENTACIÓN
+	# 1. INPUT Y DIRECCIÓN
 	var raw_input := Input.get_vector("move_left", "move_right", "move_front", "move_back")
-
 	var forward: Vector3
 	var right: Vector3
 
+	# Determinar ejes según la cámara (especial para TOP)
 	if abs(_camera.global_transform.basis.z.y) > 0.9:
 		forward = -_camera_pivot.global_basis.z
 		right = -_camera_pivot.global_basis.x
@@ -74,28 +74,28 @@ func _physics_process(delta: float) -> void:
 	move_direction.y = 0.0
 	move_direction = move_direction.normalized()
 
-	# 2. GESTIÓN DE VELOCIDAD HORIZONTAL
+	# 2. VELOCIDAD HORIZONTAL
 	var y_velocity := velocity.y
 	velocity.y = 0.0
 	velocity = velocity.move_toward(move_direction * move_speed, acceleration * delta)
 
-	# 3. APLICACIÓN DE RESTRICCIONES 2D (CHANGE)
+	# 3. FÍSICA SEGÚN MODO
 	if is_2d_mode:
 		velocity *= _move_mask
+		velocity.y = y_velocity + _gravity * delta
 		_snap_to_lock_axis()
+	else:
+		velocity.y = y_velocity + _gravity * delta
 
-	# 4. GRAVEDAD Y SALTO
-	velocity.y = y_velocity + _gravity * delta
-
+	# 4. SALTO Y MOVIMIENTO
 	var is_starting_jump := Input.is_action_just_pressed("jump") and is_on_floor()
 	if is_starting_jump:
-		velocity.y += jump_impulse
+		velocity.y = jump_impulse
 
 	move_and_slide()
 
-	# 5. COSMÉTICA Y ANIMACIONES
+	# 5. ANIMACIONES
 	_handle_cosmetics(move_direction, delta, is_starting_jump)
-
 
 ## Cambia el estado del juego entre 3D y 2D, calculando los ejes de bloqueo según la cámara.
 func toggle_change() -> void:
@@ -111,42 +111,39 @@ func _enter_change_mode() -> void:
 
 	if abs(basis_z.y) > 0.9:
 		_lock_axis = Vector3(0, 1, 0)
+		_locked_position_value = -0.5   # bloques se aplanan aquí
+		global_position.y = 0.5         # jugador queda encima de los bloques
 	elif abs(basis_z.z) > abs(basis_z.x):
 		_lock_axis = Vector3(0, 0, 1)
+		_locked_position_value = 0.0
 	else:
 		_lock_axis = Vector3(1, 0, 0)
+		_locked_position_value = 0.0
 
-	_locked_position_value = 0.0 
-	
 	_move_mask = Vector3.ONE - _lock_axis
 
-	#Teletransportar al jugador al plano 0 del eje bloqueado antes de aplastar
-	if _lock_axis.x > 0: global_position.x = 0
-	elif _lock_axis.y > 0: global_position.y = 0
-	elif _lock_axis.z > 0: global_position.z = 0
+	if _lock_axis.x > 0: global_position.x = _locked_position_value
+	elif _lock_axis.z > 0: global_position.z = _locked_position_value
+	# No tocamos Y aquí para TOP porque ya lo seteamos arriba
 
-	# Aplastar geometría
 	_project_world()
-
 	_camera_pivot.force_2d_angle(true)
 	_set_camera_projection(true)
 
 func _project_world() -> void:
 	var objects = get_tree().get_nodes_in_group("change_geometry")
+	_original_positions.clear()
 
 	for obj in objects:
 		_original_positions[obj] = obj.global_position
-
 		var pos = obj.global_position
 
 		if _lock_axis.x > 0:
-			pos.x = 0
-
-		elif _lock_axis.y > 0:
-			pos.y = 0
-
+			pos.x = _locked_position_value
 		elif _lock_axis.z > 0:
-			pos.z = 0
+			pos.z = _locked_position_value
+		elif _lock_axis.y > 0:
+			pos.y = _locked_position_value  # ← aplasta en Y para vista TOP
 
 		obj.global_position = pos
 
@@ -221,9 +218,12 @@ func _restore_3d_position() -> void:
 
 ## Asegura que el personaje no se desplace fuera del eje bloqueado durante el modo 2D.
 func _snap_to_lock_axis() -> void:
-	if _lock_axis.x > 0: global_position.x = _locked_position_value
-	elif _lock_axis.y > 0: global_position.y = _locked_position_value
-	elif _lock_axis.z > 0: global_position.z = _locked_position_value
+	if _lock_axis.x > 0:
+		global_position.x = _locked_position_value
+	elif _lock_axis.z > 0:
+		global_position.z = _locked_position_value
+	elif _lock_axis.y > 0:
+		global_position.y = 2 # jugador siempre encima de los bloques aplanados
 
 
 ## Cambia el modo de proyección de la cámara (Perspectiva ↔ Ortográfica).
