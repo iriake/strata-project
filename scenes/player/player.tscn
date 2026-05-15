@@ -1,9 +1,6 @@
-[gd_scene format=3 uid="uid://dfssymksab1fw"]
+[gd_scene format=3 uid="uid://dbaflc7ad8fmw"]
 
 [ext_resource type="PackedScene" uid="uid://be46isol6hfk7" path="res://assets/sprites/Universal Animation Library[Standard]/Unreal-Godot/UAL1_Standard.glb" id="1_4flbx"]
-[ext_resource type="Script" uid="uid://b7lnraob4lau8" path="res://scenes/player/player.gd" id="1_gfjak"]
-[ext_resource type="Script" uid="uid://1hkmippek26d" path="res://assets/sprites/Universal Animation Library[Standard]/Unreal-Godot/ual_1_standard.gd" id="3_gmlin"]
-[ext_resource type="Script" uid="uid://cw4je6ns7d7m5" path="res://scenes/player/camera_pivot.gd" id="4_lvxji"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gmlin"]
 animation = &"Crouch_Fwd"
@@ -94,11 +91,9 @@ height = 1.8173828
 [sub_resource type="SphereShape3D" id="SphereShape3D_dovo2"]
 
 [node name="Player" type="CharacterBody3D" unique_id=344500412]
-script = ExtResource("1_gfjak")
 
 [node name="UAL1_Standard" parent="." unique_id=843398248 instance=ExtResource("1_4flbx")]
 unique_name_in_owner = true
-script = ExtResource("3_gmlin")
 
 [node name="AnimationTree" type="AnimationTree" parent="UAL1_Standard" unique_id=1832677600]
 tree_root = SubResource("AnimationNodeBlendTree_p47bc")
@@ -111,7 +106,6 @@ shape = SubResource("CapsuleShape3D_wr5hl")
 [node name="CameraPivot" type="Node3D" parent="." unique_id=2141107738]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.91874987, -0.39484006, 0, 0.39484006, 0.91874987, 0, 1.619272, 0)
-script = ExtResource("4_lvxji")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot" unique_id=2083594566]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)

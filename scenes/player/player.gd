@@ -36,7 +36,7 @@ var _gravity := -30.0
 # --- REFERENCIAS A NODOS (%) ---
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera: Camera3D = %Camera3D
-@onready var _skin: Node3D = %UAL1_Standard
+@onready var _skin: Node3D = %George
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -241,15 +241,11 @@ func _handle_cosmetics(move_direction: Vector3, delta: float, is_starting_jump: 
 
 	if is_starting_jump:
 		_skin.jump()
-	elif not is_on_floor() and velocity.y < 0:
-		_skin.fall()
 	elif is_on_floor():
-		var is_crouch := Input.is_action_pressed("crouch")
 		var ground_speed := velocity.length()
 
-		if is_crouch:
-			if ground_speed > 0.0: _skin.crouch_move()
-			else: _skin.crouch_idle()
-		else:
-			if ground_speed > 0.0: _skin.move()
-			else: _skin.idle()
+		if ground_speed > 0.0: _skin.move()
+		else: 
+			if Input.is_action_pressed("emote"): _skin.dance()
+			else:
+				_skin.idle()

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c0j1vg5j3ctf6"]
 
-[ext_resource type="PackedScene" uid="uid://dfssymksab1fw" path="res://scenes/player/player.tscn" id="2_tb7nl"]
+[ext_resource type="PackedScene" uid="uid://dxiucw3ub32ad" path="res://scenes/player/test_robot.tscn" id="1_dvchg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ouw7l"]
 size = Vector3(100, 1, 100)
@@ -14,8 +14,7 @@ size = Vector3(100, 1, 100)
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 50, 0)
 shadow_enabled = true
 
-[node name="Player" parent="." unique_id=344500412 instance=ExtResource("2_tb7nl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500746, 0)
+[node name="player" parent="." unique_id=921444424 instance=ExtResource("1_dvchg")]
 
 [node name="RigidBody3D" type="StaticBody3D" parent="." unique_id=614867499]
 
