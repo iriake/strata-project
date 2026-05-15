@@ -8,9 +8,10 @@ var current_level = 0
 
 
 func start() -> void:
-	current_level = 0
-	if not levels.is_empty():
-		get_tree().change_scene_to_packed(levels[0])
+	get_tree().change_scene_to_file("res://scenes/levels/level_1.tscn")
+	#current_level = 0
+	#if not levels.is_empty():
+		#get_tree().change_scene_to_packed(levels[0])
 
 
 func next_level() -> void:
