@@ -9,8 +9,6 @@ extends Control
 
 
 func  _ready() -> void:
-	# esto es para que el menu de pausa no se quede pausado
-	process_mode = Node.PROCESS_MODE_ALWAYS 
 	hide()
 	resume.pressed.connect(_on_resume_pressed)
 	retry.pressed.connect(_on_retry_pressed)
@@ -23,22 +21,18 @@ func _on_resume_pressed() -> void:
 	get_tree().paused =  false
 	hide()
 
-
 func _on_retry_pressed() -> void:
 	get_tree().paused = false
 	hide() 
 	get_tree().reload_current_scene()
 
-
 func _on_settings_pressed() -> void:
 	Debug.log("TODO")
-
 
 func _on_main_menu_pressed() -> void:
 	get_tree().paused = false
 	hide() 
 	LevelManager.main_menu()
-
 
 func _on_save_game_pressed() -> void:
 	var dict: Dictionary = {
@@ -59,7 +53,6 @@ func _on_save_game_pressed() -> void:
 	config.set_value("Audio", "sfx_volume", 0.9)
 
 	config.save("user://settings.cfg")
-
 
 func _on_load_game_pressed() -> void:
 	var file = FileAccess.open_encrypted_with_pass("user://save.data", FileAccess.READ, "1234")

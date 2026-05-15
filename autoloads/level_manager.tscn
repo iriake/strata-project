@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bb17db381bnli" path="res://ui/PauseMenu.tscn" id="6_gty5d"]
 
 [node name="LevelManager" type="Node" unique_id=929241974]
+process_mode = 3
 script = ExtResource("1_swoet")
 main_menu_scene = ExtResource("2_stu7j")
 credits_scene = ExtResource("3_gn3j0")

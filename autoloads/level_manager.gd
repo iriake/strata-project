@@ -8,9 +8,6 @@ var current_level = 0
 
 @onready var _pause_menu = $PauseMenu
 
-func _ready() -> void:
-		process_mode = Node.PROCESS_MODE_ALWAYS 
-
 func start() -> void:
 	current_level = 0
 	if not levels.is_empty():
