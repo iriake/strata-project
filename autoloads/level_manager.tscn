@@ -5,9 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://byk7mffodrktd" path="res://ui/MainMenu.tscn" id="2_stu7j"]
 [ext_resource type="PackedScene" uid="uid://crfin475mvk1e" path="res://ui/credits.tscn" id="3_gn3j0"]
 [ext_resource type="PackedScene" uid="uid://cre8ectqc8laj" path="res://scenes/levels/level_2.tscn" id="3_stu7j"]
+[ext_resource type="PackedScene" uid="uid://bb17db381bnli" path="res://ui/PauseMenu.tscn" id="6_gty5d"]
 
 [node name="LevelManager" type="Node" unique_id=929241974]
 script = ExtResource("1_swoet")
 main_menu_scene = ExtResource("2_stu7j")
 credits_scene = ExtResource("3_gn3j0")
 levels = Array[PackedScene]([ExtResource("2_jmqug"), ExtResource("3_stu7j")])
+
+[node name="PauseMenu" parent="." unique_id=1750061234 instance=ExtResource("6_gty5d")]

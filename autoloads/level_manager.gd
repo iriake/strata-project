@@ -9,9 +9,7 @@ var current_level = 0
 
 func start() -> void:
 	current_level = 0
-	print("button")
 	if not levels.is_empty():
-		print("is not empty")
 		get_tree().change_scene_to_packed(levels[0])
 
 
