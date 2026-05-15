@@ -9,6 +9,8 @@ extends Control
 
 
 func  _ready() -> void:
+	# esto es para que el menu de pausa no se quede pausado
+	process_mode = Node.PROCESS_MODE_ALWAYS 
 	hide()
 	resume.pressed.connect(_on_resume_pressed)
 	retry.pressed.connect(_on_retry_pressed)
@@ -16,13 +18,6 @@ func  _ready() -> void:
 	main_menu.pressed.connect(_on_main_menu_pressed)
 	save_game.pressed.connect(_on_save_game_pressed)
 	load_game.pressed.connect(_on_load_game_pressed)
-
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("menu"):
-		get_tree().paused = not get_tree().paused
-		visible = get_tree().paused
-
 
 func _on_resume_pressed() -> void:
 	get_tree().paused =  false
