@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="strata"
-run/main_scene="uid://c4qc1r0xgkxha"
+run/main_scene="uid://byk7mffodrktd"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
