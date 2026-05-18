@@ -10,6 +10,9 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6761a"]
 albedo_texture = ExtResource("1_x42e6")
 metallic = 1.0
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
+uv1_world_triplanar = true
 proximity_fade_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_s8va5"]
