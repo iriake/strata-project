@@ -109,7 +109,7 @@ func toggle_change() -> void:
 func _enter_change_mode() -> void:
 	var basis_z = _camera_pivot.global_basis.z
 
-	if abs(basis_z.y) > 0.9:
+	if abs(basis_z.y*2) > 0.9:
 		_lock_axis = Vector3(0, 1, 0)
 		_locked_position_value = -0.5   # bloques se aplanan aquí
 		global_position.y = 0.5         # jugador queda encima de los bloques
@@ -230,6 +230,10 @@ func _snap_to_lock_axis() -> void:
 func _set_camera_projection(is_ortho: bool) -> void:
 	_camera.projection = Camera3D.PROJECTION_ORTHOGONAL if is_ortho else Camera3D.PROJECTION_PERSPECTIVE
 	_camera.size = 12.0
+	if is_ortho:
+		_camera.global_position = _camera.global_position + _camera.global_basis.z * 10
+	else: 
+		_camera.global_position = _camera.global_position - _camera.global_basis.z * 10
 
 
 ## Gestiona la rotación del modelo visual y dispara las animaciones correspondientes.
