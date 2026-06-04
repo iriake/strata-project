@@ -26,6 +26,12 @@ var _locked_position_value := 0.0
 var _move_mask := Vector3.ONE
 # Posiciones originales de los objetos
 var _original_positions := {}
+var _original_scales := {}
+
+# Variables para restaurar profundidad en 3D
+var _player_pos_before_2d := Vector3.ZERO
+var _initial_platform: Node3D = null
+var _offset_on_lock_axis := 0.0
 
 # --- VARIABLES INTERNAS Y FÍSICA ---
 ## Dirección del último movimiento realizado, usada para mantener la orientación del modelo en reposo.
@@ -103,10 +109,14 @@ func toggle_change() -> void:
 func _enter_change_mode() -> void:
 	var basis_z = _camera_pivot.global_basis.z
 
+	# 1. Guardar posición absoluta y plataforma inicial antes del aplanamiento
+	_player_pos_before_2d = global_position
+	_initial_platform = _get_platform_underneath()
+
+	# 2. Definir eje bloqueado y valor de bloqueo
 	if abs(basis_z.y*2) > 0.9:
 		_lock_axis = Vector3(0, 1, 0)
-		_locked_position_value = -0.5   # bloques se aplanan aquí
-		global_position.y = 0.5         # jugador queda encima de los bloques
+		_locked_position_value = -0.5
 	elif abs(basis_z.z) > abs(basis_z.x):
 		_lock_axis = Vector3(0, 0, 1)
 		_locked_position_value = 0.0
@@ -114,11 +124,31 @@ func _enter_change_mode() -> void:
 		_lock_axis = Vector3(1, 0, 0)
 		_locked_position_value = 0.0
 
+	# 3. Calcular offset en el eje bloqueado
+	if _initial_platform:
+		if _lock_axis.x > 0:
+			_offset_on_lock_axis = _player_pos_before_2d.x - _initial_platform.global_position.x
+		elif _lock_axis.y > 0:
+			_offset_on_lock_axis = _player_pos_before_2d.y - _initial_platform.global_position.y
+		elif _lock_axis.z > 0:
+			_offset_on_lock_axis = _player_pos_before_2d.z - _initial_platform.global_position.z
+	else:
+		if _lock_axis.x > 0:
+			_offset_on_lock_axis = _player_pos_before_2d.x
+		elif _lock_axis.y > 0:
+			_offset_on_lock_axis = 0.0
+		elif _lock_axis.z > 0:
+			_offset_on_lock_axis = _player_pos_before_2d.z
+
 	_move_mask = Vector3.ONE - _lock_axis
 
-	if _lock_axis.x > 0: global_position.x = _locked_position_value
-	elif _lock_axis.z > 0: global_position.z = _locked_position_value
-	# No tocamos Y aquí para TOP porque ya lo seteamos arriba
+	# 4. Aplicar cambios a la posición del jugador
+	if _lock_axis.x > 0:
+		global_position.x = _locked_position_value
+	elif _lock_axis.z > 0:
+		global_position.z = _locked_position_value
+	elif _lock_axis.y > 0:
+		global_position.y = 0.0
 
 	_project_world()
 	_camera_pivot.force_2d_angle(true)
@@ -130,19 +160,27 @@ func _enter_change_mode() -> void:
 func _project_world() -> void:
 	var objects = get_tree().get_nodes_in_group("change_geometry")
 	_original_positions.clear()
+	_original_scales.clear()
 
 	for obj in objects:
 		_original_positions[obj] = obj.global_position
+		_original_scales[obj] = obj.scale
+		
 		var pos = obj.global_position
+		var scl = obj.scale
 
 		if _lock_axis.x > 0:
 			pos.x = _locked_position_value
+			scl.x = 1.0
 		elif _lock_axis.z > 0:
 			pos.z = _locked_position_value
+			scl.z = 1.0
 		elif _lock_axis.y > 0:
-			pos.y = _locked_position_value  # ← aplasta en Y para vista TOP
+			pos.y = _locked_position_value
+			scl.y = 1.0  # ← aplasta la escala Y para vista TOP
 
 		obj.global_position = pos
+		obj.scale = scl
 
 
 func _restore_world() -> void:
@@ -150,7 +188,12 @@ func _restore_world() -> void:
 		if is_instance_valid(obj):
 			obj.global_position = _original_positions[obj]
 
+	for obj in _original_scales:
+		if is_instance_valid(obj):
+			obj.scale = _original_scales[obj]
+
 	_original_positions.clear()
+	_original_scales.clear()
 
 
 func _exit_change_mode() -> void:
@@ -167,34 +210,62 @@ func _exit_change_mode() -> void:
 
 
 func _restore_player_depth() -> void:
-	var space = get_world_3d().direct_space_state
+	var current_platform = _get_platform_underneath()
 
-	var query = PhysicsRayQueryParameters3D.create(
-		global_position + Vector3(0, 1, 0),
-		global_position + Vector3(0, -3, 0)
-	)
-
-	query.exclude = [get_rid()]
-
-	var result = space.intersect_ray(query)
-
-	if result:
-		var collider = result["collider"]
-
+	if current_platform:
 		# ¿Tenemos guardada su posición original?
-		if _original_positions.has(collider):
-
-			var original_pos = _original_positions[collider]
+		if _original_positions.has(current_platform):
+			var original_pos = _original_positions[current_platform]
 
 			# Restauramos SOLO el eje aplastado
 			if _lock_axis.x > 0:
-				global_position.x = original_pos.x
+				if _initial_platform == current_platform:
+					global_position.x = _player_pos_before_2d.x
+				else:
+					var original_scale = _original_scales.get(current_platform, Vector3.ONE)
+					var max_offset = max(0.0, original_scale.x / 2.0 - 0.2)
+					var clamped_offset = clamp(_offset_on_lock_axis, -max_offset, max_offset)
+					global_position.x = original_pos.x + clamped_offset
 
 			elif _lock_axis.y > 0:
-				global_position.y = original_pos.y + 1.0
+				var original_scale = _original_scales.get(current_platform, Vector3.ONE)
+				global_position.y = original_pos.y + original_scale.y / 2.0
 
 			elif _lock_axis.z > 0:
-				global_position.z = original_pos.z
+				if _initial_platform == current_platform:
+					global_position.z = _player_pos_before_2d.z
+				else:
+					var original_scale = _original_scales.get(current_platform, Vector3.ONE)
+					var max_offset = max(0.0, original_scale.z / 2.0 - 0.2)
+					var clamped_offset = clamp(_offset_on_lock_axis, -max_offset, max_offset)
+					global_position.z = original_pos.z + clamped_offset
+		else:
+			_restore_absolute_fallback()
+	else:
+		_restore_absolute_fallback()
+
+
+func _restore_absolute_fallback() -> void:
+	if _lock_axis.x > 0:
+		global_position.x = _player_pos_before_2d.x
+	elif _lock_axis.y > 0:
+		global_position.y = _player_pos_before_2d.y
+	elif _lock_axis.z > 0:
+		global_position.z = _player_pos_before_2d.z
+
+
+## Retorna el collider que está debajo del jugador mediante un raycast.
+func _get_platform_underneath() -> Node3D:
+	var space = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(
+		global_position + Vector3(0, 1.0, 0),
+		global_position + Vector3(0, -3.0, 0)
+	)
+	query.exclude = [get_rid()]
+	var result = space.intersect_ray(query)
+	if result:
+		return result["collider"] as Node3D
+	return null
 
 
 ## Al volver al modo 3D, hace un raycast hacia abajo para encontrar la plataforma
@@ -226,7 +297,7 @@ func _snap_to_lock_axis() -> void:
 	elif _lock_axis.z > 0:
 		global_position.z = _locked_position_value
 	elif _lock_axis.y > 0:
-		global_position.y = 2 # jugador siempre encima de los bloques aplanados
+		global_position.y = 0.0 # jugador siempre encima de los bloques aplanados
 
 
 ## Gestiona la rotación del modelo visual y dispara las animaciones correspondientes.

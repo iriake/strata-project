@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://dbaflc7ad8fmw"]
+
+[ext_resource type="Script" uid="uid://diy1sfr7cxb2r" path="res://scenes/player/player.gd" id="1_to0q3"]
+[ext_resource type="PackedScene" uid="uid://be46isol6hfk7" path="res://assets/sprites/Universal Animation Library[Standard]/Unreal-Godot/UAL1_Standard.glb" id="2_qp1at"]
+[ext_resource type="Script" uid="uid://dwut5yp3xy64a" path="res://scenes/player/camera_handler.gd" id="3_yik4x"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wr5hl"]
+radius = 0.22509766
+height = 1.8173828
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gmlin"]
+animation = &"Crouch_Fwd"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lvxji"]
+animation = &"Crouch_Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p47bc"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_75vfm"]
+animation = &"Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qek5x"]
+animation = &"Jump_Start"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h17s1"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gmlin"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lvxji"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p47bc"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_75vfm"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_je7p5"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fm80t"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gx1jg"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ugbui"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fcs02"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_myrg7"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kvlxm"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uf5tr"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lgqa7"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8ydkj"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3j4b4"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ioxgp"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h17s1"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yj68g"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qek5x"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5gtgg"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0owmy"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_lvxji"]
+states/Crouch_Fwd/node = SubResource("AnimationNodeAnimation_gmlin")
+states/Crouch_Fwd/position = Vector2(630.8, 9.800002)
+states/Crouch_Idle/node = SubResource("AnimationNodeAnimation_lvxji")
+states/Crouch_Idle/position = Vector2(425.84, 2.811203)
+states/Idle/node = SubResource("AnimationNodeAnimation_p47bc")
+states/Idle/position = Vector2(300.56, -56.152)
+states/Jump/node = SubResource("AnimationNodeAnimation_75vfm")
+states/Jump/position = Vector2(546, -182.94241)
+states/Jump_Start/node = SubResource("AnimationNodeAnimation_qek5x")
+states/Jump_Start/position = Vector2(399.6, -177.4)
+states/Start/position = Vector2(199.19998, -56)
+states/Walk/node = SubResource("AnimationNodeAnimation_h17s1")
+states/Walk/position = Vector2(742.7999, -56.456646)
+transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_gmlin"), "Idle", "Jump_Start", SubResource("AnimationNodeStateMachineTransition_lvxji"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_p47bc"), "Idle", "Crouch_Idle", SubResource("AnimationNodeStateMachineTransition_75vfm"), "Crouch_Idle", "Crouch_Fwd", SubResource("AnimationNodeStateMachineTransition_je7p5"), "Crouch_Idle", "Idle", SubResource("AnimationNodeStateMachineTransition_fm80t"), "Crouch_Idle", "Jump_Start", SubResource("AnimationNodeStateMachineTransition_gx1jg"), "Crouch_Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_ugbui"), "Walk", "Jump_Start", SubResource("AnimationNodeStateMachineTransition_fcs02"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_myrg7"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_kvlxm"), "Walk", "Crouch_Idle", SubResource("AnimationNodeStateMachineTransition_uf5tr"), "Crouch_Fwd", "Jump_Start", SubResource("AnimationNodeStateMachineTransition_lgqa7"), "Crouch_Fwd", "Jump", SubResource("AnimationNodeStateMachineTransition_8ydkj"), "Crouch_Fwd", "Idle", SubResource("AnimationNodeStateMachineTransition_3j4b4"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ioxgp"), "Jump", "Crouch_Idle", SubResource("AnimationNodeStateMachineTransition_h17s1"), "Jump", "Crouch_Fwd", SubResource("AnimationNodeStateMachineTransition_yj68g"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_qek5x"), "Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_5gtgg"), "Jump_Start", "Jump", SubResource("AnimationNodeStateMachineTransition_0owmy")]
+graph_offset = Vector2(68, -215)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p47bc"]
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_lvxji")
+nodes/StateMachine/position = Vector2(80, 144)
+node_connections = [&"output", 0, &"StateMachine"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dovo2"]
+
+[node name="Player" type="CharacterBody3D" unique_id=344500412]
+script = ExtResource("1_to0q3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1238858582]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875934, 0)
+shape = SubResource("CapsuleShape3D_wr5hl")
+
+[node name="UAL1_Standard" parent="." unique_id=843398248 instance=ExtResource("2_qp1at")]
+unique_name_in_owner = true
+
+[node name="AnimationTree" type="AnimationTree" parent="UAL1_Standard" unique_id=1832677600]
+tree_root = SubResource("AnimationNodeBlendTree_p47bc")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=2141107738]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.91874987, -0.39484006, 0, 0.39484006, 0.91874987, 0, 1.619272, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot" unique_id=2083594566]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+shape = SubResource("SphereShape3D_dovo2")
+spring_length = 8.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D" unique_id=1261885817]
+unique_name_in_owner = true
+near = 0.001
+
+[node name="CameraHandler" type="Node" parent="." unique_id=1420778348]
+unique_name_in_owner = true
+script = ExtResource("3_yik4x")
+
+[editable path="UAL1_Standard"]
