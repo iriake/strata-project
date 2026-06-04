@@ -1,5 +1,5 @@
 class_name HitboxComponent
-extends Area2D
+extends Area3D
 
 signal damage_dealt
 

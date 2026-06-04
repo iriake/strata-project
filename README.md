@@ -15,10 +15,7 @@ La narrativa y el lore están pendientes de definición.
 ```
 strata-project/
 ├── assets/
-│   ├── sprites/
-│   ├── animations/
-│   ├── audio/
-│   └── fonts/
+│   └── sprites/
 │
 ├── autoloads/
 │   ├── audio_manager.gd
@@ -33,37 +30,34 @@ strata-project/
 │   └── hitbox_component.gd
 │
 ├── gameplay/
-│   ├── collectible.gd
-│   └── collectible.tscn
-│
-├── levels/
-│   ├── level_1.tscn
-│   └── level_2.tscn
+│   └── collectible.gd
 │
 ├── scenes/
-│   ├── dimension/
-│   │   ├── DimensionManager.tscn
-│   │   ├── dimension_system.gd
-│   │   └── dimension_transition.gd
+│   ├── levels/
+│   │   ├── background.tscn
+│   │   ├── level_1.tscn
+│   │   └── level_2.tscn
+│   │
 │   ├── objects/
 │   │   ├── BlockMovable.tscn
 │   │   ├── block_movable.gd
 │   │   ├── Button.tscn
 │   │   └── button.gd
-│   ├── player/
-│   │   ├── Player.tscn
-│   │   ├── player.gd
-│   │   └── player_movement.gd
-│   └── world/
-│       └── World.tscn
+│   │
+│   └── player/
+│       ├── camera_handler.gd
+│       ├── camera_pivot.gd
+│       ├── player.gd
+│       └── player.tscn
 │
 ├── ui/
-│   ├── Credits.tscn
-│   ├── credits.gd
 │   ├── MainMenu.tscn
 │   ├── main_menu.gd
 │   ├── PauseMenu.tscn
 │   ├── pause_menu.gd
+│   ├── credits.tscn
+│   ├── credits.gd
+│   ├── hud.tscn
 │   └── theme.tres
 │
 ├── default_bus_layout.tres

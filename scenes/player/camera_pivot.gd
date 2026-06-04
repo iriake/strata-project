@@ -1,5 +1,6 @@
 ## Nodo controlador del pivot de la cámara para el proyecto "Strata".
 ## Gestiona rotaciones incrementales, vistas fijas y ajustes de ángulo para el modo 2D.
+class_name CameraPivot
 extends Node3D
 
 # --- CONFIGURACIÓN ---
@@ -37,8 +38,8 @@ func set_fixed_view(view: String):
 		_current_tween.kill()
 	
 	match view:
-		# Se resta 0.1 para evitar el Gimbal Lock y mantener consistencia en vectores
-		"top": _target_rotation_x = (PI / 2.0) - 0.1
+		# Se resta 0.05 para dar una inclinación muy sutil en 3D cenital (cercana a 90°)
+		"top": _target_rotation_x = (PI / 2.0) - 0.05
 		# Inclinación default de 22.5 grados para profundidad 3D
 		"reset": _target_rotation_x = PI / 8.0
 	
@@ -50,17 +51,38 @@ func force_2d_angle(enabled: bool):
 	if _current_tween:
 		_current_tween.kill()
 	
+	var is_top_view := false
+	
 	if enabled:
-		# Solo forzamos a 0 si no estamos en vista superior (evita colapsar la vista Top)
-		# El margen de 0.11 cubre la pequeña desviación de la vista cenital
-		if abs(_target_rotation_x - PI / 2.0) > 0.11:
+		# Si estamos en vista superior (desviación de hasta 0.11), forzamos a 90 grados exactos (PI / 2)
+		if abs(_target_rotation_x - PI / 2.0) <= 0.11:
+			_target_rotation_x = PI / 2.0
+			is_top_view = true
+		else:
 			_target_rotation_x = 0.0
 	else:
-		# Si estábamos en ángulo 2D (cercano a 0), restauramos la inclinación 3D
-		if abs(_target_rotation_x) < 0.1:
+		# Al restaurar 3D:
+		if abs(_target_rotation_x - PI / 2.0) < 0.01:
+			# Volvemos a la inclinación 3D cenital con desviación de 0.05
+			_target_rotation_x = (PI / 2.0) - 0.05
+			is_top_view = true
+		elif abs(_target_rotation_x) < 0.1:
+			# Volvemos a la inclinación 3D estándar
 			_target_rotation_x = PI / 8.0
 	
-	_start_transition()
+	if is_top_view:
+		# Transición súper rápida (0.08s) en vista cenital para suavizar el impacto sin revelar el deslizamiento
+		_start_custom_transition(0.12)
+	else:
+		# Transición estándar suave (0.3s) para las demás vistas
+		_start_transition()
+
+## Helper para iniciar transiciones con duraciones personalizadas
+func _start_custom_transition(duration: float):
+	_current_tween = create_tween().set_parallel(true)
+	_current_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	_current_tween.tween_property(self, "rotation:y", _target_rotation_y, duration)
+	_current_tween.tween_property(self, "rotation:x", _target_rotation_x, duration)
 
 ## Configura e inicia el sistema de interpolación (Tween) para mover la cámara.
 ## Utiliza una transición SINE_OUT para un movimiento fluido y responsivo.

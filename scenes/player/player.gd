@@ -1,7 +1,7 @@
-## Controla el comportamiento del jugador en el proyecto "Strata".
+## Controla el comportamiento del jugador en el proyecto "Strata" (Nueva versión limpia).
 ## Gestiona el movimiento 3D, la transición a una perspectiva 2D (mecánica Change)
 ## y la sincronización de animaciones del modelo visual.
-class_name Player
+class_name Player2
 extends CharacterBody3D
 
 # --- CONFIGURACIÓN DE MOVIMIENTO ---
@@ -37,20 +37,11 @@ var _gravity := -30.0
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera: Camera3D = %Camera3D
 @onready var _skin: Node3D = %George
+@onready var _camera_handler: Node = %CameraHandler
+
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	# --- CONTROL DE CÁMARA (Bloqueado en modo 2D) ---
-	if not is_2d_mode:
-		if event.is_action_pressed("move_camera_right"):
-			_camera_pivot.side_rotation(-1.0)
-		elif event.is_action_pressed("move_camera_left"):
-			_camera_pivot.side_rotation(1.0)
-		elif event.is_action_pressed("move_camera_up"):
-			_camera_pivot.set_fixed_view("top")
-		elif event.is_action_pressed("move_camera_down"):
-			_camera_pivot.set_fixed_view("reset")
-
 	# --- CAMBIO DE DIMENSIÓN ---
 	if event.is_action_pressed("change_dimension"):
 		toggle_change()
@@ -64,7 +55,8 @@ func _physics_process(delta: float) -> void:
 
 	# Determinar ejes según la cámara (especial para TOP)
 	if abs(_camera.global_transform.basis.z.y) > 0.9:
-		forward = -_camera_pivot.global_basis.z
+		var yaw := _camera_pivot.global_rotation.y
+		forward = Vector3.FORWARD.rotated(Vector3.UP, yaw)
 		right = -_camera_pivot.global_basis.x
 	else:
 		forward = _camera.global_basis.z
@@ -97,6 +89,7 @@ func _physics_process(delta: float) -> void:
 	# 5. ANIMACIONES
 	_handle_cosmetics(move_direction, delta, is_starting_jump)
 
+
 ## Cambia el estado del juego entre 3D y 2D, calculando los ejes de bloqueo según la cámara.
 func toggle_change() -> void:
 	is_2d_mode = !is_2d_mode
@@ -105,6 +98,7 @@ func toggle_change() -> void:
 		_enter_change_mode()
 	else:
 		_exit_change_mode()
+
 
 func _enter_change_mode() -> void:
 	var basis_z = _camera_pivot.global_basis.z
@@ -128,7 +122,10 @@ func _enter_change_mode() -> void:
 
 	_project_world()
 	_camera_pivot.force_2d_angle(true)
-	_set_camera_projection(true)
+	
+	# Delegado al controlador de cámara
+	_camera_handler.set_camera_projection(true)
+
 
 func _project_world() -> void:
 	var objects = get_tree().get_nodes_in_group("change_geometry")
@@ -147,12 +144,14 @@ func _project_world() -> void:
 
 		obj.global_position = pos
 
+
 func _restore_world() -> void:
 	for obj in _original_positions:
 		if is_instance_valid(obj):
 			obj.global_position = _original_positions[obj]
 
 	_original_positions.clear()
+
 
 func _exit_change_mode() -> void:
 	_restore_player_depth()
@@ -162,7 +161,10 @@ func _exit_change_mode() -> void:
 	_move_mask = Vector3.ONE
 
 	_camera_pivot.force_2d_angle(false)
-	_set_camera_projection(false)
+	
+	# Delegado al controlador de cámara
+	_camera_handler.set_camera_projection(false)
+
 
 func _restore_player_depth() -> void:
 	var space = get_world_3d().direct_space_state
@@ -194,6 +196,7 @@ func _restore_player_depth() -> void:
 			elif _lock_axis.z > 0:
 				global_position.z = original_pos.z
 
+
 ## Al volver al modo 3D, hace un raycast hacia abajo para encontrar la plataforma
 ## y corrige la posición en el eje bloqueado usando la posición real de esa plataforma.
 func _restore_3d_position() -> void:
@@ -224,16 +227,6 @@ func _snap_to_lock_axis() -> void:
 		global_position.z = _locked_position_value
 	elif _lock_axis.y > 0:
 		global_position.y = 2 # jugador siempre encima de los bloques aplanados
-
-
-## Cambia el modo de proyección de la cámara (Perspectiva ↔ Ortográfica).
-func _set_camera_projection(is_ortho: bool) -> void:
-	_camera.projection = Camera3D.PROJECTION_ORTHOGONAL if is_ortho else Camera3D.PROJECTION_PERSPECTIVE
-	_camera.size = 12.0
-	if is_ortho:
-		_camera.global_position = _camera.global_position + _camera.global_basis.z * 10
-	else: 
-		_camera.global_position = _camera.global_position - _camera.global_basis.z * 10
 
 
 ## Gestiona la rotación del modelo visual y dispara las animaciones correspondientes.

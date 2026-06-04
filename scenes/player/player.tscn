@@ -1,119 +1,97 @@
-[gd_scene format=3 uid="uid://dbaflc7ad8fmw"]
+[gd_scene format=3 uid="uid://dxiucw3ub32ad"]
 
-[ext_resource type="PackedScene" uid="uid://be46isol6hfk7" path="res://assets/sprites/Universal Animation Library[Standard]/Unreal-Godot/UAL1_Standard.glb" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://diy1sfr7cxb2r" path="res://scenes/player/player.gd" id="1_p47bc"]
+[ext_resource type="PackedScene" uid="uid://2vn1ksytnric" path="res://assets/sprites/robot_glb/George.glb" id="2_75vfm"]
+[ext_resource type="Script" uid="uid://cn3eai57hnuh1" path="res://assets/sprites/robot_glb/george.gd" id="3_0owmy"]
+[ext_resource type="Script" uid="uid://cw4je6ns7d7m5" path="res://scenes/player/camera_pivot.gd" id="4_qek5x"]
+[ext_resource type="Script" uid="uid://dwut5yp3xy64a" path="res://scenes/player/camera_handler.gd" id="5_5gtgg"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gmlin"]
-animation = &"Crouch_Fwd"
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mvket"]
+radius = 0.5722656
+height = 5.5531006
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lvxji"]
-animation = &"Crouch_Idle"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8ra2g"]
+animation = &"Dance"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p47bc"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wkm1j"]
 animation = &"Idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_75vfm"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qp52m"]
 animation = &"Jump"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qek5x"]
-animation = &"Jump_Start"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h17s1"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cgpoq"]
 animation = &"Walk"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gmlin"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k8feu"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lvxji"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eghdg"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p47bc"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yb6ik"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_75vfm"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eum0r"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_je7p5"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4t2di"]
+switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fm80t"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xmgfm"]
+switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gx1jg"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jgg4d"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ugbui"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4nvta"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fcs02"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ihguf"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_myrg7"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gspch"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kvlxm"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f1a3x"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uf5tr"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ejxti"]
+states/Dance/node = SubResource("AnimationNodeAnimation_8ra2g")
+states/Dance/position = Vector2(590.416, 117.119995)
+states/Idle/node = SubResource("AnimationNodeAnimation_wkm1j")
+states/Idle/position = Vector2(370.41602, -17.6)
+states/Jump/node = SubResource("AnimationNodeAnimation_qp52m")
+states/Jump/position = Vector2(590, -6.4000015)
+states/Start/position = Vector2(207.2, 68.159996)
+states/Walk/node = SubResource("AnimationNodeAnimation_cgpoq")
+states/Walk/position = Vector2(370.55682, 117.6)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_k8feu"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_eghdg"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_yb6ik"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_eum0r"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_4t2di"), "Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_xmgfm"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_jgg4d"), "Walk", "Dance", SubResource("AnimationNodeStateMachineTransition_4nvta"), "Dance", "Walk", SubResource("AnimationNodeStateMachineTransition_ihguf"), "Idle", "Dance", SubResource("AnimationNodeStateMachineTransition_gspch"), "Dance", "Idle", SubResource("AnimationNodeStateMachineTransition_f1a3x")]
+graph_offset = Vector2(37, -54)
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lgqa7"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8ydkj"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3j4b4"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ioxgp"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h17s1"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yj68g"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qek5x"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5gtgg"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0owmy"]
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_lvxji"]
-states/Crouch_Fwd/node = SubResource("AnimationNodeAnimation_gmlin")
-states/Crouch_Fwd/position = Vector2(630.8, 9.800002)
-states/Crouch_Idle/node = SubResource("AnimationNodeAnimation_lvxji")
-states/Crouch_Idle/position = Vector2(425.84, 2.811203)
-states/Idle/node = SubResource("AnimationNodeAnimation_p47bc")
-states/Idle/position = Vector2(300.56, -56.152)
-states/Jump/node = SubResource("AnimationNodeAnimation_75vfm")
-states/Jump/position = Vector2(546, -182.94241)
-states/Jump_Start/node = SubResource("AnimationNodeAnimation_qek5x")
-states/Jump_Start/position = Vector2(399.6, -177.4)
-states/Start/position = Vector2(199.19998, -56)
-states/Walk/node = SubResource("AnimationNodeAnimation_h17s1")
-states/Walk/position = Vector2(742.7999, -56.456646)
-transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_gmlin"), "Idle", "Jump_Start", SubResource("AnimationNodeStateMachineTransition_lvxji"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_p47bc"), "Idle", "Crouch_Idle", SubResource("AnimationNodeStateMachineTransition_75vfm"), "Crouch_Idle", "Crouch_Fwd", SubResource("AnimationNodeStateMachineTransition_je7p5"), "Crouch_Idle", "Idle", SubResource("AnimationNodeStateMachineTransition_fm80t"), "Crouch_Idle", "Jump_Start", SubResource("AnimationNodeStateMachineTransition_gx1jg"), "Crouch_Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_ugbui"), "Walk", "Jump_Start", SubResource("AnimationNodeStateMachineTransition_fcs02"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_myrg7"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_kvlxm"), "Walk", "Crouch_Idle", SubResource("AnimationNodeStateMachineTransition_uf5tr"), "Crouch_Fwd", "Jump_Start", SubResource("AnimationNodeStateMachineTransition_lgqa7"), "Crouch_Fwd", "Jump", SubResource("AnimationNodeStateMachineTransition_8ydkj"), "Crouch_Fwd", "Idle", SubResource("AnimationNodeStateMachineTransition_3j4b4"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ioxgp"), "Jump", "Crouch_Idle", SubResource("AnimationNodeStateMachineTransition_h17s1"), "Jump", "Crouch_Fwd", SubResource("AnimationNodeStateMachineTransition_yj68g"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_qek5x"), "Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_5gtgg"), "Jump_Start", "Jump", SubResource("AnimationNodeStateMachineTransition_0owmy")]
-graph_offset = Vector2(68, -215)
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p47bc"]
-nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_lvxji")
-nodes/StateMachine/position = Vector2(80, 144)
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ultgi"]
+graph_offset = Vector2(-287.4996, 74.68307)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_ejxti")
+nodes/StateMachine/position = Vector2(96, 144)
 node_connections = [&"output", 0, &"StateMachine"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wr5hl"]
-radius = 0.22509766
-height = 1.8173828
+[node name="player" type="CharacterBody3D" unique_id=921444424]
+script = ExtResource("1_p47bc")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_dovo2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=588879690]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7857056, 0)
+shape = SubResource("CapsuleShape3D_mvket")
 
-[node name="Player" type="CharacterBody3D" unique_id=344500412]
-
-[node name="UAL1_Standard" parent="." unique_id=843398248 instance=ExtResource("1_4flbx")]
+[node name="George" parent="." unique_id=999814062 instance=ExtResource("2_75vfm")]
 unique_name_in_owner = true
+script = ExtResource("3_0owmy")
 
-[node name="AnimationTree" type="AnimationTree" parent="UAL1_Standard" unique_id=1832677600]
-tree_root = SubResource("AnimationNodeBlendTree_p47bc")
+[node name="AnimationTree" type="AnimationTree" parent="George" unique_id=506169680]
+tree_root = SubResource("AnimationNodeBlendTree_ultgi")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1238858582]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875934, 0)
-shape = SubResource("CapsuleShape3D_wr5hl")
-
-[node name="CameraPivot" type="Node3D" parent="." unique_id=2141107738]
+[node name="CameraPivot" type="Node3D" parent="." unique_id=2000226128]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.91874987, -0.39484006, 0, 0.39484006, 0.91874987, 0, 1.619272, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9252097, -0.37945616, 0, 0.37945616, 0.9252097, 0, 5.246357, 0)
+script = ExtResource("4_qek5x")
 
-[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot" unique_id=2083594566]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-shape = SubResource("SphereShape3D_dovo2")
-spring_length = 8.0
-
-[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D" unique_id=1261885817]
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=1569288678]
 unique_name_in_owner = true
-near = 0.001
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -10)
+current = true
 
-[editable path="UAL1_Standard"]
+[node name="CameraHandler" type="Node" parent="." unique_id=1942075292]
+unique_name_in_owner = true
+script = ExtResource("5_5gtgg")
+
+[editable path="George"]
