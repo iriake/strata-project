@@ -61,6 +61,9 @@ sky_material = SubResource("PanoramaSkyMaterial_sk5k4")
 [sub_resource type="Environment" id="Environment_s8va5"]
 background_mode = 2
 sky = SubResource("Sky_oc4kc")
+sky_custom_fov = 130.0
+sky_rotation = Vector3(3.005457, -3.3684855, -1.8849556)
+tonemap_exposure = 2.27
 
 [node name="Level1" type="Node3D" unique_id=1718511091]
 
