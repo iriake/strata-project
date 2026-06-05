@@ -317,3 +317,5 @@ func _handle_cosmetics(move_direction: Vector3, delta: float, is_starting_jump: 
 			if Input.is_action_pressed("emote"): _skin.dance()
 			else:
 				_skin.idle()
+	else:
+		_skin.fall()

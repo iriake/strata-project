@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bi8p0ht4owspk" path="res://assets/textures/GreyboxTextures/greybox_green_grid.png" id="3_6761a"]
 [ext_resource type="Texture2D" uid="uid://b6ujpjixvoful" path="res://assets/textures/GreyboxTextures/greybox_blue_grid.png" id="4_sk5k4"]
 [ext_resource type="PackedScene" uid="uid://dxiucw3ub32ad" path="res://scenes/player/player.tscn" id="4_x42e6"]
+[ext_resource type="Texture2D" uid="uid://qb0ov38v0u35" path="res://assets/textures/360_F_226375061_SyEdMuZdjQgqCbq9qhW2dueHkydEwnDE.jpg" id="5_6761a"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bt44k"]
 
@@ -50,6 +51,16 @@ material = SubResource("StandardMaterial3D_dga24")
 
 [sub_resource type="BoxMesh" id="BoxMesh_x42e6"]
 material = SubResource("ShaderMaterial_qxy0u")
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sk5k4"]
+panorama = ExtResource("5_6761a")
+
+[sub_resource type="Sky" id="Sky_oc4kc"]
+sky_material = SubResource("PanoramaSkyMaterial_sk5k4")
+
+[sub_resource type="Environment" id="Environment_s8va5"]
+background_mode = 2
+sky = SubResource("Sky_oc4kc")
 
 [node name="Level1" type="Node3D" unique_id=1718511091]
 
@@ -114,3 +125,6 @@ sky_mode = 1
 
 [node name="player" parent="." unique_id=921444424 instance=ExtResource("4_x42e6")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=649123956]
+environment = SubResource("Environment_s8va5")

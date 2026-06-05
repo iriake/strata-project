@@ -1,84 +1,106 @@
 [gd_scene format=3 uid="uid://dxiucw3ub32ad"]
 
 [ext_resource type="Script" uid="uid://diy1sfr7cxb2r" path="res://scenes/player/player.gd" id="1_p47bc"]
-[ext_resource type="PackedScene" uid="uid://2vn1ksytnric" path="res://assets/sprites/robot_glb/George.glb" id="2_75vfm"]
+[ext_resource type="PackedScene" uid="uid://dknbhahr8wg5a" path="res://assets/sprites/robot_glb/George2.glb" id="2_75vfm"]
 [ext_resource type="Script" uid="uid://cn3eai57hnuh1" path="res://assets/sprites/robot_glb/george.gd" id="3_0owmy"]
+[ext_resource type="ArrayMesh" uid="uid://dt8r2wp0dobnl" path="res://assets/sprites/robot_glb/George.tres" id="4_75vfm"]
 [ext_resource type="Script" uid="uid://cw4je6ns7d7m5" path="res://scenes/player/camera_pivot.gd" id="4_qek5x"]
 [ext_resource type="Script" uid="uid://dwut5yp3xy64a" path="res://scenes/player/camera_handler.gd" id="5_5gtgg"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0owmy"]
+animation = &"Dance"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qek5x"]
+animation = &"Fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5gtgg"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h17s1"]
+animation = &"Post_Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_je7p5"]
+animation = &"Pre_jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fm80t"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_75vfm"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0owmy"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qek5x"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5gtgg"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_je7p5"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fm80t"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gx1jg"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ugbui"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fcs02"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kvlxm"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uf5tr"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lgqa7"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8ydkj"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_myrg7"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h17s1"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gx1jg"]
+states/Dance/node = SubResource("AnimationNodeAnimation_0owmy")
+states/Dance/position = Vector2(376.40002, 115.99999)
+states/Fall/node = SubResource("AnimationNodeAnimation_qek5x")
+states/Fall/position = Vector2(402.00003, -89.728004)
+states/Idle/node = SubResource("AnimationNodeAnimation_5gtgg")
+states/Idle/position = Vector2(277.19998, 26.239998)
+states/Post_Jump/node = SubResource("AnimationNodeAnimation_h17s1")
+states/Post_Jump/position = Vector2(522.80005, -90.054405)
+states/Pre_jump/node = SubResource("AnimationNodeAnimation_je7p5")
+states/Pre_jump/position = Vector2(276.39996, -89.2416)
+states/Start/position = Vector2(137.6, 26.400002)
+states/Walk/node = SubResource("AnimationNodeAnimation_fm80t")
+states/Walk/position = Vector2(472.4, 26.111998)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_75vfm"), "Idle", "Pre_jump", SubResource("AnimationNodeStateMachineTransition_0owmy"), "Pre_jump", "Fall", SubResource("AnimationNodeStateMachineTransition_qek5x"), "Fall", "Post_Jump", SubResource("AnimationNodeStateMachineTransition_5gtgg"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_je7p5"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_fm80t"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_gx1jg"), "Walk", "Pre_jump", SubResource("AnimationNodeStateMachineTransition_ugbui"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_fcs02"), "Idle", "Dance", SubResource("AnimationNodeStateMachineTransition_kvlxm"), "Dance", "Idle", SubResource("AnimationNodeStateMachineTransition_uf5tr"), "Dance", "Walk", SubResource("AnimationNodeStateMachineTransition_lgqa7"), "Walk", "Dance", SubResource("AnimationNodeStateMachineTransition_8ydkj"), "Post_Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_myrg7"), "Post_Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_h17s1")]
+graph_offset = Vector2(-16, -125)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ugbui"]
+graph_offset = Vector2(-228.63867, 39.413414)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_gx1jg")
+nodes/StateMachine/position = Vector2(-16, 144)
+node_connections = [&"output", 0, &"StateMachine"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mvket"]
 radius = 0.5722656
 height = 5.5531006
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8ra2g"]
-animation = &"Dance"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wkm1j"]
-animation = &"Idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qp52m"]
-animation = &"Jump"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cgpoq"]
-animation = &"Walk"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k8feu"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eghdg"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yb6ik"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eum0r"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4t2di"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xmgfm"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jgg4d"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4nvta"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ihguf"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gspch"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f1a3x"]
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ejxti"]
-states/Dance/node = SubResource("AnimationNodeAnimation_8ra2g")
-states/Dance/position = Vector2(590.416, 117.119995)
-states/Idle/node = SubResource("AnimationNodeAnimation_wkm1j")
-states/Idle/position = Vector2(370.41602, -17.6)
-states/Jump/node = SubResource("AnimationNodeAnimation_qp52m")
-states/Jump/position = Vector2(590, -6.4000015)
-states/Start/position = Vector2(207.2, 68.159996)
-states/Walk/node = SubResource("AnimationNodeAnimation_cgpoq")
-states/Walk/position = Vector2(370.55682, 117.6)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_k8feu"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_eghdg"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_yb6ik"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_eum0r"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_4t2di"), "Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_xmgfm"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_jgg4d"), "Walk", "Dance", SubResource("AnimationNodeStateMachineTransition_4nvta"), "Dance", "Walk", SubResource("AnimationNodeStateMachineTransition_ihguf"), "Idle", "Dance", SubResource("AnimationNodeStateMachineTransition_gspch"), "Dance", "Idle", SubResource("AnimationNodeStateMachineTransition_f1a3x")]
-graph_offset = Vector2(37, -54)
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ultgi"]
-graph_offset = Vector2(-287.4996, 74.68307)
-nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_ejxti")
-nodes/StateMachine/position = Vector2(96, 144)
-node_connections = [&"output", 0, &"StateMachine"]
-
 [node name="player" type="CharacterBody3D" unique_id=921444424]
 script = ExtResource("1_p47bc")
+
+[node name="George" parent="." unique_id=1506184954 instance=ExtResource("2_75vfm")]
+unique_name_in_owner = true
+script = ExtResource("3_0owmy")
+
+[node name="George" parent="George/RobotArmature/Skeleton3D" parent_id_path=PackedInt32Array(1506184954, 1763704905) index="0" unique_id=569218842]
+mesh = ExtResource("4_75vfm")
+
+[node name="AnimationTree" type="AnimationTree" parent="George" unique_id=749344169]
+tree_root = SubResource("AnimationNodeBlendTree_ugbui")
+anim_player = NodePath("../AnimationPlayer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=588879690]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7857056, 0)
 shape = SubResource("CapsuleShape3D_mvket")
-
-[node name="George" parent="." unique_id=999814062 instance=ExtResource("2_75vfm")]
-unique_name_in_owner = true
-script = ExtResource("3_0owmy")
-
-[node name="AnimationTree" type="AnimationTree" parent="George" unique_id=506169680]
-tree_root = SubResource("AnimationNodeBlendTree_ultgi")
-anim_player = NodePath("../AnimationPlayer")
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=2000226128]
 unique_name_in_owner = true

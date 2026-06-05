@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c17wi5fho7k2w"
+path="res://.godot/imported/Pickup_Heart.obj-56fff47b8936c5f9e18be54c4e4bc6f2.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Pickup_Heart.obj-56fff47b8936c5f9e18be54c4e4bc6f2.mesh"]
+
+source_file="res://assets/Cyberpunk Game Kit - Quaternius/Pickups and Objects/Pickup_Heart.obj"
+dest_files=["res://.godot/imported/Pickup_Heart.obj-56fff47b8936c5f9e18be54c4e4bc6f2.mesh", "res://.godot/imported/Pickup_Heart.obj-56fff47b8936c5f9e18be54c4e4bc6f2.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

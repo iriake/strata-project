@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://df5ruolcn3g7o"
+path="res://.godot/imported/AC_Stacked.obj-74894b63d0aa90eda06f550433af2c07.mesh"
+
+[deps]
+
+files=["res://.godot/imported/AC_Stacked.obj-74894b63d0aa90eda06f550433af2c07.mesh"]
+
+source_file="res://assets/Cyberpunk Game Kit - Quaternius/Platforms/AC_Stacked.obj"
+dest_files=["res://.godot/imported/AC_Stacked.obj-74894b63d0aa90eda06f550433af2c07.mesh", "res://.godot/imported/AC_Stacked.obj-74894b63d0aa90eda06f550433af2c07.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

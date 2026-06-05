@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dj0crqq2xbq34"
+path="res://.godot/imported/Pickup_Tank.obj-fa3b8062686912edd26f9ec09ca541ee.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Pickup_Tank.obj-fa3b8062686912edd26f9ec09ca541ee.mesh"]
+
+source_file="res://assets/Cyberpunk Game Kit - Quaternius/Pickups and Objects/Pickup_Tank.obj"
+dest_files=["res://.godot/imported/Pickup_Tank.obj-fa3b8062686912edd26f9ec09ca541ee.mesh", "res://.godot/imported/Pickup_Tank.obj-fa3b8062686912edd26f9ec09ca541ee.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cygwl5vsah8h4"
+path="res://.godot/imported/Sign_Small_1.obj-250e59f80f9080c3e8e2ec9a32b5eddf.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Sign_Small_1.obj-250e59f80f9080c3e8e2ec9a32b5eddf.mesh"]
+
+source_file="res://assets/Cyberpunk Game Kit - Quaternius/Platforms/Sign_Small_1.obj"
+dest_files=["res://.godot/imported/Sign_Small_1.obj-250e59f80f9080c3e8e2ec9a32b5eddf.mesh", "res://.godot/imported/Sign_Small_1.obj-250e59f80f9080c3e8e2ec9a32b5eddf.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

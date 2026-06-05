@@ -1,6 +1,14 @@
 [gd_scene format=3 uid="uid://c0j1vg5j3ctf6"]
 
-[ext_resource type="PackedScene" uid="uid://dxiucw3ub32ad" path="res://scenes/player/test_robot.tscn" id="1_dvchg"]
+[ext_resource type="PackedScene" uid="uid://dxiucw3ub32ad" path="res://scenes/player/player.tscn" id="1_dvchg"]
+[ext_resource type="PackedScene" uid="uid://bmhrx8qgb64x" path="res://assets/Cyberpunk Game Kit - Quaternius/Pickups and Objects/Lootbox.gltf" id="2_fg6w5"]
+[ext_resource type="PackedScene" uid="uid://ofecnkahcry7" path="res://assets/Cyberpunk Game Kit - Quaternius/Pickups and Objects/Pickup_Health.fbx" id="3_vav5i"]
+[ext_resource type="PackedScene" uid="uid://brylhhwvdtlen" path="res://assets/Cyberpunk Game Kit - Quaternius/Pickups and Objects/Pickup_Heart.fbx" id="4_srv1s"]
+[ext_resource type="PackedScene" uid="uid://b83ktgcbx7l25" path="res://assets/Cyberpunk Game Kit - Quaternius/Pickups and Objects/Pickup_Tank.gltf" id="5_6hrys"]
+[ext_resource type="PackedScene" uid="uid://mhuhe3jad2ao" path="res://assets/Cyberpunk Game Kit - Quaternius/Pickups and Objects/Tank.fbx" id="6_7i3yn"]
+[ext_resource type="PackedScene" uid="uid://y2l8p1odinl" path="res://assets/Cyberpunk Game Kit - Quaternius/Pickups and Objects/Collectible_Gear.gltf" id="7_3bo3h"]
+[ext_resource type="PackedScene" uid="uid://btxh1pbj85wfh" path="res://assets/Cyberpunk Game Kit - Quaternius/Pickups and Objects/Lever.gltf" id="8_h2dxg"]
+[ext_resource type="PackedScene" uid="uid://4nnm2me2q6xp" path="res://assets/Cyberpunk Game Kit - Quaternius/Pickups and Objects/Collectible_Board.gltf" id="9_5574n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ouw7l"]
 size = Vector3(100, 1, 100)
@@ -23,3 +31,32 @@ shape = SubResource("BoxShape3D_ouw7l")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=766930214]
 mesh = SubResource("BoxMesh_tb7nl")
+
+[node name="Lootbox" parent="RigidBody3D" unique_id=2096850160 instance=ExtResource("2_fg6w5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3160069, 0.5004728, 21.889528)
+
+[node name="Pickup_Health" parent="RigidBody3D" unique_id=622942357 instance=ExtResource("3_vav5i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2526066, 0.62063557, 22.31259)
+
+[node name="Pickup_Heart" parent="RigidBody3D" unique_id=137499308 instance=ExtResource("4_srv1s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.398118, 0.62063557, 21.806538)
+
+[node name="Pickup_Tank2" parent="RigidBody3D" unique_id=1375359059 instance=ExtResource("5_6hrys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3517435, 0.50026596, 20.254677)
+
+[node name="Tank" parent="RigidBody3D" unique_id=885526575 instance=ExtResource("6_7i3yn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2821329, 0.91547513, 20.102165)
+
+[node name="Collectible_Gear2" parent="." unique_id=1753739125 instance=ExtResource("7_3bo3h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.227227, 0.6983457, 21.399908)
+
+[node name="Lever" parent="." unique_id=1164579015 instance=ExtResource("8_h2dxg")]
+transform = Transform3D(1, 0, 0, 0, 0.9997781, 0.021064566, 0, -0.021064566, 0.9997781, 1.8444823, 0.514738, 21.274408)
+
+[node name="Lever_Top" parent="Lever" index="1" unique_id=1156763102]
+transform = Transform3D(1, 0, 0, 0, 0.99838877, -0.05674506, 0, 0.05674506, 0.99838877, 0, 0, 0)
+
+[node name="Collectible_Board2" parent="." unique_id=1701502484 instance=ExtResource("9_5574n")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 3.884213, 3.4565096, 20.74592)
+
+[editable path="Lever"]

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://r00odrnebu8e"
+path="res://.godot/imported/Platform_2x2_Empty.obj-42dea3543be39b3004ad333b9e2f3e3f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Platform_2x2_Empty.obj-42dea3543be39b3004ad333b9e2f3e3f.mesh"]
+
+source_file="res://assets/Cyberpunk Game Kit - Quaternius/Platforms/Platform_2x2_Empty.obj"
+dest_files=["res://.godot/imported/Platform_2x2_Empty.obj-42dea3543be39b3004ad333b9e2f3e3f.mesh", "res://.godot/imported/Platform_2x2_Empty.obj-42dea3543be39b3004ad333b9e2f3e3f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

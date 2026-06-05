@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://k3xthr6a2tfe"
+path="res://.godot/imported/Turret_Teleporter.obj-7250a7e785e6b38e87ad28ba193d46de.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Turret_Teleporter.obj-7250a7e785e6b38e87ad28ba193d46de.mesh"]
+
+source_file="res://assets/Cyberpunk Game Kit - Quaternius/Enemies/Turret_Teleporter.obj"
+dest_files=["res://.godot/imported/Turret_Teleporter.obj-7250a7e785e6b38e87ad28ba193d46de.mesh", "res://.godot/imported/Turret_Teleporter.obj-7250a7e785e6b38e87ad28ba193d46de.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
