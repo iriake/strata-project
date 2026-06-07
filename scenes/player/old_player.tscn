@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dbaflc7ad8fmw"]
+[gd_scene format=3 uid="uid://c6g1l1tjl4ru1"]
 
 [ext_resource type="Script" uid="uid://diy1sfr7cxb2r" path="res://scenes/player/player.gd" id="1_to0q3"]
 [ext_resource type="PackedScene" uid="uid://be46isol6hfk7" path="res://assets/sprites/Universal Animation Library[Standard]/Unreal-Godot/UAL1_Standard.glb" id="2_qp1at"]
