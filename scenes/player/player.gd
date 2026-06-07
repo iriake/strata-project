@@ -358,3 +358,7 @@ func _handle_cosmetics(move_direction: Vector3, delta: float, is_starting_jump: 
 				_active_skin.idle()
 	else:
 		_active_skin.fall()
+
+
+func _on_killzone_body_entered(body: Node3D) -> void:
+	pass # Replace with function body.
