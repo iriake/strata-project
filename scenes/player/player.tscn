@@ -6,6 +6,90 @@
 [ext_resource type="ArrayMesh" uid="uid://dt8r2wp0dobnl" path="res://assets/sprites/robot_glb/George.tres" id="4_75vfm"]
 [ext_resource type="Script" uid="uid://cw4je6ns7d7m5" path="res://scenes/player/camera_pivot.gd" id="4_qek5x"]
 [ext_resource type="Script" uid="uid://dwut5yp3xy64a" path="res://scenes/player/camera_handler.gd" id="5_5gtgg"]
+[ext_resource type="PackedScene" uid="uid://ej4llcdk4jwc" path="res://assets/sprites/robot_glb/MiniRobot.glb" id="6_75vfm"]
+[ext_resource type="Script" uid="uid://fdk74d6vcy6o" path="res://assets/sprites/robot_glb/mini_robot.gd" id="8_qek5x"]
+[ext_resource type="Material" uid="uid://dya15p62ocdy" path="res://scenes/player/m_explosive_cloude.tres" id="9_5gtgg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mvket"]
+radius = 0.5722656
+height = 5.5531006
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0owmy"]
+radius = 0.3955078
+height = 2.7265625
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gx1jg"]
+animation = &"Robot_Dance"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ugbui"]
+animation = &"Robot_Fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fcs02"]
+animation = &"Robot_Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_myrg7"]
+animation = &"Robot_PostJump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kvlxm"]
+animation = &"Robot_PreJump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uf5tr"]
+animation = &"Robot_Walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3j4b4"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yj68g"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ioxgp"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cnsyf"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_007i1"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6cv16"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j4nxn"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_28m0y"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uniwh"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iqsei"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tffgl"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pk8ii"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5mf0n"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4hvnv"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bbmj2"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_lgqa7"]
+states/Robot_Dance/node = SubResource("AnimationNodeAnimation_gx1jg")
+states/Robot_Dance/position = Vector2(491.76, 187.68001)
+states/Robot_Fall/node = SubResource("AnimationNodeAnimation_ugbui")
+states/Robot_Fall/position = Vector2(490.80002, -42.399994)
+states/Robot_Idle/node = SubResource("AnimationNodeAnimation_fcs02")
+states/Robot_Idle/position = Vector2(317.68, 85.783035)
+states/Robot_PostJump/node = SubResource("AnimationNodeAnimation_myrg7")
+states/Robot_PostJump/position = Vector2(658, -36.799995)
+states/Robot_PreJump/node = SubResource("AnimationNodeAnimation_kvlxm")
+states/Robot_PreJump/position = Vector2(317.2, -43.200005)
+states/Robot_Walking/node = SubResource("AnimationNodeAnimation_uf5tr")
+states/Robot_Walking/position = Vector2(672.4, 85.164795)
+states/Start/position = Vector2(111.2, 61.92)
+transitions = ["Start", "Robot_Idle", SubResource("AnimationNodeStateMachineTransition_3j4b4"), "Robot_Idle", "Robot_Walking", SubResource("AnimationNodeStateMachineTransition_yj68g"), "Robot_Walking", "Robot_Idle", SubResource("AnimationNodeStateMachineTransition_ioxgp"), "Robot_Idle", "Robot_Dance", SubResource("AnimationNodeStateMachineTransition_cnsyf"), "Robot_Dance", "Robot_Idle", SubResource("AnimationNodeStateMachineTransition_007i1"), "Robot_Dance", "Robot_Walking", SubResource("AnimationNodeStateMachineTransition_6cv16"), "Robot_Walking", "Robot_Dance", SubResource("AnimationNodeStateMachineTransition_j4nxn"), "Robot_Idle", "Robot_PreJump", SubResource("AnimationNodeStateMachineTransition_28m0y"), "Robot_PreJump", "Robot_Fall", SubResource("AnimationNodeStateMachineTransition_uniwh"), "Robot_Fall", "Robot_PostJump", SubResource("AnimationNodeStateMachineTransition_iqsei"), "Robot_PostJump", "Robot_Walking", SubResource("AnimationNodeStateMachineTransition_tffgl"), "Robot_Walking", "Robot_PreJump", SubResource("AnimationNodeStateMachineTransition_pk8ii"), "Robot_PostJump", "Robot_Idle", SubResource("AnimationNodeStateMachineTransition_5mf0n"), "Robot_Idle", "Robot_Fall", SubResource("AnimationNodeStateMachineTransition_4hvnv"), "Robot_Walking", "Robot_Fall", SubResource("AnimationNodeStateMachineTransition_bbmj2")]
+graph_offset = Vector2(28, -46)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0owmy"]
+graph_offset = Vector2(-137.6, 84.8)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_lgqa7")
+nodes/StateMachine/position = Vector2(-48, 128)
+node_connections = [&"output", 0, &"StateMachine"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0owmy"]
 animation = &"Dance"
@@ -70,37 +154,75 @@ states/Pre_jump/node = SubResource("AnimationNodeAnimation_je7p5")
 states/Pre_jump/position = Vector2(276.39996, -89.2416)
 states/Start/position = Vector2(137.6, 26.400002)
 states/Walk/node = SubResource("AnimationNodeAnimation_fm80t")
-states/Walk/position = Vector2(472.4, 26.111998)
+states/Walk/position = Vector2(529.2, 32.511997)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_75vfm"), "Idle", "Pre_jump", SubResource("AnimationNodeStateMachineTransition_0owmy"), "Pre_jump", "Fall", SubResource("AnimationNodeStateMachineTransition_qek5x"), "Fall", "Post_Jump", SubResource("AnimationNodeStateMachineTransition_5gtgg"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_je7p5"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_fm80t"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_gx1jg"), "Walk", "Pre_jump", SubResource("AnimationNodeStateMachineTransition_ugbui"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_fcs02"), "Idle", "Dance", SubResource("AnimationNodeStateMachineTransition_kvlxm"), "Dance", "Idle", SubResource("AnimationNodeStateMachineTransition_uf5tr"), "Dance", "Walk", SubResource("AnimationNodeStateMachineTransition_lgqa7"), "Walk", "Dance", SubResource("AnimationNodeStateMachineTransition_8ydkj"), "Post_Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_myrg7"), "Post_Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_h17s1")]
-graph_offset = Vector2(-16, -125)
+graph_offset = Vector2(-4, -117)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ugbui"]
-graph_offset = Vector2(-228.63867, 39.413414)
+graph_offset = Vector2(-286.05157, 49.125927)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_gx1jg")
 nodes/StateMachine/position = Vector2(-16, 144)
 node_connections = [&"output", 0, &"StateMachine"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mvket"]
-radius = 0.5722656
-height = 5.5531006
+[sub_resource type="Curve" id="Curve_h17s1"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_je7p5"]
+curve = SubResource("Curve_h17s1")
+
+[sub_resource type="Curve" id="Curve_5gtgg"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_h17s1"]
+curve = SubResource("Curve_5gtgg")
+
+[sub_resource type="Curve" id="Curve_fm80t"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7491857, 0.15032685), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gx1jg"]
+curve = SubResource("Curve_fm80t")
+
+[sub_resource type="Curve" id="Curve_je7p5"]
+_data = [Vector2(0, 0.22875816), 0.0, 2.7011065, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fm80t"]
+curve = SubResource("Curve_je7p5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ugbui"]
+lifetime_randomness = 0.2
+particle_flag_rotate_y = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = 1.0728835e-05
+angle_max = 180.00002
+angle_curve = SubResource("CurveTexture_h17s1")
+radial_velocity_min = 7.9999776
+radial_velocity_max = 7.9999776
+radial_velocity_curve = SubResource("CurveTexture_gx1jg")
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_fm80t")
+alpha_curve = SubResource("CurveTexture_je7p5")
+
+[sub_resource type="SphereMesh" id="SphereMesh_fcs02"]
 
 [node name="player" type="CharacterBody3D" unique_id=921444424]
 script = ExtResource("1_p47bc")
 
-[node name="George" parent="." unique_id=1506184954 instance=ExtResource("2_75vfm")]
-unique_name_in_owner = true
-script = ExtResource("3_0owmy")
-
-[node name="George" parent="George/RobotArmature/Skeleton3D" parent_id_path=PackedInt32Array(1506184954, 1763704905) index="0" unique_id=569218842]
-mesh = ExtResource("4_75vfm")
-
-[node name="AnimationTree" type="AnimationTree" parent="George" unique_id=749344169]
-tree_root = SubResource("AnimationNodeBlendTree_ugbui")
-anim_player = NodePath("../AnimationPlayer")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=588879690]
+[node name="CollisionGeorge" type="CollisionShape3D" parent="." unique_id=588879690]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7857056, 0)
 shape = SubResource("CapsuleShape3D_mvket")
+
+[node name="CollisionMini" type="CollisionShape3D" parent="." unique_id=288010386]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.326, 0)
+shape = SubResource("CapsuleShape3D_0owmy")
+disabled = true
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=2000226128]
 unique_name_in_owner = true
@@ -116,4 +238,38 @@ current = true
 unique_name_in_owner = true
 script = ExtResource("5_5gtgg")
 
+[node name="MiniRobot" parent="." unique_id=1280423826 instance=ExtResource("6_75vfm")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+visible = false
+script = ExtResource("8_qek5x")
+
+[node name="AnimationTreeMini" type="AnimationTree" parent="MiniRobot" unique_id=1417262101]
+tree_root = SubResource("AnimationNodeBlendTree_0owmy")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="George" parent="." unique_id=1156086094 instance=ExtResource("2_75vfm")]
+script = ExtResource("3_0owmy")
+
+[node name="George" parent="George/RobotArmature/Skeleton3D" parent_id_path=PackedInt32Array(1156086094, 1763704905) index="0" unique_id=569218842]
+mesh = ExtResource("4_75vfm")
+
+[node name="AnimationTreeGeorge" type="AnimationTree" parent="George" unique_id=749344169]
+tree_root = SubResource("AnimationNodeBlendTree_ugbui")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=956772396]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2473855, 0)
+material_override = ExtResource("9_5gtgg")
+emitting = false
+amount = 60
+one_shot = true
+preprocess = 0.1
+explosiveness = 1.0
+fixed_fps = 60
+local_coords = true
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_ugbui")
+draw_pass_1 = SubResource("SphereMesh_fcs02")
+
+[editable path="MiniRobot"]
 [editable path="George"]

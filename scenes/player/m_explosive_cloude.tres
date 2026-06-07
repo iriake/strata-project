@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dya15p62ocdy"]
+
+[ext_resource type="Shader" uid="uid://cmo4v0veg8pna" path="res://scenes/player/s_explosion_cloude.tres" id="1_0uq6a"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_0uq6a")
+shader_parameter/Cloude_Speed = Vector2(0.4, 0.4)
+shader_parameter/Cloude_Intensity = 0.3

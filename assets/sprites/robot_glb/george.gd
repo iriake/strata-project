@@ -1,4 +1,8 @@
-extends PlayerSkin
+extends Node3D
+
+@onready var animation_tree: AnimationTree = $AnimationTreeGeorge
+@onready var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/StateMachine/playback")
+
 
 func idle():
 	state_machine.travel("Idle")

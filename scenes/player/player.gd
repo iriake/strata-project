@@ -1,4 +1,4 @@
-## Controla el comportamiento del jugador en el proyecto "Strata" (Nueva versión limpia).
+## Controla el comportamiento del jugador en el proyecto "Strata".
 ## Gestiona el movimiento 3D, la transición a una perspectiva 2D (mecánica Change)
 ## y la sincronización de animaciones del modelo visual.
 class_name Player2
@@ -42,16 +42,35 @@ var _gravity := -30.0
 # --- REFERENCIAS A NODOS (%) ---
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera: Camera3D = %Camera3D
-@onready var _skin: Node3D = %George
 @onready var _camera_handler: Node = %CameraHandler
 
+# Referencias a los visuales y colisiones
+@onready var _skin_george: Node3D = $George
+@onready var _skin_mini: Node3D = $MiniRobot
+@onready var _col_george: CollisionShape3D = $CollisionGeorge
+@onready var _col_mini: CollisionShape3D = $CollisionMini
+@onready var _gpu_particles_3d: GPUParticles3D = $GPUParticles3D
 
+# Variables de estado de transformación
+var is_george_active := true
+var _active_skin: Node3D # Puntero dinámico que usaremos en cosmetics
+
+func _ready() -> void:
+	_active_skin = _skin_george
+	_skin_george.show()
+	_col_george.set_deferred("disabled", false)
+	
+	_skin_mini.hide()
+	_col_mini.set_deferred("disabled", true)
 
 func _unhandled_input(event: InputEvent) -> void:
 	# --- CAMBIO DE DIMENSIÓN ---
 	if event.is_action_pressed("change_dimension"):
 		toggle_change()
-
+	
+	# --- CAMBIO DE ROBOT ---
+	if event.is_action_pressed("transform"):
+		toggle_robot()
 
 func _physics_process(delta: float) -> void:
 	# 1. INPUT Y DIRECCIÓN
@@ -94,6 +113,26 @@ func _physics_process(delta: float) -> void:
 
 	# 5. ANIMACIONES
 	_handle_cosmetics(move_direction, delta, is_starting_jump)
+
+func toggle_robot() -> void:
+	_gpu_particles_3d.restart()
+	is_george_active = !is_george_active
+	
+	if is_george_active:
+		_active_skin = _skin_george
+		_skin_george.show()
+		_skin_mini.hide()
+		
+		# Cambiamos colisiones de forma segura
+		_col_george.set_deferred("disabled", false)
+		_col_mini.set_deferred("disabled", true)
+	else:
+		_active_skin = _skin_mini
+		_skin_george.hide()
+		_skin_mini.show()
+		
+		_col_george.set_deferred("disabled", true)
+		_col_mini.set_deferred("disabled", false)
 
 
 ## Cambia el estado del juego entre 3D y 2D, calculando los ejes de bloqueo según la cámara.
@@ -305,17 +344,17 @@ func _handle_cosmetics(move_direction: Vector3, delta: float, is_starting_jump: 
 	if move_direction.length() > 0.2:
 		_last_movement_direction = move_direction
 		var target_angle := Vector3.BACK.signed_angle_to(_last_movement_direction, Vector3.UP)
-		_skin.global_rotation.y = lerp_angle(_skin.rotation.y, target_angle, rotation_speed * delta)
-
+		_skin_george.global_rotation.y = lerp_angle(_skin_george.rotation.y, target_angle, rotation_speed * delta)
+		_skin_mini.global_rotation.y = lerp_angle(_skin_mini.rotation.y, target_angle, rotation_speed * delta)
 	if is_starting_jump:
-		_skin.jump()
+		_active_skin.jump()
 	elif is_on_floor():
 		var ground_speed := velocity.length()
 
-		if ground_speed > 0.0: _skin.move()
+		if ground_speed > 0.0: _active_skin.move()
 		else: 
-			if Input.is_action_pressed("emote"): _skin.dance()
+			if Input.is_action_pressed("emote"): _active_skin.dance()
 			else:
-				_skin.idle()
+				_active_skin.idle()
 	else:
-		_skin.fall()
+		_active_skin.fall()
