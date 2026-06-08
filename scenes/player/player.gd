@@ -15,6 +15,11 @@ extends CharacterBody3D
 ## Fuerza aplicada instantáneamente hacia arriba al saltar.
 @export var jump_impulse := 12.0
 
+# --- CONFIGURACIÓN DE BACKGROUND 2D ---
+@export_group("Background")
+## Escena de parallax 2D que se muestra al entrar en modo 2D.
+@export var parallax_scene: PackedScene
+
 # --- ESTADO DE LA MECÁNICA CHANGE (2D) ---
 ## Indica si el jugador se encuentra actualmente en el modo de perspectiva aplastada.
 var is_2d_mode := false
@@ -39,6 +44,10 @@ var _last_movement_direction := Vector3.BACK
 ## Valor de aceleración gravitatoria constante.
 var _gravity := -30.0
 
+# --- BACKGROUND HANDLER ---
+## Gestiona la transición del fondo entre sky panorámico (3D) y Sprite3D plano (2D).
+var _background_handler: BackgroundHandler
+
 # --- REFERENCIAS A NODOS (%) ---
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera: Camera3D = %Camera3D
@@ -62,6 +71,11 @@ func _ready() -> void:
 	
 	_skin_mini.hide()
 	_col_mini.set_deferred("disabled", true)
+	
+	# Inicializar el handler de fondo 2D/3D
+	_background_handler = BackgroundHandler.new()
+	_background_handler.parallax_scene = parallax_scene
+	add_child(_background_handler)
 
 func _unhandled_input(event: InputEvent) -> void:
 	# --- CAMBIO DE DIMENSIÓN ---
@@ -101,6 +115,8 @@ func _physics_process(delta: float) -> void:
 		velocity *= _move_mask
 		velocity.y = y_velocity + _gravity * delta
 		_snap_to_lock_axis()
+		# Actualizar posición del fondo 2D para que siga a la cámara
+		_background_handler.update_2d_background(_camera, _camera_pivot)
 	else:
 		velocity.y = y_velocity + _gravity * delta
 
@@ -194,6 +210,9 @@ func _enter_change_mode() -> void:
 	
 	# Delegado al controlador de cámara
 	_camera_handler.set_camera_projection(true)
+	
+	# Activar fondo plano 2D
+	_background_handler.enter_2d_background(_camera, _camera_pivot)
 
 
 func _project_world() -> void:
@@ -246,6 +265,9 @@ func _exit_change_mode() -> void:
 	
 	# Delegado al controlador de cámara
 	_camera_handler.set_camera_projection(false)
+	
+	# Restaurar fondo panorámico 3D
+	_background_handler.exit_2d_background()
 
 
 func _restore_player_depth() -> void:

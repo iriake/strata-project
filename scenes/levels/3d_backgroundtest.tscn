@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://d0b8e34gns0y8"]
+
+[ext_resource type="Texture2D" uid="uid://crgjvxbv5r5u" path="res://assets/backgroundtests/free-city-backgrounds-pixel-art/city 1/10.png" id="1_o41g1"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_dga24"]
+panorama = ExtResource("1_o41g1")
+energy_multiplier = 0.5
+
+[sub_resource type="Sky" id="Sky_oc4kc"]
+sky_material = SubResource("PanoramaSkyMaterial_dga24")
+
+[sub_resource type="Environment" id="Environment_iav0o"]
+background_mode = 2
+sky = SubResource("Sky_oc4kc")
+tonemap_exposure = 0.66
+
+[node name="WorldEnvironment" type="WorldEnvironment" unique_id=687647513]
+environment = SubResource("Environment_iav0o")

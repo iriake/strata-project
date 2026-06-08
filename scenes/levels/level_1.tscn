@@ -1,25 +1,14 @@
 [gd_scene format=3 uid="uid://c4qc1r0xgkxha"]
 
-[ext_resource type="Texture2D" uid="uid://dj3h8v3w4wmd2" path="res://assets/textures/circuit_albedo.png" id="1_x42e6"]
-[ext_resource type="Texture2D" uid="uid://bi8p0ht4owspk" path="res://assets/textures/GreyboxTextures/greybox_green_grid.png" id="3_6761a"]
+[ext_resource type="PackedScene" uid="uid://bf1uipk24biiq" path="res://scenes/levels/2d_backgroundtest.tscn" id="2_dga24"]
+[ext_resource type="PackedScene" uid="uid://d0b8e34gns0y8" path="res://scenes/levels/3d_backgroundtest.tscn" id="3_dga24"]
 [ext_resource type="PackedScene" uid="uid://dxiucw3ub32ad" path="res://scenes/player/player.tscn" id="4_x42e6"]
-[ext_resource type="Texture2D" uid="uid://qb0ov38v0u35" path="res://assets/textures/360_F_226375061_SyEdMuZdjQgqCbq9qhW2dueHkydEwnDE.jpg" id="5_6761a"]
-[ext_resource type="PackedScene" uid="uid://gq0v1dbpl5bt" path="res://assets/Cyberpunk Game Kit - Quaternius/Pickups and Objects/Collectible_Gear.fbx" id="5_sk5k4"]
+[ext_resource type="Texture2D" uid="uid://coj271eim6tj2" path="res://assets/FreeSample/FreeSample/Textures/VoxelCity_CompositeBuildings_Optimized-0_diffuse.png" id="5_s8va5"]
+[ext_resource type="PackedScene" uid="uid://c5a7gpfb8u8j1" path="res://scenes/objects/collectible_gear.tscn" id="5_sk5k4"]
 [ext_resource type="Script" uid="uid://dym5c806jgsk5" path="res://scenes/levels/killzone.gd" id="6_sk5k4"]
-[ext_resource type="Texture2D" uid="uid://b6ujpjixvoful" path="res://assets/textures/GreyboxTextures/greybox_blue_grid.png" id="7_oc4kc"]
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_excbq"]
-panorama = ExtResource("5_6761a")
-
-[sub_resource type="Sky" id="Sky_oc4kc"]
-sky_material = SubResource("PanoramaSkyMaterial_excbq")
-
-[sub_resource type="Environment" id="Environment_iav0o"]
-background_mode = 2
-sky = SubResource("Sky_oc4kc")
-sky_custom_fov = 130.0
-sky_rotation = Vector3(3.005457, -3.3684855, -1.8849556)
-tonemap_exposure = 2.27
+[ext_resource type="Texture2D" uid="uid://cr3f0f4612vom" path="res://assets/FreeSample/FreeSample/Textures/T_PropsDiffuse- 4K.png" id="7_dga24"]
+[ext_resource type="Texture2D" uid="uid://qqow4d8kw0j4" path="res://assets/FreeSample/FreeSample/Textures/VoxelCity_CompositeBuildings_Optimized-2_diffuse.png" id="7_s8va5"]
+[ext_resource type="Texture2D" uid="uid://ww0qj781o38x" path="res://assets/FreeSample/FreeSample/Textures/VoxelCity_CompositeBuildings_Optimized-4_diffuse.png" id="9_dga24"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6761a"]
 size = Vector3(190.12585, 2.6860352, 263.4922)
@@ -27,10 +16,11 @@ size = Vector3(190.12585, 2.6860352, 263.4922)
 [sub_resource type="BoxShape3D" id="BoxShape3D_oc4kc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6761a"]
-albedo_texture = ExtResource("1_x42e6")
+albedo_texture = ExtResource("5_s8va5")
 metallic = 1.0
-uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_scale = Vector3(0.07, 0.07, 0.07)
 uv1_triplanar = true
+uv1_triplanar_sharpness = 2.282103
 uv1_world_triplanar = true
 proximity_fade_enabled = true
 
@@ -39,23 +29,33 @@ material = SubResource("StandardMaterial3D_6761a")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dga24"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dga24"]
-albedo_texture = ExtResource("3_6761a")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s8va5"]
+albedo_texture = ExtResource("7_dga24")
+uv1_scale = Vector3(0.07, 0.07, 0.07)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 0.26794365
+uv1_world_triplanar = true
+uv2_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_qxy0u"]
-material = SubResource("StandardMaterial3D_dga24")
+material = SubResource("StandardMaterial3D_s8va5")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dnkej"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fmg3e"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxy0u"]
+albedo_texture = ExtResource("7_s8va5")
 
 [sub_resource type="BoxMesh" id="BoxMesh_mm8aj"]
-material = SubResource("ShaderMaterial_fmg3e")
+material = SubResource("StandardMaterial3D_qxy0u")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s8va5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brxtv"]
-albedo_texture = ExtResource("7_oc4kc")
+albedo_texture = ExtResource("9_dga24")
+uv1_scale = Vector3(0.07, 0.07, 0.07)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 0.29730198
+uv1_world_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_dga24"]
 material = SubResource("StandardMaterial3D_brxtv")
@@ -69,9 +69,9 @@ sky_mode = 1
 
 [node name="player" parent="." unique_id=921444424 instance=ExtResource("4_x42e6")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+parallax_scene = ExtResource("2_dga24")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=956409336]
-environment = SubResource("Environment_iav0o")
+[node name="WorldEnvironment" parent="." unique_id=687647513 instance=ExtResource("3_dga24")]
 
 [node name="Collectible_Gear" parent="." unique_id=127400650 instance=ExtResource("5_sk5k4")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 102.395096, 48.849274, 149.90262)
@@ -84,7 +84,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.682312, -8.973389, 113.785
 shape = SubResource("BoxShape3D_6761a")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1213087419 groups=["change_geometry"]]
-transform = Transform3D(10, 0, 0, 0, 3, 0, 0, 0, 24, 0, -2, 9.568255)
+transform = Transform3D(10, 0, 0, 0, 15, 0, 0, 0, 24, 0, -8, 9.568)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1451944309]
 shape = SubResource("BoxShape3D_oc4kc")
@@ -190,60 +190,6 @@ shape = SubResource("BoxShape3D_dnkej")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D12" unique_id=586832287]
 mesh = SubResource("BoxMesh_mm8aj")
-
-[node name="StaticBody3D15" type="StaticBody3D" parent="." unique_id=1649358677 groups=["change_geometry"]]
-transform = Transform3D(10, 0, 0, 0, 0.5, 0, 0, 0, 8, -45.91221, 3.788704, 2.3350286)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D15" unique_id=1941960666]
-shape = SubResource("BoxShape3D_oc4kc")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D15" unique_id=1184430908]
-mesh = SubResource("BoxMesh_s8va5")
-
-[node name="StaticBody3D16" type="StaticBody3D" parent="." unique_id=601071262 groups=["change_geometry"]]
-transform = Transform3D(10, 0, 0, 0, 0.5, 0, 0, 0, 12, 30.016, 1.238, 14.507)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D16" unique_id=361370800]
-shape = SubResource("BoxShape3D_dnkej")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D16" unique_id=218062617]
-mesh = SubResource("BoxMesh_mm8aj")
-
-[node name="StaticBody3D17" type="StaticBody3D" parent="." unique_id=389300066 groups=["change_geometry"]]
-transform = Transform3D(10, 0, 0, 0, 0.5, 0, 0, 0, 12, 30.090149, 5.995663, 14.507)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D17" unique_id=1130801165]
-shape = SubResource("BoxShape3D_dnkej")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D17" unique_id=1942289311]
-mesh = SubResource("BoxMesh_mm8aj")
-
-[node name="StaticBody3D18" type="StaticBody3D" parent="." unique_id=1389457817 groups=["change_geometry"]]
-transform = Transform3D(10, 0, 0, 0, 0.5, 0, 0, 0, 8, 29.8637, 8.416098, 2.3350286)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D18" unique_id=342485709]
-shape = SubResource("BoxShape3D_oc4kc")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D18" unique_id=1822145947]
-mesh = SubResource("BoxMesh_s8va5")
-
-[node name="StaticBody3D19" type="StaticBody3D" parent="." unique_id=1190836645 groups=["change_geometry"]]
-transform = Transform3D(10, 0, 0, 0, 0.5, 0, 0, 0, 12, 29.830284, 9.967851, 14.507)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D19" unique_id=254632585]
-shape = SubResource("BoxShape3D_dnkej")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D19" unique_id=1426202395]
-mesh = SubResource("BoxMesh_mm8aj")
-
-[node name="StaticBody3D20" type="StaticBody3D" parent="." unique_id=1432053815 groups=["change_geometry"]]
-transform = Transform3D(10, 0, 0, 0, 0.5, 0, 0, 0, 8, -45.898407, 12.060681, 16.503864)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D20" unique_id=1152676859]
-shape = SubResource("BoxShape3D_oc4kc")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D20" unique_id=265812035]
-mesh = SubResource("BoxMesh_s8va5")
 
 [node name="StaticBody3D14" type="StaticBody3D" parent="." unique_id=864359940 groups=["change_geometry"]]
 transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 73.88008, 28.14826, 226.95755)

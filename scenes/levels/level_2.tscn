@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cre8ectqc8laj"]
 
-[ext_resource type="Texture2D" uid="uid://dj3h8v3w4wmd2" path="res://assets/textures/circuit_albedo.png" id="1_l37oo"]
+[ext_resource type="Texture2D" uid="uid://g6d2fu1on6be" path="res://assets/FreeSample/FreeSample/Textures/T_Buildings_002Diffuse- 4K.png" id="1_l37oo"]
 [ext_resource type="Texture2D" uid="uid://bi8p0ht4owspk" path="res://assets/textures/GreyboxTextures/greybox_green_grid.png" id="2_qpwj6"]
 [ext_resource type="Texture2D" uid="uid://b6ujpjixvoful" path="res://assets/textures/GreyboxTextures/greybox_blue_grid.png" id="3_ibugp"]
 [ext_resource type="PackedScene" uid="uid://dxiucw3ub32ad" path="res://scenes/player/player.tscn" id="4_8qukl"]
@@ -28,7 +28,6 @@ proximity_fade_enabled = true
 material = SubResource("StandardMaterial3D_8qukl")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qsp8v"]
-albedo_texture = ExtResource("1_l37oo")
 metallic = 1.0
 proximity_fade_enabled = true
 

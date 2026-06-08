@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://byk7mffodrktd"]
 
 [ext_resource type="Script" uid="uid://cp27jtqcg8aov" path="res://ui/main_menu.gd" id="1_t7e0r"]
+[ext_resource type="Texture2D" uid="uid://cxfliymq3rspn" path="res://assets/backgroundtests/free-city-backgrounds-pixel-art/city 7/7.png" id="2_rn8js"]
 
 [node name="MainMenu" type="Control" unique_id=406316603]
 layout_mode = 3
@@ -10,6 +11,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t7e0r")
+
+[node name="7" type="Sprite2D" parent="." unique_id=1582623441]
+modulate = Color(0.39, 0.39, 0.39, 1)
+position = Vector2(609, 324)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_rn8js")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1311120978]
 layout_mode = 1

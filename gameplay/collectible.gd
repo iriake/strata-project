@@ -4,8 +4,7 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node3D) -> void:
-	var player = body as Player
+	var player = body as Player2
 	if player:
 		monitoring = false
-		GameManager.collect()
-		queue_free()
+		get_tree().reload_current_scene()

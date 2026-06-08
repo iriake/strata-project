@@ -1,8 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://c2su37hhr4rmq"]
-
-[ext_resource type="Texture2D" uid="uid://bi8p0ht4owspk" path="res://assets/textures/GreyboxTextures/greybox_green_grid.png" id="1_83kpt"]
-
-[resource]
-albedo_texture = ExtResource("1_83kpt")
-metallic = 1.0
-proximity_fade_enabled = true

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c5a7gpfb8u8j1"]
+
+[ext_resource type="Script" uid="uid://dn2nd63v60vs2" path="res://gameplay/collectible.gd" id="1_collectible_script"]
+[ext_resource type="PackedScene" uid="uid://gq0v1dbpl5bt" path="res://assets/Cyberpunk Game Kit - Quaternius/Pickups and Objects/Collectible_Gear.fbx" id="2_gear_fbx"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1"]
+radius = 0.8
+
+[node name="Collectible_Gear" type="Area3D"]
+script = ExtResource("1_collectible_script")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_1")
+
+[node name="Collectible_Gear_Model" parent="." instance=ExtResource("2_gear_fbx")]

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bb17db381bnli"]
 
 [ext_resource type="Script" uid="uid://c0at20tnnxv71" path="res://ui/pause_menu.gd" id="1_50142"]
+[ext_resource type="Texture2D" uid="uid://b0pkd03rjeq5o" path="res://assets/backgroundtests/free-city-backgrounds-pixel-art/city 6/8.png" id="2_8tehv"]
 
 [node name="PauseMenu" type="Control" unique_id=1750061234]
 process_mode = 2
@@ -11,6 +12,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_50142")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1661122120]
+position = Vector2(573.00006, 312)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_8tehv")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=212526715]
 layout_mode = 1
