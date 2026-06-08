@@ -189,6 +189,7 @@ transform = Transform3D(8, 0, 0, 0, 2, 0, 0, 0, 4.5, 102.1158, 47.243088, 149.65
 shape = SubResource("BoxShape3D_dnkej")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D12" unique_id=586832287]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0061187744, 0)
 mesh = SubResource("BoxMesh_mm8aj")
 
 [node name="StaticBody3D14" type="StaticBody3D" parent="." unique_id=864359940 groups=["change_geometry"]]
