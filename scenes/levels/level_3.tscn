@@ -3,21 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://g6d2fu1on6be" path="res://assets/FreeSample/FreeSample/Textures/T_Buildings_002Diffuse- 4K.png" id="1_fmg3e"]
 [ext_resource type="Texture2D" uid="uid://bi8p0ht4owspk" path="res://assets/textures/GreyboxTextures/greybox_green_grid.png" id="2_fmg3e"]
 [ext_resource type="PackedScene" uid="uid://dxiucw3ub32ad" path="res://scenes/player/player.tscn" id="3_ftfob"]
-[ext_resource type="Texture2D" uid="uid://qb0ov38v0u35" path="res://assets/textures/360_F_226375061_SyEdMuZdjQgqCbq9qhW2dueHkydEwnDE.jpg" id="4_fkk1g"]
 [ext_resource type="PackedScene" uid="uid://c5a7gpfb8u8j1" path="res://scenes/objects/collectible_gear.tscn" id="5_fmg3e"]
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qi5uv"]
-panorama = ExtResource("4_fkk1g")
-
-[sub_resource type="Sky" id="Sky_oc4kc"]
-sky_material = SubResource("PanoramaSkyMaterial_qi5uv")
-
-[sub_resource type="Environment" id="Environment_f6egh"]
-background_mode = 2
-sky = SubResource("Sky_oc4kc")
-sky_custom_fov = 130.0
-sky_rotation = Vector3(3.005457, -3.3684855, -1.8849556)
-tonemap_exposure = 2.27
+[ext_resource type="PackedScene" uid="uid://d0b8e34gns0y8" path="res://scenes/levels/3d_backgroundtest.tscn" id="5_ftfob"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ugcn1"]
 
@@ -56,9 +43,6 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 transform = Transform3D(0.7071068, 0.5, -0.5, 0, 0.7071068, 0.70710677, 0.7071068, -0.5, 0.5, -10, 10, 10)
 light_energy = 1.5
 sky_mode = 1
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1193403013]
-environment = SubResource("Environment_f6egh")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1014367778 groups=["change_geometry"]]
 transform = Transform3D(6, 0, 0, 0, 3, 0, 0, 0, 24, 0, -2, 9.568255)
@@ -170,3 +154,5 @@ mesh = SubResource("BoxMesh_ftfob")
 
 [node name="Collectible_Gear" parent="." unique_id=127400650 instance=ExtResource("5_fmg3e")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 102.395096, 48.849274, 149.90262)
+
+[node name="WorldEnvironment" parent="." unique_id=687647513 instance=ExtResource("5_ftfob")]

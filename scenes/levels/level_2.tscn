@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bi8p0ht4owspk" path="res://assets/textures/GreyboxTextures/greybox_green_grid.png" id="2_qpwj6"]
 [ext_resource type="Texture2D" uid="uid://b6ujpjixvoful" path="res://assets/textures/GreyboxTextures/greybox_blue_grid.png" id="3_ibugp"]
 [ext_resource type="PackedScene" uid="uid://dxiucw3ub32ad" path="res://scenes/player/player.tscn" id="4_8qukl"]
-[ext_resource type="Texture2D" uid="uid://qb0ov38v0u35" path="res://assets/textures/360_F_226375061_SyEdMuZdjQgqCbq9qhW2dueHkydEwnDE.jpg" id="5_3p04p"]
+[ext_resource type="PackedScene" uid="uid://d0b8e34gns0y8" path="res://scenes/levels/3d_backgroundtest.tscn" id="5_l37oo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l37oo"]
 
@@ -50,19 +50,6 @@ material = SubResource("StandardMaterial3D_r88tb")
 
 [sub_resource type="BoxMesh" id="BoxMesh_v8d84"]
 material = SubResource("ShaderMaterial_ndlae")
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_gw1l3"]
-panorama = ExtResource("5_3p04p")
-
-[sub_resource type="Sky" id="Sky_p4se4"]
-sky_material = SubResource("PanoramaSkyMaterial_gw1l3")
-
-[sub_resource type="Environment" id="Environment_sibr7"]
-background_mode = 2
-sky = SubResource("Sky_p4se4")
-sky_custom_fov = 130.0
-sky_rotation = Vector3(3.005457, -3.3684855, -1.8849556)
-tonemap_exposure = 2.27
 
 [node name="Level2" type="Node3D" unique_id=923322736]
 
@@ -128,5 +115,4 @@ sky_mode = 1
 [node name="player" parent="." unique_id=921444424 instance=ExtResource("4_8qukl")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=445456152]
-environment = SubResource("Environment_sibr7")
+[node name="WorldEnvironment" parent="." unique_id=687647513 instance=ExtResource("5_l37oo")]
