@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dh2e38bggmvlr" path="res://assets/backgroundtests/free-city-backgrounds-pixel-art/city 1/6.png" id="6_uo7gw"]
 
 [node name="Node2D" type="Node2D" unique_id=1893392125]
+texture_filter = 1
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1090588011]
 scroll_scale = Vector2(0.1, 1)

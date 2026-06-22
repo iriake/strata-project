@@ -4,6 +4,9 @@
 class_name Player2
 extends CharacterBody3D
 
+# --- SIGNALS ---
+signal dimension_changed(to_2d: bool, camera: Camera3D, camera_pivot: Node3D)
+
 # --- CONFIGURACIÓN DE MOVIMIENTO ---
 @export_group("Movement")
 ## Velocidad máxima alcanzable al caminar.
@@ -17,8 +20,16 @@ extends CharacterBody3D
 
 # --- CONFIGURACIÓN DE BACKGROUND 2D ---
 @export_group("Background")
-## Escena de parallax 2D que se muestra al entrar en modo 2D.
+## Escena de parallax 2D lateral que se muestra al entrar en modo 2D.
 @export var parallax_scene: PackedScene
+## Escena de parallax 2D cenital (vista superior) que se muestra al entrar en modo 2D cenital.
+@export var parallax_scene_topdown: PackedScene
+## Escala de los sprites del fondo 2D para cubrir la pantalla (por defecto 4.0).
+@export var background_sprite_scale := Vector2(4.0, 4.0)
+## Intensidad global del efecto parallax.
+@export var background_parallax_intensity := 1.0
+## Desviación de ángulo (en grados) para alinear el fondo 2D con el panorama 3D.
+@export var background_rotation_offset := 0.0
 
 # --- ESTADO DE LA MECÁNICA CHANGE (2D) ---
 ## Indica si el jugador se encuentra actualmente en el modo de perspectiva aplastada.
@@ -75,6 +86,10 @@ func _ready() -> void:
 	# Inicializar el handler de fondo 2D/3D
 	_background_handler = BackgroundHandler.new()
 	_background_handler.parallax_scene = parallax_scene
+	_background_handler.parallax_scene_topdown = parallax_scene_topdown
+	_background_handler.sprite_scale = background_sprite_scale
+	_background_handler.parallax_intensity = background_parallax_intensity
+	_background_handler.background_rotation_offset = background_rotation_offset
 	add_child(_background_handler)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -115,8 +130,7 @@ func _physics_process(delta: float) -> void:
 		velocity *= _move_mask
 		velocity.y = y_velocity + _gravity * delta
 		_snap_to_lock_axis()
-		# Actualizar posición del fondo 2D para que siga a la cámara
-		_background_handler.update_2d_background(_camera, _camera_pivot)
+
 	else:
 		velocity.y = y_velocity + _gravity * delta
 
@@ -212,7 +226,7 @@ func _enter_change_mode() -> void:
 	_camera_handler.set_camera_projection(true)
 	
 	# Activar fondo plano 2D
-	_background_handler.enter_2d_background(_camera, _camera_pivot)
+	dimension_changed.emit(true, _camera, _camera_pivot)
 
 
 func _project_world() -> void:
@@ -267,7 +281,7 @@ func _exit_change_mode() -> void:
 	_camera_handler.set_camera_projection(false)
 	
 	# Restaurar fondo panorámico 3D
-	_background_handler.exit_2d_background()
+	dimension_changed.emit(false, _camera, _camera_pivot)
 
 
 func _restore_player_depth() -> void:

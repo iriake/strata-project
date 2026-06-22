@@ -69,6 +69,7 @@ sky_mode = 1
 [node name="player" parent="." unique_id=921444424 instance=ExtResource("4_x42e6")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 parallax_scene = ExtResource("2_dga24")
+background_sprite_scale = Vector2(6, 6)
 
 [node name="WorldEnvironment" parent="." unique_id=687647513 instance=ExtResource("3_dga24")]
 
