@@ -63,8 +63,7 @@ material = SubResource("StandardMaterial3D_brxtv")
 [node name="Level1" type="Node3D" unique_id=1718511091]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1701436637]
-transform = Transform3D(0.7071068, 0.5, -0.5, 0, 0.7071068, 0.70710677, 0.7071068, -0.5, 0.5, -10, 10, 10)
-light_energy = 1.5
+transform = Transform3D(-1, 0, 0, 0, 0.7071068, 0.70710677, 0, 0.70710677, -0.70710677, 0, 100, -100)
 sky_mode = 1
 
 [node name="player" parent="." unique_id=921444424 instance=ExtResource("4_x42e6")]
@@ -73,7 +72,7 @@ parallax_scene = ExtResource("2_dga24")
 
 [node name="WorldEnvironment" parent="." unique_id=687647513 instance=ExtResource("3_dga24")]
 
-[node name="Collectible_Gear" parent="." unique_id=127400650 instance=ExtResource("5_sk5k4")]
+[node name="Collectible_Gear" parent="." unique_id=127400650 groups=["change_geometry"] instance=ExtResource("5_sk5k4")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 102.395096, 48.849274, 149.90262)
 
 [node name="Killzone" type="Area3D" parent="." unique_id=671526304]
@@ -272,5 +271,17 @@ shape = SubResource("BoxShape3D_dnkej")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D13" unique_id=1316336254]
 mesh = SubResource("BoxMesh_mm8aj")
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=163495620]
+transform = Transform3D(-4.3711385e-08, -0.7071067, 0.70710677, 0, 0.7071067, 0.70710677, -0.9999999, 3.0908616e-08, -3.090862e-08, 100, 100, 0)
+sky_mode = 1
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="." unique_id=320487177]
+transform = Transform3D(-4.371139e-08, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 1, 3.090862e-08, -3.090862e-08, -100, 100, 0)
+sky_mode = 1
+
+[node name="DirectionalLight3D4" type="DirectionalLight3D" parent="." unique_id=434960657]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 100, 100)
+sky_mode = 1
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
