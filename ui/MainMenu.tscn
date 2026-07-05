@@ -1,7 +1,63 @@
 [gd_scene format=3 uid="uid://byk7mffodrktd"]
 
+[ext_resource type="FontFile" uid="uid://dwu5my835e5uk" path="res://fonts/GeneraleStation-Regular.otf" id="1_nmrkx"]
 [ext_resource type="Script" uid="uid://cp27jtqcg8aov" path="res://ui/main_menu.gd" id="1_t7e0r"]
 [ext_resource type="Texture2D" uid="uid://cxfliymq3rspn" path="res://assets/backgroundtests/free-city-backgrounds-pixel-art/city 7/7.png" id="2_rn8js"]
+[ext_resource type="Shader" uid="uid://bxh8fd4elqvgk" path="res://ui/MainMenu.gdshader" id="4_8v85u"]
+
+[sub_resource type="Theme" id="Theme_rn8js"]
+default_font = ExtResource("1_nmrkx")
+
+[sub_resource type="Gradient" id="Gradient_nmrkx"]
+colors = PackedColorArray(0.30588236, 0.9490196, 0.9137255, 1, 0.8, 0.14901961, 0.7607843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_color = Color(0.30588236, 0.9490196, 0.9137255, 1)
+corner_radius_top_left = 12
+corner_radius_bottom_right = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nmrkx"]
+content_margin_left = 40.0
+content_margin_top = 12.0
+content_margin_right = 40.0
+content_margin_bottom = 12.0
+bg_color = Color(0.30588236, 0.9490196, 0.9137255, 0.15686275)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_57qmd"]
+content_margin_left = 40.0
+content_margin_top = 12.0
+content_margin_right = 40.0
+content_margin_bottom = 12.0
+bg_color = Color(0.101960786, 0.10980392, 0.13725491, 0.78431374)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.30588236, 0.9490196, 0.9137255, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Theme" id="Theme_yf5fn"]
+Button/colors/font_color = Color(0.30588236, 0.9490196, 0.9137255, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_nmrkx")
+Button/styles/normal = SubResource("StyleBoxFlat_57qmd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gqbgw"]
+shader = ExtResource("4_8v85u")
+shader_parameter/intensidad_lineas = 0.12
+shader_parameter/glitch_rgb = 0.0025
 
 [node name="MainMenu" type="Control" unique_id=406316603]
 layout_mode = 3
@@ -10,6 +66,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_rn8js")
 script = ExtResource("1_t7e0r")
 
 [node name="7" type="Sprite2D" parent="." unique_id=1582623441]
@@ -18,50 +75,80 @@ position = Vector2(609, 324)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_rn8js")
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1311120978]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -35.0
-offset_top = -81.5
-offset_right = 35.0
-offset_bottom = 81.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=416090211]
+position = Vector2(576, 324)
+amount = 30
+emission_shape = 3
+emission_rect_extents = Vector2(576, 324)
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 25.0
+scale_amount_min = 2.0
+scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_nmrkx")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1815427697]
+[node name="ContenedorPrincipal" type="VBoxContainer" parent="." unique_id=2087105921]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_constants/separation = 80
+
+[node name="CenterContainer" type="CenterContainer" parent="ContenedorPrincipal" unique_id=1471420552]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=2087105921]
+[node name="PanelContainer" type="PanelContainer" parent="ContenedorPrincipal/CenterContainer" unique_id=2104952497]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1579247744]
+[node name="MarginContainer" type="MarginContainer" parent="ContenedorPrincipal/CenterContainer/PanelContainer" unique_id=1399529343]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="ContenedorPrincipal/CenterContainer/PanelContainer/MarginContainer" unique_id=1579247744]
 layout_mode = 2
 theme_type_variation = &"Title"
-text = "Strata"
+theme_override_colors/font_color = Color(0.8, 0.14901961, 0.7607843, 1)
+theme_override_font_sizes/font_size = 120
+text = "STRATA"
 horizontal_alignment = 1
 
-[node name="Start" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=516099098]
+[node name="Control" type="Control" parent="ContenedorPrincipal" unique_id=41770703]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="CenterContainer2" type="CenterContainer" parent="ContenedorPrincipal" unique_id=639449163]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContenedorPrincipal/CenterContainer2" unique_id=1272678757]
+layout_mode = 2
+theme = SubResource("Theme_yf5fn")
+theme_override_constants/separation = 25
+
+[node name="Start" type="Button" parent="ContenedorPrincipal/CenterContainer2/VBoxContainer" unique_id=516099098]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Start"
 
-[node name="Settings" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1918208766]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Settings"
-
-[node name="Credits" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=300963168]
+[node name="Credits" type="Button" parent="ContenedorPrincipal/CenterContainer2/VBoxContainer" unique_id=300963168]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Credits"
 
-[node name="Quit" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=262957973]
+[node name="Quit" type="Button" parent="ContenedorPrincipal/CenterContainer2/VBoxContainer" unique_id=262957973]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Quit"
+
+[node name="FiltroCRT" type="ColorRect" parent="." unique_id=1291455651]
+material = SubResource("ShaderMaterial_gqbgw")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

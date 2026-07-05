@@ -72,3 +72,17 @@ offset_bottom = 122.0
 grow_horizontal = 2
 text = "Credits"
 label_settings = SubResource("LabelSettings_ed0b0")
+
+[node name="Label2" type="Label" parent="." unique_id=994446854]
+layout_mode = 0
+offset_left = 238.0
+offset_top = 329.0
+offset_right = 628.0
+offset_bottom = 549.0
+text = " Creditos por hacer:
+-Assets del robot grande, chico y tuerca coleccionable: https://quaternius.com/index.html
+-Asset de los bloques: ?
+-Assets lettras: https://fontlibrary.org/en/font/generale-station
+-efecto de bomba de humo
+-asset del fondo
+-contorno de bloques: https://gx310.itch.io/pxiel-art-ui-borders"

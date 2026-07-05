@@ -1,6 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://dvhkimwoy5bag"]
 
-[ext_resource type="FontFile" uid="uid://c2p1yc65ux6mt" path="res://assets/fonts/BoldPixels.ttf" id="1_d4nwg"]
+[ext_resource type="FontFile" uid="uid://dwu5my835e5uk" path="res://fonts/GeneraleStation-Regular.otf" id="1_rqugq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4nwg"]
 content_margin_left = 4.0
@@ -81,8 +81,8 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [resource]
-default_font = ExtResource("1_d4nwg")
-default_font_size = 48
+default_font = ExtResource("1_rqugq")
+default_font_size = 30
 BlueButton/base_type = &"Button"
 BlueButton/styles/hover = SubResource("StyleBoxFlat_d4nwg")
 BlueButton/styles/normal = SubResource("StyleBoxFlat_7ct1h")
