@@ -82,7 +82,9 @@ offset_bottom = 549.0
 text = " Creditos por hacer:
 -Assets del robot grande, chico y tuerca coleccionable: https://quaternius.com/index.html
 -Asset de los bloques: ?
--Assets lettras: https://fontlibrary.org/en/font/generale-station
+-Assets lettras: 
+- Titulo: https://fontlibrary.org/en/font/constantine
+- Botones y tutorial: https://fontlibrary.org/en/font/generale-station
 -efecto de bomba de humo
 -asset del fondo
 -contorno de bloques: https://gx310.itch.io/pxiel-art-ui-borders"
