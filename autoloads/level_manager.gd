@@ -31,8 +31,14 @@ func credits() -> void:
 func _input(event: InputEvent) -> void:
 	# si se presiona menu
 	if event.is_action_pressed("menu"):
-		# variable para la ruta de la escena actual
-		var current = get_tree().current_scene.scene_file_path
+		# 1. Validar que la escena actual exista en el árbol antes de pedir sus propiedades
+		var current_scene = get_tree().current_scene
+		if not is_instance_valid(current_scene):
+			return # Salimos de la función de forma segura si es null
+			
+		# 2. Si existe, leemos la ruta de forma segura
+		var current = current_scene.scene_file_path
+		
 		var is_in_level = current != main_menu_scene.resource_path and current != credits_scene.resource_path
 		# si no estamos ni en menu ni en creditos
 		if is_in_level:

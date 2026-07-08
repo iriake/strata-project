@@ -1,11 +1,59 @@
 [gd_scene format=3 uid="uid://crfin475mvk1e"]
 
 [ext_resource type="Script" uid="uid://dvrvrwc3iu3lo" path="res://ui/credits.gd" id="1_ed0b0"]
+[ext_resource type="Shader" uid="uid://8cyt1lxjf7gb" path="res://ui/credits2.gdshader" id="2_1bagf"]
+[ext_resource type="Texture2D" uid="uid://cxfliymq3rspn" path="res://assets/backgroundtests/free-city-backgrounds-pixel-art/city 7/7.png" id="2_orljq"]
+[ext_resource type="Shader" uid="uid://cuh8d43ul3jbg" path="res://ui/Credits.gdshader" id="3_74u3g"]
+[ext_resource type="Shader" uid="uid://cbf08tbgj81f6" path="res://ui/Marco_titulo.gdshader" id="3_dyfqb"]
+[ext_resource type="Texture2D" uid="uid://dd53g1f6jcdir" path="res://ui/Marcos/Borde_fragmentado_blanco.PNG" id="4_swjq5"]
+[ext_resource type="Shader" uid="uid://pycckw05uqj3" path="res://ui/Titulo.gdshader" id="5_43xik"]
+[ext_resource type="FontFile" uid="uid://bqf6g22bbhala" path="res://fonts/Constantine.ttf" id="6_b41pb"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_ed0b0"]
-font_size = 160
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4v7s"]
+shader = ExtResource("2_1bagf")
+shader_parameter/scanline_count = 300.0
+shader_parameter/scanline_opacity = 0.25
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/screen_curvature = 0.05
+shader_parameter/neon_tint = Color(1, 1, 1, 1)
 
-[node name="Credits" type="Control" unique_id=378386958]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wyfq4"]
+shader = ExtResource("3_dyfqb")
+shader_parameter/velocidad_color = 2.5
+shader_parameter/velocidad_glitch = 12.0
+shader_parameter/intensidad_corte = 0.015
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4xmwn"]
+content_margin_left = 325.0
+content_margin_top = 70.0
+content_margin_right = 325.0
+content_margin_bottom = 70.0
+texture = ExtResource("4_swjq5")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_thxm2"]
+shader = ExtResource("5_43xik")
+shader_parameter/velocidad_color = 1.5
+shader_parameter/velocidad_glitch = 10.0
+shader_parameter/intensidad_corte = 0.05
+shader_parameter/grosor_borde = 0.50000002375
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uvwf2"]
+shader = ExtResource("3_74u3g")
+shader_parameter/intensidad_lineas = 0.12
+shader_parameter/glitch_rgb = 0.0015
+
+[sub_resource type="Curve" id="Curve_1bagf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.50453174, 0.48502988), -6.4035087, -6.4035087, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_icdkc"]
+colors = PackedColorArray(0.30588236, 0.9490196, 0.9137255, 1, 0.8, 0.14901961, 0.7607843, 1)
+
+[node name="PantallaCreditos" type="Control" unique_id=378386958]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,77 +62,300 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ed0b0")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=221850981]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -618.0
-offset_top = -276.0
-offset_right = 618.0
-offset_bottom = 276.0
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=778831582]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1555645670]
+material = SubResource("ShaderMaterial_g4v7s")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-bbcode_enabled = true
-text = "[center][rainbow][wave][font_size=50]asdfadsf[/font_size][/wave][/rainbow][/center]
 
-[center]fonts[/center]
-
-[url = https://antidote-studios.itch.io/bold-pixel-sprite-font]Bold Pixel Font[/url]
-by Antidote Studios
-
-asassdf
-
-
-
-adsfa
-dsf
-
-
-
-
-
-a
-sdf
-a
-dfd
-a
-fd
-
-
-a
-f
-d
-saf"
-scroll_active = false
-
-[node name="Label" type="Label" parent="." unique_id=1357079934]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1469167393]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -51.0
-offset_top = 94.0
-offset_right = 51.0
-offset_bottom = 122.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-text = "Credits"
-label_settings = SubResource("LabelSettings_ed0b0")
+grow_vertical = 2
+texture = ExtResource("2_orljq")
+expand_mode = 1
 
-[node name="Label2" type="Label" parent="." unique_id=994446854]
-layout_mode = 0
-offset_left = 238.0
-offset_top = 329.0
-offset_right = 628.0
-offset_bottom = 549.0
-text = " Creditos por hacer:
--Assets del robot grande, chico y tuerca coleccionable: https://quaternius.com/index.html
--Asset de los bloques: ?
--Assets lettras: 
-- Titulo: https://fontlibrary.org/en/font/constantine
-- Botones y tutorial: https://fontlibrary.org/en/font/generale-station
--efecto de bomba de humo
--asset del fondo
--contorno de bloques: https://gx310.itch.io/pxiel-art-ui-borders"
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1673514022]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 200.0
+grow_horizontal = 2
+size_flags_vertical = 3
+
+[node name="ContenedorMarco" type="PanelContainer" parent="CenterContainer" unique_id=232085112]
+material = SubResource("ShaderMaterial_wyfq4")
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_4xmwn")
+
+[node name="EfectoTitulo" type="CanvasGroup" parent="CenterContainer/ContenedorMarco" unique_id=2141806399]
+material = SubResource("ShaderMaterial_thxm2")
+fit_margin = 15.0
+clear_margin = 15.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/ContenedorMarco/EfectoTitulo" unique_id=313638407]
+offset_right = 642.0
+offset_bottom = 160.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="CenterContainer/ContenedorMarco/EfectoTitulo/MarginContainer" unique_id=1114472421]
+layout_mode = 2
+theme_type_variation = &"Title"
+theme_override_fonts/font = ExtResource("6_b41pb")
+theme_override_font_sizes/font_size = 120
+text = "CREDITOS"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1696567508]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=816656017]
+custom_minimum_size = Vector2(800, 350)
+custom_maximum_size = Vector2(1000, -1)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 76.0
+offset_top = -104.0
+offset_right = -76.0
+offset_bottom = 246.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=750899214]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="SeparadorInicial" type="Control" parent="ScrollContainer/VBoxContainer" unique_id=1955252159]
+custom_minimum_size = Vector2(0, 350)
+layout_mode = 2
+
+[node name="CatEquipo" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=1264964841]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.30588236, 0.9490196, 0.9137255, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49803922)
+theme_override_colors/font_outline_color = Color(0.047058824, 0.02745098, 0.078431375, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 28
+text = "--- EQUIPO UBICHEF ---"
+horizontal_alignment = 1
+
+[node name="Equipo" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=72757832]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49803922)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 18
+text = "Diseño y Programación: Equipo Ubichef"
+horizontal_alignment = 1
+
+[node name="Separador2" type="Control" parent="ScrollContainer/VBoxContainer" unique_id=1772101171]
+layout_mode = 2
+
+[node name="CatArte&Textura" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=104372436]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.30588236, 0.9490196, 0.9137255, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49803922)
+theme_override_colors/font_outline_color = Color(0.047058824, 0.02745098, 0.078431375, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 28
+text = "--- ART & TEXTURAS ---"
+horizontal_alignment = 1
+
+[node name="CiudadFondo" type="RichTextLabel" parent="ScrollContainer/VBoxContainer" unique_id=1291920531]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49803922)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+bbcode_enabled = true
+text = "[center][font_size=18][color=#fbfaff]\"Cyberpunk City Background\"[/color][/font_size]
+[font_size=14][color=#8ca0ba]Recurso original de CraftPix.net[/color][/font_size][/center]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Bordes" type="RichTextLabel" parent="ScrollContainer/VBoxContainer" unique_id=1194587728]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49803922)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+bbcode_enabled = true
+text = "[center][font_size=18][color=#fbfaff]\"Pxiel Art UI Borders\"[/color][/font_size]
+[font_size=14][color=#8ca0ba]por GX310 vía itch.io[/color][/font_size][/center]"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Separador3" type="Control" parent="ScrollContainer/VBoxContainer" unique_id=521820733]
+layout_mode = 2
+
+[node name="CatModelos" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=734426651]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.30588236, 0.9490196, 0.9137255, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49803922)
+theme_override_colors/font_outline_color = Color(0.047058824, 0.02745098, 0.078431375, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 28
+text = "--- MODELADO & ASSETS 3D ---"
+horizontal_alignment = 1
+
+[node name="George" type="RichTextLabel" parent="ScrollContainer/VBoxContainer" unique_id=832006243]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49803922)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+bbcode_enabled = true
+text = "[center][font_size=18][color=#fbfaff]Modelo Base de \"George\"[/color][/font_size]
+[font_size=14][color=#8ca0ba]por @Quaternius (CC0)[/color][/font_size][/center]"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="RobotPequeño" type="RichTextLabel" parent="ScrollContainer/VBoxContainer" unique_id=383695238]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49803922)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+bbcode_enabled = true
+text = "[center][font_size=18][color=#fbfaff]Modelo Base de \"Robot\"[/color][/font_size]
+[font_size=14][color=#8ca0ba]por @Quaternius (CC0)[/color][/font_size][/center]"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Tuerca" type="RichTextLabel" parent="ScrollContainer/VBoxContainer" unique_id=1747765903]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49803922)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+bbcode_enabled = true
+text = "[center][font_size=18][color=#fbfaff]Modelo de \"Tuerca Coleccionable\"[/color][/font_size]
+[font_size=14][color=#8ca0ba]por @Quaternius (CC0)[/color][/font_size][/center]"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Separador4" type="Control" parent="ScrollContainer/VBoxContainer" unique_id=1927203321]
+layout_mode = 2
+
+[node name="CatTipografia" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=356886003]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.30588236, 0.9490196, 0.9137255, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49803922)
+theme_override_colors/font_outline_color = Color(0.047058824, 0.02745098, 0.078431375, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 28
+text = "--- TIPOGRAFIA ---"
+horizontal_alignment = 1
+
+[node name="FontBotonesMenu" type="RichTextLabel" parent="ScrollContainer/VBoxContainer" unique_id=621216128]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49803922)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+bbcode_enabled = true
+text = "[center][font_size=18][color=#fbfaff]Generale Station[/color][/font_size]
+[font_size=14][color=#8ca0ba]por Ariel Martín Pérez (OFL)[/color][/font_size][/center]"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Separador5" type="Control" parent="ScrollContainer/VBoxContainer" unique_id=1006270173]
+layout_mode = 2
+
+[node name="CatAudio&Musica" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=484892297]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.30588236, 0.9490196, 0.9137255, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49803922)
+theme_override_colors/font_outline_color = Color(0.047058824, 0.02745098, 0.078431375, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 28
+text = "--- AUDIO & MUSICA ---"
+horizontal_alignment = 1
+
+[node name="SeparadorFinal" type="Control" parent="ScrollContainer/VBoxContainer" unique_id=1128076096]
+custom_minimum_size = Vector2(0, 350)
+layout_mode = 2
+
+[node name="Regresar" type="Label" parent="." unique_id=387713499]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -73.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "PRESS [ESCAPE] TO RETURN"
+horizontal_alignment = 1
+
+[node name="FiltroRCT" type="ColorRect" parent="." unique_id=2065898483]
+material = SubResource("ShaderMaterial_uvwf2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1350254326]
+position = Vector2(576, 324)
+amount = 50
+lifetime = 1.5
+preprocess = 1.5
+randomness = 1.0
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(576, 324)
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 25.0
+scale_amount_min = 2.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_1bagf")
+color_ramp = SubResource("Gradient_icdkc")

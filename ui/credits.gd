@@ -1,27 +1,29 @@
 extends Control
 
-@export var speed: int = 100
-var scrolling: bool = false
+@onready var scroll_container: ScrollContainer = $ScrollContainer
+@onready var vbox_container: VBoxContainer = $ScrollContainer/VBoxContainer
 
-@onready var rich_text_label: RichTextLabel = $RichTextLabel
-
-var last_value: float = 0
+@export var velocidad_scroll: float = 45.0 # Velocidad en píxeles por segundo
+var scroll_actual: float = 0.0
 
 func _ready() -> void:
-	await get_tree().create_timer(2).timeout
-	scrolling = true
-
+	# Forzamos a que empiece abajo del todo
+	scroll_container.scroll_vertical = 0
+	scroll_actual = 0.0
 
 func _process(delta: float) -> void:
-	if scrolling:
-		var scroll_bar: VScrollBar = rich_text_label.get_v_scroll_bar()
-		scroll_bar.value += delta * speed
-		if scroll_bar.value == last_value:
-			scrolling = false
-			finish_scrolling()
-		last_value = scroll_bar.value
+	# Movimiento suave flotante e independiente de los FPS
+	scroll_actual += velocidad_scroll * delta
+	scroll_container.scroll_vertical = int(scroll_actual)
+	
+	# Detectar el final del scroll para reiniciarlo en bucle
+	var barra_v = scroll_container.get_v_scroll_bar()
+	var limite_maximo = barra_v.max_value - barra_v.page
+	
+	if scroll_actual >= limite_maximo:
+		scroll_actual = 0.0 # Reinicia la cascada automáticamente
 
-
-func finish_scrolling() -> void:
-	await get_tree().create_timer(2).timeout
-	LevelManager.main_menu()
+func _input(event: InputEvent) -> void:
+	# Detecta si el jugador presiona Escape para volver al menú anterior
+	if event.is_action_pressed("menu") or (event is InputEventKey and event.keycode == KEY_ESCAPE):
+		get_tree().change_scene_to_file("res://ui/MainMenu.tscn")
