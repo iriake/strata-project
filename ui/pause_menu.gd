@@ -1,71 +1,65 @@
 extends Control
 
-@onready var resume: Button = %Resume
-@onready var retry: Button = %Retry
-@onready var settings: Button = %Settings
-@onready var main_menu: Button = %MainMenu
-@onready var save_game: Button = %SaveGame
-@onready var load_game: Button = %LoadGame
+@onready var advertencia: ConfirmationDialog = $Advertencia
 
+# Usamos un enum para rastrear qué botón abrió el cuadro de confirmación
+enum AccionConfirmar { NINGUNA, CARGAR, MENU_PRINCIPAL }
+var accion_pendiente = AccionConfirmar.NINGUNA
 
-func  _ready() -> void:
+func _ready() -> void:
 	hide()
-	resume.pressed.connect(_on_resume_pressed)
-	retry.pressed.connect(_on_retry_pressed)
-	settings.pressed.connect(_on_settings_pressed)
-	main_menu.pressed.connect(_on_main_menu_pressed)
-	save_game.pressed.connect(_on_save_game_pressed)
-	load_game.pressed.connect(_on_load_game_pressed)
+	# Aseguramos que los textos del diálogo nativo sean correctos
+	advertencia.get_ok_button().text = "Sí, continuar"
+	advertencia.get_cancel_button().text = "Cancelar"
 
+# --- BOTÓN: RESUME ---
 func _on_resume_pressed() -> void:
-	get_tree().paused =  false
-	hide()
-
-func _on_retry_pressed() -> void:
+	# Despausamos simulando la misma lógica del LevelManager
 	get_tree().paused = false
-	hide() 
+	visible = false
+
+# --- BOTÓN: SAVE ---
+func _on_save_pressed() -> void:
+	# Aquí irá tu lógica de guardado futuro (ej: Guardado.save_game())
+	pass
+
+# --- BOTÓN: LOAD ---
+func _on_load_pressed() -> void:
+	accion_pendiente = AccionConfirmar.CARGAR
+	advertencia.popup_centered()
+
+# --- BOTÓN: RESTART ---
+func _on_restart_pressed() -> void:
+	visible = false
+	# Es vital despausar antes de recargar la escena actual
+	get_tree().paused = false
 	get_tree().reload_current_scene()
 
-func _on_settings_pressed() -> void:
-	Debug.log("TODO")
+# --- BOTÓN: OPTIONS ---
+func _on_options_pressed() -> void:
+	# Aquí abrirás tu futuro panel de opciones
+	pass
 
-func _on_main_menu_pressed() -> void:
-	get_tree().paused = false
-	hide() 
-	LevelManager.main_menu()
+# --- BOTÓN: QUIT (Menú Principal) ---
+func _on_quit_pressed() -> void:
+	accion_pendiente = AccionConfirmar.MENU_PRINCIPAL
+	advertencia.popup_centered()
 
-func _on_save_game_pressed() -> void:
-	var dict: Dictionary = {
-		"name": "Pepito",
-		"attack": 10.2,
-	}
-	var dict_string = JSON.stringify(dict)
-	
-	var file = FileAccess.open_encrypted_with_pass("user://save.data", FileAccess.WRITE, "1234")
-	file.store_string(dict_string)
-	
-	var config = ConfigFile.new()
+# --- SEÑAL: "confirmed" de Advertencia ---
+func _on_advertencia_confirmed() -> void:
+	match accion_pendiente:
+		AccionConfirmar.CARGAR:
+			print("Cargando partida...")
+			get_tree().paused = false
+			visible = false
+			
+		AccionConfirmar.MENU_PRINCIPAL:
+			visible = false
+			get_tree().paused = false
+			get_tree().change_scene_to_file("res://ui/MainMenu.tscn")
 
-	# Store some values.
-	config.set_value("Video", "fullscreen", false)
-	config.set_value("Video", "V-Sync", true)
-	config.set_value("Audio", "music_volume", 0.7)
-	config.set_value("Audio", "sfx_volume", 0.9)
+	accion_pendiente = AccionConfirmar.NINGUNA
 
-	config.save("user://settings.cfg")
-
-func _on_load_game_pressed() -> void:
-	var file = FileAccess.open_encrypted_with_pass("user://save.data", FileAccess.READ, "1234")
-	var dict: Dictionary = JSON.parse_string(file.get_as_text())
-	Debug.log(dict.name)
-	Debug.log(dict.attack)
-	
-	var config = ConfigFile.new()
-	
-	config.load("user://settings.cfg")
-
-	for section in config.get_sections():
-		for key in config.get_section_keys(section):
-			Debug.log("[%s] %s: %s" %  [section, key, config.get_value(section, str(key))])
-			var string: String = "hola: %s , %d -- %.2f" % ["pepito", 123, 3.0/7.0]
-			Debug.log(string)
+# --- SEÑAL: "canceled" de Advertencia ---
+func _on_advertencia_canceled() -> void:
+	accion_pendiente = AccionConfirmar.NINGUNA

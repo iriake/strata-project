@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://cqcpa3ywesb1u"]
+
+[ext_resource type="Script" uid="uid://bcf6qdg51ibn8" path="res://ui/tutorial_ui.gd" id="1_7qhjk"]
+[ext_resource type="FontFile" uid="uid://dwu5my835e5uk" path="res://fonts/GeneraleStation-Regular.otf" id="1_epm2k"]
+
+[sub_resource type="Theme" id="Theme_g4v7s"]
+default_font = ExtResource("1_epm2k")
+default_font_size = 20
+
+[node name="TutorialUI" type="CanvasLayer" unique_id=103690516]
+script = ExtResource("1_7qhjk")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1142018139]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_top = 30
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer" unique_id=1749957809]
+custom_minimum_size = Vector2(1152, 60)
+layout_mode = 2
+color = Color(0.047058824, 0.02745098, 0.078431375, 0.7019608)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/ColorRect" unique_id=1619248896]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_g4v7s")
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1

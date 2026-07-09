@@ -1,7 +1,36 @@
 [gd_scene format=3 uid="uid://bb17db381bnli"]
 
 [ext_resource type="Script" uid="uid://c0at20tnnxv71" path="res://ui/pause_menu.gd" id="1_50142"]
-[ext_resource type="Texture2D" uid="uid://b0pkd03rjeq5o" path="res://assets/backgroundtests/free-city-backgrounds-pixel-art/city 6/8.png" id="2_8tehv"]
+[ext_resource type="Texture2D" uid="uid://dd53g1f6jcdir" path="res://ui/Marcos/Borde_fragmentado_blanco.PNG" id="2_8tehv"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8tehv"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_8tehv")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c7v6e"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_8tehv")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+modulate_color = Color(0.30588236, 0.9490196, 0.9137255, 1)
+
+[sub_resource type="Theme" id="Theme_1q10k"]
+Button/colors/font_color = Color(0.30588236, 0.9490196, 0.9137255, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/styles/hover = SubResource("StyleBoxTexture_8tehv")
+Button/styles/normal = SubResource("StyleBoxTexture_c7v6e")
 
 [node name="PauseMenu" type="Control" unique_id=1750061234]
 process_mode = 2
@@ -13,77 +42,74 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_50142")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1661122120]
-position = Vector2(573.00006, 312)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("2_8tehv")
-
-[node name="ColorRect" type="ColorRect" parent="." unique_id=212526715]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1603301028]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.39215687)
+color = Color(0.047058824, 0.02745098, 0.078431375, 0.7058824)
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=196775941]
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect" unique_id=1567374701]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 13
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -35.0
-offset_top = -81.5
-offset_right = 35.0
-offset_bottom = 81.5
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_right = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1599459707]
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer" unique_id=1881985220]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+theme = SubResource("Theme_1q10k")
+theme_override_constants/separation = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1257402367]
+[node name="Titulo" type="Label" parent="ColorRect/CenterContainer/VBoxContainer" unique_id=326489777]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=27748663]
-layout_mode = 2
-theme_type_variation = &"Title"
-text = "Pause"
+text = "PAUSADO"
 horizontal_alignment = 1
 
-[node name="Resume" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=417316676]
-unique_name_in_owner = true
+[node name="Resume" type="Button" parent="ColorRect/CenterContainer/VBoxContainer" unique_id=745336560]
 layout_mode = 2
-text = "Resume"
+text = "Reanudar"
 
-[node name="SaveGame" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=282549867]
-unique_name_in_owner = true
+[node name="Save" type="Button" parent="ColorRect/CenterContainer/VBoxContainer" unique_id=1091721807]
 layout_mode = 2
-text = "Save Game
-"
+text = "Guardar Partida"
 
-[node name="LoadGame" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1323481633]
-unique_name_in_owner = true
+[node name="Load" type="Button" parent="ColorRect/CenterContainer/VBoxContainer" unique_id=1448808761]
 layout_mode = 2
-text = "Load Game"
+text = "Cargar Partida"
 
-[node name="Retry" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1348532524]
-unique_name_in_owner = true
+[node name="Restart" type="Button" parent="ColorRect/CenterContainer/VBoxContainer" unique_id=1132792802]
 layout_mode = 2
-text = "Retry
-"
+text = "Reintentar"
 
-[node name="Settings" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1051979863]
-unique_name_in_owner = true
+[node name="Options" type="Button" parent="ColorRect/CenterContainer/VBoxContainer" unique_id=318655001]
 layout_mode = 2
-text = "Settings"
+text = "Configuración"
 
-[node name="MainMenu" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=266580520]
-unique_name_in_owner = true
+[node name="Quit" type="Button" parent="ColorRect/CenterContainer/VBoxContainer" unique_id=1941038806]
 layout_mode = 2
-text = "MainMenu
-"
+text = "Menú Principal"
+
+[node name="Advertencia" type="ConfirmationDialog" parent="." unique_id=948358254]
+oversampling_override = 1.0
+title = "¡CUIDADO!"
+initial_position = 1
+size = Vector2i(493, 100)
+ok_button_text = "Sí, continuar"
+dialog_text = "Todo el progreso no guardado se perderá. ¿Deseas continuar?"
+cancel_button_text = "Cancelar"
+
+[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="canceled" from="Advertencia" to="." method="_on_advertencia_canceled"]
+[connection signal="confirmed" from="Advertencia" to="." method="_on_advertencia_confirmed"]
