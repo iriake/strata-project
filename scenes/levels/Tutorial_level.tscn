@@ -19,19 +19,18 @@ material = SubResource("StandardMaterial3D_yf5fn")
 script = ExtResource("1_chmei")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=461768932]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -50, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=792132309]
-transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
 shape = SubResource("BoxShape3D_57qmd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=950763419]
-transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
 mesh = SubResource("BoxMesh_g4v7s")
-
-[node name="player" parent="StaticBody3D" unique_id=921444424 instance=ExtResource("2_bum5t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7892723, 0.5671329, -3.341957)
 
 [node name="AreaLight3D" type="DirectionalLight3D" parent="." unique_id=493552931]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 3, 0)
 
 [node name="TutorialUI" parent="." unique_id=103690516 instance=ExtResource("4_53fof")]
+
+[node name="player" parent="." unique_id=921444424 instance=ExtResource("2_bum5t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7892723, 0.5671329, -3.341957)
