@@ -6,10 +6,10 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_1"]
 radius = 0.8
 
-[node name="Collectible_Gear" type="Area3D"]
+[node name="Collectible_Gear" type="Area3D" unique_id=127955572]
 script = ExtResource("1_collectible_script")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=285381881]
 shape = SubResource("SphereShape3D_1")
 
-[node name="Collectible_Gear_Model" parent="." instance=ExtResource("2_gear_fbx")]
+[node name="Collectible_Gear_Model" parent="." unique_id=1593237752 instance=ExtResource("2_gear_fbx")]

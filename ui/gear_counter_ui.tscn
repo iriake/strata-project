@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://db1ge6s6e7unp"]
+
+[ext_resource type="PackedScene" uid="uid://c5a7gpfb8u8j1" path="res://scenes/objects/collectible_gear.tscn" id="1_t3eax"]
+[ext_resource type="Script" uid="uid://byx4v5105718w" path="res://ui/gear_counter_ui.gd" id="1_yx1nk"]
+[ext_resource type="FontFile" uid="uid://dwu5my835e5uk" path="res://fonts/GeneraleStation-Regular.otf" id="2_yx1nk"]
+
+[node name="GearCounterUI" type="CanvasLayer" unique_id=439129681]
+script = ExtResource("1_yx1nk")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=629736962]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -517.0
+offset_bottom = 512.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=598394810]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MarginContainer/HBoxContainer" unique_id=1105214635]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/SubViewportContainer" unique_id=1028505531]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(64, 64)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/SubViewportContainer/SubViewport" unique_id=1281654775]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2906422)
+projection = 1
+size = 0.5
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MarginContainer/HBoxContainer/SubViewportContainer/SubViewport" unique_id=667753814]
+
+[node name="Collectible_Gear" parent="MarginContainer/HBoxContainer/SubViewportContainer/SubViewport" unique_id=616312679 instance=ExtResource("1_t3eax")]
+script = null
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer" unique_id=176192403]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_yx1nk")
+text = "00 / 10"
+vertical_alignment = 1

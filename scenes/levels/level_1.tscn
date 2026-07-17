@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c4qc1r0xgkxha"]
 
+[ext_resource type="Script" uid="uid://cp1ppmxsoqtuw" path="res://scenes/levels/level_1.gd" id="1_qxy0u"]
 [ext_resource type="PackedScene" uid="uid://bf1uipk24biiq" path="res://scenes/levels/2d_backgroundtest.tscn" id="2_dga24"]
 [ext_resource type="PackedScene" uid="uid://d0b8e34gns0y8" path="res://scenes/levels/3d_backgroundtest.tscn" id="3_dga24"]
 [ext_resource type="PackedScene" uid="uid://dxiucw3ub32ad" path="res://scenes/player/player.tscn" id="4_x42e6"]
@@ -9,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cr3f0f4612vom" path="res://assets/FreeSample/FreeSample/Textures/T_PropsDiffuse- 4K.png" id="7_dga24"]
 [ext_resource type="Texture2D" uid="uid://qqow4d8kw0j4" path="res://assets/FreeSample/FreeSample/Textures/VoxelCity_CompositeBuildings_Optimized-2_diffuse.png" id="7_s8va5"]
 [ext_resource type="Texture2D" uid="uid://ww0qj781o38x" path="res://assets/FreeSample/FreeSample/Textures/VoxelCity_CompositeBuildings_Optimized-4_diffuse.png" id="9_dga24"]
+[ext_resource type="PackedScene" uid="uid://db1ge6s6e7unp" path="res://ui/gear_counter_ui.tscn" id="11_excbq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6761a"]
 size = Vector3(190.12585, 2.6860352, 263.4922)
@@ -61,19 +63,35 @@ uv1_world_triplanar = true
 material = SubResource("StandardMaterial3D_brxtv")
 
 [node name="Level1" type="Node3D" unique_id=1718511091]
+script = ExtResource("1_qxy0u")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1701436637]
 transform = Transform3D(-1, 0, 0, 0, 0.7071068, 0.70710677, 0, 0.70710677, -0.70710677, 0, 100, -100)
 sky_mode = 1
 
 [node name="player" parent="." unique_id=921444424 instance=ExtResource("4_x42e6")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.48135984, 0)
 parallax_scene = ExtResource("2_dga24")
 
 [node name="WorldEnvironment" parent="." unique_id=687647513 instance=ExtResource("3_dga24")]
 
-[node name="Collectible_Gear" parent="." unique_id=127400650 groups=["change_geometry"] instance=ExtResource("5_sk5k4")]
+[node name="Collectible_Gear" parent="." unique_id=127400650 groups=["change_geometry", "engranajes"] instance=ExtResource("5_sk5k4")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 102.395096, 48.849274, 149.90262)
+
+[node name="Collectible_Gear3" parent="." unique_id=1129177540 groups=["change_geometry", "engranajes"] instance=ExtResource("5_sk5k4")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 106.96724, 35.65017, 189.15129)
+
+[node name="Collectible_Gear4" parent="." unique_id=358848647 groups=["change_geometry", "engranajes"] instance=ExtResource("5_sk5k4")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 98.83729, 14.405318, 205.73953)
+
+[node name="Collectible_Gear5" parent="." unique_id=1442373177 groups=["change_geometry", "engranajes"] instance=ExtResource("5_sk5k4")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 99.93721, 30.384722, 239.52109)
+
+[node name="Collectible_Gear6" parent="." unique_id=1111693435 groups=["change_geometry", "engranajes"] instance=ExtResource("5_sk5k4")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 44.960747, 27.937382, 9.6840105)
+
+[node name="Collectible_Gear7" parent="." unique_id=1520827462 groups=["change_geometry", "engranajes"] instance=ExtResource("5_sk5k4")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -2.4335694, 25.161161, 59.178272)
 
 [node name="Killzone" type="Area3D" parent="." unique_id=671526304]
 script = ExtResource("6_sk5k4")
@@ -283,5 +301,7 @@ sky_mode = 1
 [node name="DirectionalLight3D4" type="DirectionalLight3D" parent="." unique_id=434960657]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 100, 100)
 sky_mode = 1
+
+[node name="GearCounterUI" parent="." unique_id=439129681 instance=ExtResource("11_excbq")]
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
