@@ -70,6 +70,9 @@ var _background_handler: BackgroundHandler
 @onready var _col_george: CollisionShape3D = $CollisionGeorge
 @onready var _col_mini: CollisionShape3D = $CollisionMini
 @onready var _gpu_particles_3d: GPUParticles3D = $GPUParticles3D
+@onready var _crush_zone: Area3D = $CrushZone
+@onready var _crush_shape_george: CollisionShape3D = $CrushZone/CrushShapeGeorge
+@onready var _crush_shape_mini: CollisionShape3D = $CrushZone/CrushShapeMini
 
 # Variables de estado de transformación
 var is_george_active := true
@@ -83,6 +86,9 @@ func _ready() -> void:
 	_skin_mini.hide()
 	_col_mini.set_deferred("disabled", true)
 	
+	_crush_shape_george.set_deferred("disabled", false)
+	_crush_shape_mini.set_deferred("disabled", true)
+	
 	# Inicializar el handler de fondo 2D/3D
 	_background_handler = BackgroundHandler.new()
 	_background_handler.parallax_scene = parallax_scene
@@ -91,6 +97,7 @@ func _ready() -> void:
 	_background_handler.parallax_intensity = background_parallax_intensity
 	_background_handler.background_rotation_offset = background_rotation_offset
 	add_child(_background_handler)
+	_crush_zone.body_entered.connect(_on_crush_zone_body_entered)
 
 func _unhandled_input(event: InputEvent) -> void:
 	# --- CAMBIO DE DIMENSIÓN ---
@@ -156,6 +163,9 @@ func toggle_robot() -> void:
 		# Cambiamos colisiones de forma segura
 		_col_george.set_deferred("disabled", false)
 		_col_mini.set_deferred("disabled", true)
+		
+		_crush_shape_george.set_deferred("disabled", false)
+		_crush_shape_mini.set_deferred("disabled", true)
 	else:
 		_active_skin = _skin_mini
 		_skin_george.hide()
@@ -163,6 +173,8 @@ func toggle_robot() -> void:
 		
 		_col_george.set_deferred("disabled", true)
 		_col_mini.set_deferred("disabled", false)
+		_crush_shape_george.set_deferred("disabled", true)
+		_crush_shape_mini.set_deferred("disabled", false)
 
 
 ## Cambia el estado del juego entre 3D y 2D, calculando los ejes de bloqueo según la cámara.
@@ -398,3 +410,14 @@ func _handle_cosmetics(move_direction: Vector3, delta: float, is_starting_jump: 
 
 func _on_killzone_body_entered(body: Node3D) -> void:
 	pass # Replace with function body.
+	
+func _on_crush_zone_body_entered(body: Node3D) -> void:
+	if not is_2d_mode:
+		return
+	if body == _initial_platform:
+		return  # es la plataforma en la que estás parado, no debe matarte
+	if body.is_in_group("change_geometry"):
+		_die_by_crush()
+		
+func _die_by_crush() -> void:
+	get_tree().reload_current_scene()

@@ -217,6 +217,7 @@ script = ExtResource("1_p47bc")
 
 [node name="CollisionGeorge" type="CollisionShape3D" parent="." unique_id=588879690]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7857056, 0)
+visible = false
 shape = SubResource("CapsuleShape3D_mvket")
 
 [node name="CollisionMini" type="CollisionShape3D" parent="." unique_id=288010386]
@@ -248,9 +249,10 @@ tree_root = SubResource("AnimationNodeBlendTree_0owmy")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="George" parent="." unique_id=1156086094 instance=ExtResource("2_75vfm")]
+visible = false
 script = ExtResource("3_0owmy")
 
-[node name="George" parent="George/RobotArmature/Skeleton3D" parent_id_path=PackedInt32Array(1156086094, 1763704905) index="0" unique_id=569218842]
+[node name="George" parent="George/RobotArmature/Skeleton3D" parent_id_path=PackedInt32Array(1156086094, 1322008914) index="0" unique_id=526706699]
 mesh = ExtResource("4_75vfm")
 
 [node name="AnimationTreeGeorge" type="AnimationTree" parent="George" unique_id=749344169]
@@ -270,6 +272,17 @@ local_coords = true
 draw_order = 3
 process_material = SubResource("ParticleProcessMaterial_ugbui")
 draw_pass_1 = SubResource("SphereMesh_fcs02")
+
+[node name="CrushZone" type="Area3D" parent="." unique_id=1372414124]
+
+[node name="CrushShapeMini" type="CollisionShape3D" parent="CrushZone" unique_id=1652363925]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 1.326, 0)
+shape = SubResource("CapsuleShape3D_0owmy")
+disabled = true
+
+[node name="CrushShapeGeorge" type="CollisionShape3D" parent="CrushZone" unique_id=1117519262]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 2.7857056, 0)
+shape = SubResource("CapsuleShape3D_mvket")
 
 [editable path="MiniRobot"]
 [editable path="George"]
