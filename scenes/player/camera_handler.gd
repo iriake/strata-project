@@ -12,6 +12,9 @@ extends Node
 ## Guarda la posición local que tenía la cámara en 3D justo antes de cambiar a 2D.
 var _camera_local_position_before_2d := Vector3.ZERO
 
+func _ready() -> void:
+	_camera_local_position_before_2d = _camera.position
+
 ## Vinculación al estado 2D del jugador.
 var is_2d_mode: bool:
 	get:

@@ -222,8 +222,9 @@ func _enter_change_mode() -> void:
 	_project_world()
 	_camera_pivot.force_2d_angle(true)
 	
-	# Delegado al controlador de cámara
-	_camera_handler.set_camera_projection(true)
+	# Delegado al controlador de cámara (mantenemos perspectiva en vista superior)
+	var is_top_down = _lock_axis.y > 0
+	_camera_handler.set_camera_projection(not is_top_down)
 	
 	# Activar fondo plano 2D
 	dimension_changed.emit(true, _camera, _camera_pivot)

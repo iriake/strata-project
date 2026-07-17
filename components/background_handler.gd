@@ -106,10 +106,19 @@ func enter_2d_background(camera: Camera3D, camera_pivot: Node3D) -> void:
 
 	print("[BackgroundHandler] Activando modo 2D. Vista cenital: ", _is_top_down)
 
+	if _is_top_down:
+		print("[BackgroundHandler] Vista superior (Top-Down) detectada. Manteniendo entorno 3D original y ocultando 2D.")
+		if _world_env:
+			_world_env.environment = _original_environment
+		camera.environment = null
+		if _canvas_layer:
+			_canvas_layer.visible = false
+		return
+
 	if not _env_2d:
 		_create_2d_environment_cache()
 
-	var target_scene = parallax_scene_topdown if _is_top_down else parallax_scene
+	var target_scene = parallax_scene
 
 	# 1. Configurar el environment duplicado
 	if _env_2d:
@@ -153,7 +162,7 @@ func enter_2d_background(camera: Camera3D, camera_pivot: Node3D) -> void:
 	if _parallax_instance_topdown:
 		_parallax_instance_topdown.visible = (target_scene == parallax_scene_topdown)
 
-	var active_instance = _parallax_instance_topdown if _is_top_down else _parallax_instance_side
+	var active_instance = _parallax_instance_topdown if (_is_top_down and _parallax_instance_topdown) else _parallax_instance_side
 	_cache_parallax_layers(active_instance)
 
 	if _canvas_layer:
