@@ -168,6 +168,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "CREDITS"
 
+[node name="Settings" type="Button" parent="ContenedorPrincipal/CenterContainer2/VBoxContainer" unique_id=300963169]
+unique_name_in_owner = true
+layout_mode = 2
+text = "SETTINGS"
+
 [node name="Quit" type="Button" parent="ContenedorPrincipal/CenterContainer2/VBoxContainer" unique_id=262957973]
 unique_name_in_owner = true
 layout_mode = 2

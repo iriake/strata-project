@@ -173,7 +173,9 @@ theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 18
-text = "Diseño y Programación: Equipo Ubichef"
+text = "Juan Pablo Carrasco
+David Aguiar
+Benjamín Del Portillo"
 horizontal_alignment = 1
 
 [node name="Separador2" type="Control" parent="ScrollContainer/VBoxContainer" unique_id=1772101171]
@@ -188,7 +190,7 @@ theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 28
-text = "--- ART & TEXTURAS ---"
+text = "--- ARTE & TEXTURAS ---"
 horizontal_alignment = 1
 
 [node name="CiudadFondo" type="RichTextLabel" parent="ScrollContainer/VBoxContainer" unique_id=1291920531]
@@ -213,7 +215,7 @@ theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 2
 bbcode_enabled = true
-text = "[center][font_size=18][color=#fbfaff]\"Pxiel Art UI Borders\"[/color][/font_size]
+text = "[center][font_size=18][color=#fbfaff]\"Pixel Art UI Borders\"[/color][/font_size]
 [font_size=14][color=#8ca0ba]por GX310 vía itch.io[/color][/font_size][/center]"
 fit_content = true
 horizontal_alignment = 1
@@ -230,7 +232,7 @@ theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 28
-text = "--- MODELADO & ASSETS 3D ---"
+text = "--- MODELOS 3D ---"
 horizontal_alignment = 1
 
 [node name="George" type="RichTextLabel" parent="ScrollContainer/VBoxContainer" unique_id=832006243]
@@ -312,7 +314,27 @@ theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 28
-text = "--- AUDIO & MUSICA ---"
+text = "--- MUSICA & SFX ---"
+horizontal_alignment = 1
+
+[node name="FontBotonesMenu2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer" unique_id=1903136092]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49803922)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+bbcode_enabled = true
+text = "[center][font_size=18][color=#fbfaff]\"Exploding Sun\"[/color][/font_size]
+[font_size=14][color=#8ca0ba] por Kyra van Meijl (Kyra's Voice)
+Licensed under CC BY 4.0[/color][/font_size][/center]
+
+
+[center][font_size=18][color=#fbfaff]\"Coin Sound Effect\"[/color][/font_size]
+[font_size=14][color=#8ca0ba]  por CrunchPix 
+(www.crunchpix.com)[/color][/font_size][/center]
+"
+fit_content = true
 horizontal_alignment = 1
 
 [node name="SeparadorFinal" type="Control" parent="ScrollContainer/VBoxContainer" unique_id=1128076096]

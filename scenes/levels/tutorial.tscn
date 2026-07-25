@@ -1,0 +1,149 @@
+[gd_scene format=3 uid="uid://d34wqbdsj6205"]
+
+[ext_resource type="Script" uid="uid://o8aaejg7078u" path="res://scenes/levels/tutorial.gd" id="1_uu0hj"]
+[ext_resource type="PackedScene" uid="uid://dxiucw3ub32ad" path="res://scenes/player/player.tscn" id="2_irnc0"]
+[ext_resource type="PackedScene" uid="uid://bf1uipk24biiq" path="res://scenes/levels/2d_background.tscn" id="3_84vya"]
+[ext_resource type="PackedScene" uid="uid://d0b8e34gns0y8" path="res://scenes/levels/3d_background.tscn" id="4_cw4as"]
+[ext_resource type="Script" uid="uid://dym5c806jgsk5" path="res://scenes/levels/killzone.gd" id="5_4o3hj"]
+[ext_resource type="Texture2D" uid="uid://coj271eim6tj2" path="res://assets/FreeSample/FreeSample/Textures/VoxelCity_CompositeBuildings_Optimized-0_diffuse.png" id="6_uy53l"]
+[ext_resource type="PackedScene" uid="uid://c5a7gpfb8u8j1" path="res://scenes/objects/collectible_gear.tscn" id="7_l8ohl"]
+[ext_resource type="Texture2D" uid="uid://qqow4d8kw0j4" path="res://assets/FreeSample/FreeSample/Textures/VoxelCity_CompositeBuildings_Optimized-2_diffuse.png" id="8_wr5d5"]
+[ext_resource type="Texture2D" uid="uid://ww0qj781o38x" path="res://assets/FreeSample/FreeSample/Textures/VoxelCity_CompositeBuildings_Optimized-4_diffuse.png" id="9_q462l"]
+[ext_resource type="PackedScene" uid="uid://db1ge6s6e7unp" path="res://ui/gear_counter_ui.tscn" id="10_cyy7t"]
+[ext_resource type="PackedScene" uid="uid://cqcpa3ywesb1u" path="res://ui/Tutorial_ui.tscn" id="11_1x4hw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6761a"]
+size = Vector3(190.12585, 2.6860352, 263.4922)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oc4kc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6761a"]
+albedo_texture = ExtResource("6_uy53l")
+metallic = 1.0
+uv1_scale = Vector3(0.07, 0.07, 0.07)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 2.282103
+uv1_world_triplanar = true
+proximity_fade_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_s8va5"]
+material = SubResource("StandardMaterial3D_6761a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxy0u"]
+albedo_texture = ExtResource("8_wr5d5")
+uv1_triplanar = true
+uv1_triplanar_sharpness = 14.928526
+
+[sub_resource type="BoxMesh" id="BoxMesh_mm8aj"]
+material = SubResource("StandardMaterial3D_qxy0u")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qsp8v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brxtv"]
+albedo_texture = ExtResource("9_q462l")
+uv1_scale = Vector3(0.07, 0.07, 0.07)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 0.29730198
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_nt80m"]
+material = SubResource("StandardMaterial3D_brxtv")
+
+[node name="Level1" type="Node3D" unique_id=1718511091]
+script = ExtResource("1_uu0hj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1701436637]
+transform = Transform3D(-1, 0, 0, 0, 0.7071068, 0.70710677, 0, 0.70710677, -0.70710677, 0, 100, -100)
+sky_mode = 1
+
+[node name="player" parent="." unique_id=921444424 instance=ExtResource("2_irnc0")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.48135984, 0)
+parallax_scene = ExtResource("3_84vya")
+
+[node name="WorldEnvironment" parent="." unique_id=687647513 instance=ExtResource("4_cw4as")]
+
+[node name="Killzone" type="Area3D" parent="." unique_id=671526304]
+script = ExtResource("5_4o3hj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Killzone" unique_id=619117069]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -15, 0)
+shape = SubResource("BoxShape3D_6761a")
+
+[node name="Platform1" type="StaticBody3D" parent="." unique_id=1213087419 groups=["change_geometry"]]
+transform = Transform3D(10, 0, 0, 0, 2.5, 0, 0, 0, 10, 0, -2.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform1" unique_id=1451944309]
+shape = SubResource("BoxShape3D_oc4kc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform1" unique_id=170392063]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.013, 0)
+mesh = SubResource("BoxMesh_s8va5")
+
+[node name="Collectible_Gear1" parent="." unique_id=127400650 groups=["change_geometry", "engranajes"] instance=ExtResource("7_l8ohl")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 17.5, 6, 20)
+
+[node name="Platform2" type="StaticBody3D" parent="." unique_id=791201969 groups=["change_geometry"]]
+transform = Transform3D(10, 0, 0, 0, 2.5, 0, 0, 0, 10, 17.5, 3.0000005, 20)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform2" unique_id=29684743]
+shape = SubResource("BoxShape3D_oc4kc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform2" unique_id=1827157797]
+mesh = SubResource("BoxMesh_s8va5")
+
+[node name="Collectible_Gear2" parent="." unique_id=127955572 groups=["change_geometry", "engranajes"] instance=ExtResource("7_l8ohl")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 44.429314, 9.258419, -30.006937)
+
+[node name="Platform5" type="StaticBody3D" parent="." unique_id=1729616575 groups=["change_geometry"]]
+transform = Transform3D(10, 0, 0, 0, 2.5, 0, 0, 0, 10, 45, 3, -20)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform5" unique_id=845892738]
+shape = SubResource("BoxShape3D_oc4kc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform5" unique_id=591099685]
+mesh = SubResource("BoxMesh_s8va5")
+
+[node name="Platform3" type="StaticBody3D" parent="." unique_id=1050559746 groups=["change_geometry"]]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 10, 10, -3, 20)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform3" unique_id=29675210]
+shape = SubResource("BoxShape3D_oc4kc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform3" unique_id=1375463443]
+mesh = SubResource("BoxMesh_mm8aj")
+
+[node name="Platform4" type="StaticBody3D" parent="." unique_id=1116981418 groups=["change_geometry"]]
+transform = Transform3D(5, 0, 0, 0, 4.5, 0, 0, 0, 10, 38, 2, 10)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform4" unique_id=1895275065]
+shape = SubResource("BoxShape3D_qsp8v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform4" unique_id=1414463759]
+mesh = SubResource("BoxMesh_nt80m")
+
+[node name="Platform6" type="StaticBody3D" parent="." unique_id=1810317905 groups=["change_geometry"]]
+transform = Transform3D(5, 0, 0, 0, 4.5, 0, 0, 0, 5, 38, 8, 10)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform6" unique_id=279481475]
+shape = SubResource("BoxShape3D_qsp8v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform6" unique_id=1373518985]
+mesh = SubResource("BoxMesh_nt80m")
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=163495620]
+transform = Transform3D(-4.371139e-08, -0.7071068, 0.7071068, 0, 0.7071068, 0.7071068, -1, 3.090862e-08, -3.090862e-08, 100.71168, 100, 1.0935535)
+sky_mode = 1
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="." unique_id=320487177]
+transform = Transform3D(-4.371139e-08, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 1, 3.090862e-08, -3.090862e-08, -100, 100, 0)
+sky_mode = 1
+
+[node name="DirectionalLight3D4" type="DirectionalLight3D" parent="." unique_id=434960657]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 100, 100)
+sky_mode = 1
+
+[node name="GearCounterUI" parent="." unique_id=439129681 instance=ExtResource("10_cyy7t")]
+
+[node name="TutorialUI" parent="." unique_id=103690516 instance=ExtResource("11_1x4hw")]
+
+[connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]

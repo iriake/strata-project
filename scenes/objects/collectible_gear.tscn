@@ -2,12 +2,17 @@
 
 [ext_resource type="Script" uid="uid://dn2nd63v60vs2" path="res://gameplay/collectible.gd" id="1_collectible_script"]
 [ext_resource type="PackedScene" uid="uid://gq0v1dbpl5bt" path="res://assets/Cyberpunk Game Kit - Quaternius/Pickups and Objects/Collectible_Gear.fbx" id="2_gear_fbx"]
+[ext_resource type="AudioStream" uid="uid://byscejmvfm2bo" path="res://assets/audio/freesound_crunchpixstudio-drop-coin-384921.mp3" id="2_n5g55"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1"]
 radius = 0.8
 
 [node name="Collectible_Gear" type="Area3D" unique_id=127955572]
 script = ExtResource("1_collectible_script")
+
+[node name="FreesoundCrunchpixstudioDropCoin384921" type="AudioStreamPlayer" parent="." unique_id=329570826]
+stream = ExtResource("2_n5g55")
+bus = &"SFX"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=285381881]
 shape = SubResource("SphereShape3D_1")

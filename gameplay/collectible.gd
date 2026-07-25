@@ -11,6 +11,8 @@ var target_angle := 0.0
 var angle: float = 0.0
 var start_y: float
 
+const COIN_SFX = preload("res://assets/audio/freesound_crunchpixstudio-drop-coin-384921.mp3")
+
 func _ready() -> void:
 	start_y = global_position.y
 	body_entered.connect(_on_body_entered)
@@ -20,6 +22,9 @@ func _on_body_entered(body: Node3D) -> void:
 	if body is Player2:
 		# Desactivamos colisiones inmediatamente para evitar doble recolección
 		monitoring = false
+		# Reproducir sonido de moneda (atenuado a -12.0 dB para que sea agradable)
+		if has_node("/root/AudioManager"):
+			AudioManager.play_sfx(COIN_SFX, -12.0)
 		# Emitimos la señal avisando al nivel
 		recolectado.emit(self)
 		# Nos destruimos

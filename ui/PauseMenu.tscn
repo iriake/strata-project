@@ -76,14 +76,6 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Reanudar"
 
-[node name="Save" type="Button" parent="ColorRect/CenterContainer/VBoxContainer" unique_id=1091721807]
-layout_mode = 2
-text = "Guardar Partida"
-
-[node name="Load" type="Button" parent="ColorRect/CenterContainer/VBoxContainer" unique_id=1448808761]
-layout_mode = 2
-text = "Cargar Partida"
-
 [node name="Restart" type="Button" parent="ColorRect/CenterContainer/VBoxContainer" unique_id=1132792802]
 layout_mode = 2
 text = "Reintentar"
@@ -106,8 +98,6 @@ dialog_text = "Todo el progreso no guardado se perderá. ¿Deseas continuar?"
 cancel_button_text = "Cancelar"
 
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/Save" to="." method="_on_save_pressed"]
-[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/Load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

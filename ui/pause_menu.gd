@@ -37,8 +37,8 @@ func _on_restart_pressed() -> void:
 
 # --- BOTÓN: OPTIONS ---
 func _on_options_pressed() -> void:
-	# Aquí abrirás tu futuro panel de opciones
-	pass
+	var settings = load("res://ui/settings_menu.tscn").instantiate()
+	add_child(settings)
 
 # --- BOTÓN: QUIT (Menú Principal) ---
 func _on_quit_pressed() -> void:
